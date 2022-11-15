@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#26a9e1",
     position: "absolute",
-    bottom: 20,
+    bottom: 10,
     right: 20,
     width: 50,
     height: 50,
