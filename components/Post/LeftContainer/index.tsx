@@ -9,11 +9,11 @@ export type LeftContainerProps = {
 };
 
 const LeftContainer = ({ user }: LeftContainerProps) => (
-  <TouchableOpacity activeOpacity={0.7}>
-    <View>
+  <View>
+    <TouchableOpacity activeOpacity={0.7}>
       <ProfilePicture image={user.image} size={50} />
-    </View>
-  </TouchableOpacity>
+    </TouchableOpacity>
+  </View>
 );
 
 export default LeftContainer;
