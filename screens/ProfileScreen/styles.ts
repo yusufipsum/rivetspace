@@ -9,9 +9,11 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   headerContainer: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
     width: "100%",
     paddingRight: 15,
-    top: 7,
   },
   button: {
     top: 5,
@@ -44,13 +46,17 @@ const styles = StyleSheet.create({
   },
   headerText: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
     fontSize: 20,
     fontWeight: "bold",
   },
   nameText: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  separator: {
+    height: 1,
+    width: "90%",
+    top: 15,
   },
 });
 

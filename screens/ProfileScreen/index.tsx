@@ -29,6 +29,9 @@ export default function ProfileScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Profil</Text>
+        <TouchableOpacity activeOpacity={0.5}>
+          <Ionicons name="md-menu-outline" size={30} />
+        </TouchableOpacity>
       </View>
       <View style={styles.newPostContainer}>
         <ProfilePicture
@@ -39,19 +42,45 @@ export default function ProfileScreen() {
         />
         <Text style={styles.nameText}>Yusuf</Text>
         <Text style={styles.buttonText}>@yusufipsum</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              width: 15,
+              height: 15,
+              borderRadius: 50,
+              backgroundColor: "#26a9e1",
+              marginRight: 5,
+            }}
+          ></View>
+          <Text style={styles.buttonText}>
+            Sosyallik Puanı:{" "}
+            <Text
+              style={{
+                fontWeight: "bold",
+              }}
+            >
+              146
+            </Text>
+          </Text>
+        </View>
         <Text style={styles.textInput}>
           Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
           baksanalalalal lasllaslslaldklfalkfjklkkkksk
         </Text>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
         <TouchableOpacity style={styles.button} onPress={onPostShare}>
           <Text style={styles.shareButtonText}>Profili Düzenle</Text>
         </TouchableOpacity>
       </View>
+      <View
+        style={styles.separator}
+        lightColor="#eee"
+        darkColor="rgba(255,255,255,0.1)"
+      />
     </SafeAreaView>
   );
 }
