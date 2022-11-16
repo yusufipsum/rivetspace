@@ -142,6 +142,7 @@ function BottomTabNavigator() {
         component={NearbyScreen}
         options={{
           title: "Ortam",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="account-group-outline"
