@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontSize: 20,
     fontWeight: "bold",
+    marginBottom: 5,
+    marginTop: 5,
   },
   nameText: {
     fontSize: 20,
