@@ -6,7 +6,13 @@ export type ProfilePictureProps = {
   size?: number;
 };
 
-const ProfilePicture = ({ image, size = 50 }: ProfilePictureProps) => {
+const ProfilePicture = ({
+  position,
+  marginLeft,
+  marginRight,
+  image,
+  size = 50,
+}: ProfilePictureProps) => {
   return (
     <Image
       source={{ uri: image }}
@@ -14,6 +20,9 @@ const ProfilePicture = ({ image, size = 50 }: ProfilePictureProps) => {
         width: size,
         height: size,
         borderRadius: size,
+        position,
+        marginLeft,
+        marginRight,
       }}
     />
   );
