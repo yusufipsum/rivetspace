@@ -7,7 +7,7 @@ import profiles from "../../data/profiles";
 const NearbyFeed = () => (
   <View style={{ width: "100%", flex: 1 }}>
     <FlatList
-      data={profiles}
+      data={profiles.slice(1, 6)}
       renderItem={({ item }) => <FriendProfile profiles={item} />}
       keyExtractor={(item) => item.id}
       showsVerticalScrollIndicator={false}
