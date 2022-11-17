@@ -27,7 +27,8 @@ const NearbyFeed = () => (
         showsHorizontalScrollIndicator={false}
       />
       <Text style={styles.text}>
-        Ortamında {profiles.length} aktif kullanıcı bulunuyor
+        Ortamında <Text style={{ fontWeight: "bold" }}>{profiles.length}</Text>{" "}
+        aktif kullanıcı bulunuyor
       </Text>
     </View>
     <FlatList
