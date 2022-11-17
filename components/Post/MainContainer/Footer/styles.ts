@@ -7,31 +7,29 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-
   upIcon: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
-
   downIcon: {
     right: 60,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
-
   commentIcon: {
     color: "white",
     right: 50,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
-
   info: {
-    marginTop: 5,
     marginLeft: 5,
     color: "grey",
     fontWeight: "bold",
-    fontSize: 13,
+    fontSize: 12,
   },
 });
 

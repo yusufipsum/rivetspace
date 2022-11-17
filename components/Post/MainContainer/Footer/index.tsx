@@ -21,19 +21,19 @@ const Footer = ({ post }: FooterContainerProps) => (
   <View style={styles.container}>
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.upIcon}>
-        <Feather size={20} color="green" name={"chevron-up"} />
+        <EvilIcons size={30} name={"chevron-up"} />
         <Text style={styles.info}>{post.numberOfLikes}</Text>
       </View>
     </TouchableOpacity>
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.downIcon}>
-        <Feather size={20} name={"chevron-down"} />
+        <EvilIcons size={30} name={"chevron-down"} />
         <Text style={styles.info}>{post.numberOfUnlikes}</Text>
       </View>
     </TouchableOpacity>
     <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.commentIcon}>
-        <Feather size={20} name={"message-circle"} />
+        <EvilIcons size={24} name={"comment"} />
         <Text style={styles.info}>{post.numberOfComments}</Text>
       </View>
     </TouchableOpacity>
