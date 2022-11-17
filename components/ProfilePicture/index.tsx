@@ -10,6 +10,8 @@ const ProfilePicture = ({
   position,
   marginLeft,
   marginRight,
+  borderWidth,
+  borderColor,
   image,
   size = 50,
 }: ProfilePictureProps) => {
@@ -23,6 +25,8 @@ const ProfilePicture = ({
         position,
         marginLeft,
         marginRight,
+        borderWidth,
+        borderColor,
       }}
     />
   );
