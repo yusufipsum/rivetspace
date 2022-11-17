@@ -1,16 +1,21 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, SafeAreaView, FlatList } from "react-native";
 
 import styles from "./styles.ts";
 
-import { Text, View } from "../../components/Themed";
-import { PostFeed, NewPostButton } from "../../components";
+import { Text } from "../../components/Themed";
+import { PostFeed, NewPostButton, StoryFeed } from "../../components";
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <PostFeed />
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={() => <StoryFeed />}
+        ListFooterComponent={() => <PostFeed />}
+      />
       <NewPostButton />
-    </View>
+    </SafeAreaView>
   );
 }
