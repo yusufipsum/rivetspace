@@ -103,7 +103,7 @@ export default function NewPostScreen() {
               numberOfLines={3}
               maxLength={300}
               style={styles.textInput}
-              placeholder={"Ne düşünüyorsun?"}
+              placeholder={"Aklından neler geçiyor?"}
             />
             {/*<TextInput
           value={imageUrl}
