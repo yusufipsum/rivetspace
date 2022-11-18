@@ -54,8 +54,8 @@ const posts = [
     id: "p4",
     user: {
       id: "u4",
-      username: "@canlitoplum",
-      name: "Canlıtoplum",
+      username: "@gossipcats",
+      name: "GossipCats",
       image:
         "https://instagram.fada1-14.fna.fbcdn.net/v/t51.2885-19/292164509_1071308726794776_5465116345670360624_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fada1-14.fna.fbcdn.net&_nc_cat=100&_nc_ohc=Relohv0_-GoAX-thylD&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfB6YJKUVyBnmGDa4r_3Q5dcjG3mQ0KEQk4gkPOl6CvB1A&oe=636F96A8&_nc_sid=1527a3",
     },
