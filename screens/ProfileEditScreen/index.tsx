@@ -92,7 +92,7 @@ export default function ProfileScreen() {
             }}
           >
             <TouchableOpacity onPress={pickImage}>
-              <AntDesign name="pluscircleo" size={25} />
+              <AntDesign name="pluscircleo" size={30} />
             </TouchableOpacity>
           </View>
         </View>
@@ -105,11 +105,12 @@ export default function ProfileScreen() {
               name="pencil"
               style={{ paddingLeft: 7 }}
               onPress={() => name.current.focus()}
+              size={20}
             />
           </TouchableOpacity>
         </View>
         <View style={styles.editContainer}>
-          <Feather name="at-sign" color="grey" />
+          <Feather name="at-sign" color="grey" size={16} />
           <TextInput
             style={styles.buttonText}
             ref={username}
@@ -122,6 +123,7 @@ export default function ProfileScreen() {
               name="pencil"
               style={{ paddingLeft: 7 }}
               onPress={() => username.current.focus()}
+              size={20}
             />
           </TouchableOpacity>
         </View>

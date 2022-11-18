@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   headerContainer: {
@@ -18,24 +18,28 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 5,
     width: "30%",
-    height: 30,
+    height: 40,
     backgroundColor: "#f2f2f2",
     borderRadius: 30,
     alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     color: "grey",
+    fontSize: 16,
   },
   onaylaButtonText: {
     paddingHorizontal: 20,
     paddingVertical: 6,
     color: "black",
     fontWeight: "bold",
+    fontSize: 16,
   },
   vazgecButtonText: {
     paddingHorizontal: 20,
     paddingVertical: 6,
     color: "black",
+    fontSize: 16,
   },
   newPostContainer: {
     width: "100%",
@@ -63,6 +67,7 @@ const styles = StyleSheet.create({
   editContainer: {
     alignItems: "center",
     flexDirection: "row",
+    justifyContent: "center",
   },
   separator: {
     height: 1,
