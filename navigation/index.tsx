@@ -117,6 +117,7 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<"Home">) => ({
           title: "Ana Sayfa",
+          headerShown: false,
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons name="home" color={color} size={25} />
           ),
