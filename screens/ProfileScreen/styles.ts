@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   headerContainer: {
@@ -18,10 +18,11 @@ const styles = StyleSheet.create({
   button: {
     top: 5,
     width: "80%",
-    height: 30,
+    height: 40,
     backgroundColor: "#f2f2f2",
     borderRadius: 30,
     alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     color: "grey",
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     color: "black",
     fontWeight: "bold",
+    fontSize: 16,
   },
   newPostContainer: {
     width: "100%",
