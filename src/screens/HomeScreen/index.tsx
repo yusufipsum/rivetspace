@@ -26,14 +26,23 @@ export default function HomeScreen() {
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate("Notifications");
+    navigation.navigate("Profile");
+  };
+  const Login = () => {
+    navigation.navigate("Login");
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.logo}>
-          <Logo size={38} />
-        </View>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.button}
+          onPress={Login}
+        >
+          <View style={styles.logo}>
+            <Logo size={38} />
+          </View>
+        </TouchableOpacity>
         <View>
           <Text style={styles.title}>rivetspace</Text>
         </View>
