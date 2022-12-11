@@ -5,25 +5,123 @@ import {
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
+  TextInput,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
+import { Logo } from "../../assets/svg";
 
-import { AntDesign } from "@expo/vector-icons";
+export default function LoginScreen() {
+  const navigation = useNavigation();
 
-export default function SignInScreen() {
+  const Login = () => {
+    navigation.navigate("Login");
+  };
+
+  const Sign = () => {
+    navigation.navigate("Home");
+  };
+
+  const DismissKeyboard = ({ children }) => (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        {children}
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Sign In Screen</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
-    </SafeAreaView>
+    <DismissKeyboard>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.sectionCenter}>
+          <View style={styles.logo}>
+            <Logo size={140} />
+            <Text style={styles.title}>rivetspace</Text>
+          </View>
+          <View style={styles.form}>
+            <View style={styles.inputs}>
+              <View style={styles.input}>
+                <TextInput
+                  type="text"
+                  fontSize={15}
+                  width={"100%"}
+                  placeholder="Cep Telefonu Numarası veya E-Posta"
+                  placeholderFontWeight="bold"
+                />
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  type="text"
+                  fontSize={15}
+                  width={"100%"}
+                  placeholder="Adı Soyadı"
+                  placeholderFontWeight="bold"
+                />
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  type="text"
+                  fontSize={15}
+                  width={"100%"}
+                  placeholder="Kullanıcı Adı"
+                  placeholderFontWeight="bold"
+                />
+              </View>
+              <View style={styles.input}>
+                <TextInput
+                  secureTextEntry={true}
+                  fontSize={15}
+                  width={"100%"}
+                  placeholder="Şifre"
+                  placeholderFontWeight="bold"
+                />
+              </View>
+            </View>
+            <View style={styles.footer}>
+              <View style={styles.info}>
+                <Text style={style.infoText}>
+                  Kaydolarak,{" "}
+                  <TouchableOpacity raised activeOpacity={0.8}>
+                    <Text style={styles.principles}>Koşullarımızı,</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity raised activeOpacity={0.8}>
+                    <Text style={styles.principles}> Gizlilik İlkemizi</Text>
+                  </TouchableOpacity>{" "}
+                  ve
+                  <TouchableOpacity raised activeOpacity={0.8}>
+                    <Text style={styles.principles}>Çerezler İlkemizi</Text>
+                  </TouchableOpacity>{" "}
+                  kabul etmiş olursun.
+                </Text>
+              </View>
+              <TouchableOpacity
+                raised
+                activeOpacity={0.8}
+                style={styles.button}
+                onPress={Sign}
+              >
+                <Text style={styles.buttonText}>Kaydol</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.sign}>
+            <Text style={styles.text}>Zaten bir hesabın var mı? </Text>
+            <TouchableOpacity raised activeOpacity={0.6} onPress={Login}>
+              <Text style={{ fontSize: "14", fontWeight: "bold" }}>
+                Giriş yap
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
+      </SafeAreaView>
+    </DismissKeyboard>
   );
 }
