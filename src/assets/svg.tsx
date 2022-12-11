@@ -1,4 +1,4 @@
-import Svg, { Circle, Rect, Path } from "react-native-svg";
+import Svg, { Circle, Rect, Path, G } from "react-native-svg";
 
 function Logo({ size, ...props }) {
   return (
@@ -6,15 +6,17 @@ function Logo({ size, ...props }) {
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
-      viewBox="0 0 3465.000000 3465.000000"
+      viewBox="0 0 3465 3465"
       preserveAspectRatio="xMidYMid meet"
-      fill="#000000"
-      stroke="none"
-      transform="translate(0.000000,3465.000000) scale(0.100000,-0.100000)"
       {...props}
     >
-      <Path
-        d="M16745 32899 c-4358 -173 -8424 -2198 -11212 -5584 -2687 -3263
+      <G
+        transform="translate(0.000000,3465.000000) scale(0.100000,-0.100000)"
+        fill="#000000"
+        stroke="none"
+      >
+        <Path
+          d="M16745 32899 c-4358 -173 -8424 -2198 -11212 -5584 -2687 -3263
         -3945 -7504 -3477 -11725 459 -4144 2530 -7922 5757 -10502 3715 -2971 8566
         -4040 13165 -2902 3185 788 6046 2596 8149 5149 2687 3263 3945 7504 3477
         11725 -459 4144 -2530 7922 -5757 10502 -2725 2179 -6102 3361 -9562 3346
@@ -93,7 +95,8 @@ function Logo({ size, ...props }) {
         -12 11 -54 44 -94 74 -98 75 -148 126 -189 195 -19 32 -48 74 -63 94 -52 66
         -127 231 -147 326 -20 88 -20 162 -20 4779 0 4954 -1 4742 41 4899 28 103 116
         216 210 268 137 75 174 77 280 14z"
-      />
+        />
+      </G>
     </Svg>
   );
 }
