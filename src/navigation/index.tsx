@@ -69,6 +69,16 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name="NewMessage"
         component={FriendsScreen}
         options={{ headerTitle: "Yeni Mesaj", headerShown: false }}
