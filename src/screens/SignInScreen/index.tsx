@@ -54,6 +54,7 @@ export default function LoginScreen() {
                   width={"100%"}
                   placeholder="Cep Telefonu Numarası veya E-Posta"
                   placeholderFontWeight="bold"
+                  hitSlop={{ top: 30, bottom: 30 }}
                 />
               </View>
               <View style={styles.input}>
@@ -63,6 +64,7 @@ export default function LoginScreen() {
                   width={"100%"}
                   placeholder="Adı Soyadı"
                   placeholderFontWeight="bold"
+                  hitSlop={{ top: 30, bottom: 30 }}
                 />
               </View>
               <View style={styles.input}>
@@ -72,6 +74,7 @@ export default function LoginScreen() {
                   width={"100%"}
                   placeholder="Kullanıcı Adı"
                   placeholderFontWeight="bold"
+                  hitSlop={{ top: 30, bottom: 30 }}
                 />
               </View>
               <View style={styles.input}>
@@ -81,12 +84,13 @@ export default function LoginScreen() {
                   width={"100%"}
                   placeholder="Şifre"
                   placeholderFontWeight="bold"
+                  hitSlop={{ top: 30, bottom: 30 }}
                 />
               </View>
             </View>
             <View style={styles.footer}>
               <View style={styles.info}>
-                <Text style={style.infoText}>
+                <Text style={styles.infoText}>
                   Kaydolarak,{" "}
                   <TouchableOpacity raised activeOpacity={0.8}>
                     <Text style={styles.principles}>Koşullarımızı,</Text>
@@ -113,7 +117,12 @@ export default function LoginScreen() {
           </View>
           <View style={styles.sign}>
             <Text style={styles.text}>Zaten bir hesabın var mı? </Text>
-            <TouchableOpacity raised activeOpacity={0.6} onPress={Login}>
+            <TouchableOpacity
+              raised
+              activeOpacity={0.6}
+              onPress={Login}
+              hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
+            >
               <Text style={{ fontSize: "14", fontWeight: "bold" }}>
                 Giriş yap
               </Text>
