@@ -34,7 +34,7 @@ const NearbyTopInfo = () => (
               uri: "https://i.pinimg.com/736x/bf/f1/1d/bff11de83086515bdf280818ec8c3458.jpg",
             }}
           />
-          <Text style={style.restText}>+{rest}</Text>
+          <Text style={styles.restText}>+{rest}</Text>
         </View>
       )}
       showsVerticalScrollIndicator={false}
