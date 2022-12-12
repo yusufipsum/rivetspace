@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   sectionCenter: {
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     width: "100%",
     height: "auto",
   },
