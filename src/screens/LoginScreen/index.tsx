@@ -54,6 +54,7 @@ export default function LoginScreen() {
                   width={"100%"}
                   placeholder="Kullanıcı adı"
                   placeholderFontWeight="bold"
+                  hitSlop={{ top: 30, bottom: 30 }}
                 />
               </View>
               <View style={styles.input}>
@@ -63,12 +64,17 @@ export default function LoginScreen() {
                   width={"100%"}
                   placeholder="Şifre"
                   placeholderFontWeight="bold"
+                  hitSlop={{ top: 30, bottom: 30 }}
                 />
               </View>
             </View>
             <View style={styles.footer}>
               <View style={styles.forgotPassword}>
-                <TouchableOpacity raised activeOpacity={0.8}>
+                <TouchableOpacity
+                  raised
+                  activeOpacity={0.8}
+                  hitSlop={{ bottom: 25 }}
+                >
                   <Text
                     style={{
                       color: "grey",
@@ -90,7 +96,12 @@ export default function LoginScreen() {
           </View>
           <View style={styles.sign}>
             <Text style={styles.text}>Henüz bir hesabın yok mu? </Text>
-            <TouchableOpacity raised activeOpacity={0.6} onPress={Sign}>
+            <TouchableOpacity
+              raised
+              activeOpacity={0.6}
+              onPress={Sign}
+              hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
+            >
               <Text style={{ fontSize: "14", fontWeight: "bold" }}>Kaydol</Text>
             </TouchableOpacity>
           </View>
