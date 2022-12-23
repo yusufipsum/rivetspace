@@ -2,14 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
-import {
-  Ionicons,
-  Feather,
-  Entypo,
-  FontAwesome,
-  EvilIcons,
-  Fontisto,
-} from "@expo/vector-icons";
+import { EvilIcons } from "@expo/vector-icons";
 
 import { PostType } from "../../../../types";
 
