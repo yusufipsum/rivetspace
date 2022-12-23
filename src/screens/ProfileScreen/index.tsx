@@ -1,23 +1,16 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   TouchableOpacity,
   SafeAreaView,
-  TextInput,
-  Keyboard,
-  ScrollView,
-  StatusBar,
-  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
-import Colors from "../constants/Colors";
 
 import { Text, View } from "../../components/Themed";
 import { ProfilePicture } from "../../components";
 
-import { Ionicons, Octicons, Feather } from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
