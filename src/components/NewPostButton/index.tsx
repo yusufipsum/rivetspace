@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const NewPostButton = () => {
   const navigation = useNavigation();
