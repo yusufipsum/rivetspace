@@ -1,12 +1,6 @@
 import * as React from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  SafeAreaView,
-  TextInput,
-} from "react-native";
+import { TouchableOpacity, SafeAreaView } from "react-native";
 
-import { SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles.ts";
