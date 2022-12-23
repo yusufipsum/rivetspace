@@ -33,12 +33,12 @@ export type UserType = {
   name: string;
   username: string;
   image?: string;
+  biography?: string;
 };
 
 export type ProfileType = {
   id: string;
   user: UserType;
-  biography: string;
 };
 
 export type PostType = {
@@ -49,6 +49,7 @@ export type PostType = {
   image?: string;
   numberOfComments?: number;
   numberOfLikes?: number;
+  numberOfUnlikes?: number;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
