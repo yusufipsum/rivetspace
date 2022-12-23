@@ -8,8 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
-  TextInput,
-  ScrollView,
+  TextInput
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
