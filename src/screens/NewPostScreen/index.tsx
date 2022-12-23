@@ -1,32 +1,21 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   TouchableOpacity,
   SafeAreaView,
   TextInput,
-  Keyboard,
-  ScrollView,
   Alert,
-  StatusBar,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback,
   Dimensions,
   FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles.ts";
-import Colors from "../constants/Colors";
 import { Text, View } from "../../components/Themed";
 
 import { ProfilePicture } from "../../components";
 
-import {
-  MaterialIcons,
-  MaterialCommunityIcons,
-  Ionicons,
-  Feather,
-} from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
