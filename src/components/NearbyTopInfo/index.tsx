@@ -4,7 +4,6 @@ import { View, Text, Image, FlatList } from "react-native";
 import styles from "./styles.ts";
 
 import profiles from "../../data/profiles";
-import NearbyProfile from "../NearbyProfile";
 import ProfilePicture from "../ProfilePicture";
 
 const rest = profiles.length - 4;
