@@ -4,6 +4,13 @@ import { Image } from "react-native";
 export type ProfilePictureProps = {
   image?: string;
   size?: number;
+  position?: any;
+  marginLeft?: number;
+  marginRight?: number;
+  borderWidth?: number;
+  borderColor?: string;
+  //blurRadius?: undefined;
+  backgroundColor?: string; 
 };
 
 const ProfilePicture = ({
@@ -12,7 +19,7 @@ const ProfilePicture = ({
   marginRight,
   borderWidth,
   borderColor,
-  blurRadius,
+  //blurRadius,
   image,
   backgroundColor,
   size = 50,
@@ -24,7 +31,7 @@ const ProfilePicture = ({
         width: size,
         height: size,
         borderRadius: size,
-        blurRadius,
+        //blurRadius,
         position,
         marginLeft,
         marginRight,
