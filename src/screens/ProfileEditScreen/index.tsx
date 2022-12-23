@@ -3,10 +3,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   TextInput,
-  Keyboard,
-  ScrollView,
-  Alert,
-  StatusBar,
+  Alert
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -16,7 +13,7 @@ import { Text, View } from "../../components/Themed";
 import { ProfilePicture } from "../../components";
 
 import * as ImagePicker from "expo-image-picker";
-import { Ionicons, Octicons, Feather, AntDesign } from "@expo/vector-icons";
+import { Octicons, Feather, AntDesign } from "@expo/vector-icons";
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
