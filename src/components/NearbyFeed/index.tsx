@@ -1,12 +1,11 @@
 import React from "react";
-import { View, Text, Image, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 
 import styles from "./styles.ts";
 
 import profiles from "../../data/profiles";
 import NearbyProfile from "../NearbyProfile";
 import NearbyTopInfo from "../NearbyTopInfo";
-import ProfilePicture from "../ProfilePicture";
 
 const NearbyFeed = () => (
   <View style={styles.container}>
