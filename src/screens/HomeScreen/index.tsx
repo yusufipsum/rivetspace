@@ -1,9 +1,8 @@
 import * as React from "react";
 import {
-  StyleSheet,
   SafeAreaView,
   FlatList,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
@@ -14,13 +13,9 @@ import { Logo } from "../../assets/svg";
 import { Text, View } from "../../components/Themed";
 import {
   PostFeed,
-  NewPostButton,
   StoryFeed,
-  Header,
-  ProfileButton,
+  ProfileButton
 } from "../../components";
-
-import { Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
