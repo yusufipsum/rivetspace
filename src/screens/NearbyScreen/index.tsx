@@ -3,7 +3,6 @@ import { SafeAreaView } from "react-native";
 
 import styles from "./styles.ts";
 
-import { Text } from "../../components/Themed";
 import { NearbyFeed } from "../../components";
 
 export default function NearbyScreen() {
