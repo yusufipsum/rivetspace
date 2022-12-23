@@ -21,7 +21,7 @@ const MainContainer = ({ profiles }: MainContainerProps) => (
         </View>
       </TouchableOpacity>
       <View>
-        <Text style={styles.biography}>{profiles.user.biography}</Text>
+        <Text>{profiles.user.biography}</Text>
       </View>
     </View>
   </View>
