@@ -1,13 +1,11 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 
 import { PostType } from "../../../types";
 /*import moment from 'moment';*/
-
-import Footer from "./Footer";
 
 export type TopContainerProps = {
   post: PostType;
