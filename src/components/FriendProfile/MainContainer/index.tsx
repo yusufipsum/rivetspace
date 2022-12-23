@@ -1,8 +1,7 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
-import { Ionicons, Octicons } from "@expo/vector-icons";
 /*import moment from 'moment';*/
 
 import { ProfileType } from "../../../types";
