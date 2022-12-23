@@ -9,7 +9,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TextInput,
-  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
