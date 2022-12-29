@@ -1,7 +1,9 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import styles from "./styles";
+
 import ProfilePicture from "../../components/ProfilePicture";
 
 const ProfileButton = () => {
