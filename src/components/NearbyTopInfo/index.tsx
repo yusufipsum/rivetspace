@@ -7,6 +7,7 @@ import profiles from "../../data/profiles";
 import ProfilePicture from "../ProfilePicture";
 
 const rest = profiles.length - 4;
+const lastProfile = profiles.slice(4,5);
 
 const NearbyTopInfo = () => (
   <View style={styles.topContainer}>
@@ -30,7 +31,7 @@ const NearbyTopInfo = () => (
             style={styles.lastImage}
             blurRadius={7}
             source={{
-              uri: "https://i.pinimg.com/736x/bf/f1/1d/bff11de83086515bdf280818ec8c3458.jpg",
+              uri: `${lastProfile[0].user.image}`,
             }}
           />
           <Text style={styles.restText}>+{rest}</Text>
