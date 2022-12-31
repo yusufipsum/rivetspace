@@ -1,4 +1,4 @@
-package com.finxterslab.canlitoplumApp.newarchitecture.modules;
+package com.finxterslab.rivetspace.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

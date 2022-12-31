@@ -1,4 +1,4 @@
-package com.finxterslab.canlitoplumApp;
+package com.finxterslab.rivetspace;
 
 import android.os.Build;
 import android.os.Bundle;

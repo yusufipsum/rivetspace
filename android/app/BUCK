@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.finxterslab.canlitoplumApp",
+    package = "com.finxterslab.rivetspace",
 )
 
 android_resource(
     name = "res",
-    package = "com.finxterslab.canlitoplumApp",
+    package = "com.finxterslab.rivetspace",
     res = "src/main/res",
 )
 

@@ -1,4 +1,4 @@
-package com.finxterslab.canlitoplumApp.newarchitecture;
+package com.finxterslab.rivetspace.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -20,9 +20,9 @@ import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.finxterslab.canlitoplumApp.BuildConfig;
-import com.finxterslab.canlitoplumApp.newarchitecture.components.MainComponentsRegistry;
-import com.finxterslab.canlitoplumApp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.finxterslab.rivetspace.BuildConfig;
+import com.finxterslab.rivetspace.newarchitecture.components.MainComponentsRegistry;
+import com.finxterslab.rivetspace.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

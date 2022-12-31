@@ -1,4 +1,4 @@
-package com.finxterslab.canlitoplumApp.newarchitecture.components;
+package com.finxterslab.rivetspace.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
