@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontSize: 20,
     fontWeight: "bold",
-    fontSize: 18,
   },
 
   header: {
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
   },
+
   goBackIcon: {
     paddingHorizontal: 12,
     paddingVertical: 7,
@@ -36,6 +37,12 @@ const styles = StyleSheet.create({
   searchIcon: {
     paddingHorizontal: 16,
     paddingVertical: 7,
+  },
+
+  separator: {
+    marginVertical: 30,
+    height: 1,
+    width: "80%",
   },
 });
 

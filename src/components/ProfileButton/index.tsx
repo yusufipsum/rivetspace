@@ -22,7 +22,7 @@ const ProfileButton = () => {
       <ProfilePicture
         size={30}
         image={
-          "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/317881261_514954124010496_344328476115875096_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=SFswZBGNhzAAX8bc908&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDT_IiZLLSqKq_gDlbhsen9BBlAFchs3lRdWRrtJJDxpg&oe=639A14AF&_nc_sid=1527a3"
+          "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76"
         }
       />
     </TouchableOpacity>

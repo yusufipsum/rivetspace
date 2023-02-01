@@ -6,7 +6,7 @@ const posts = [
       username: "@deneme",
       name: "deneme",
       image:
-        "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/317881261_514954124010496_344328476115875096_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=SFswZBGNhzAAX8bc908&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDT_IiZLLSqKq_gDlbhsen9BBlAFchs3lRdWRrtJJDxpg&oe=639A14AF&_nc_sid=1527a3",
+        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content:
@@ -22,7 +22,7 @@ const posts = [
       username: "@yusufipsum",
       name: "Yusuf",
       image:
-        "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/317881261_514954124010496_344328476115875096_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=SFswZBGNhzAAX8bc908&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDT_IiZLLSqKq_gDlbhsen9BBlAFchs3lRdWRrtJJDxpg&oe=639A14AF&_nc_sid=1527a3",
+        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content:
@@ -40,7 +40,7 @@ const posts = [
       username: "@hello",
       name: "Hello",
       image:
-        "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/317881261_514954124010496_344328476115875096_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=SFswZBGNhzAAX8bc908&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDT_IiZLLSqKq_gDlbhsen9BBlAFchs3lRdWRrtJJDxpg&oe=639A14AF&_nc_sid=1527a3",
+        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content: "I'm developing a new application. Join me in this project!",
@@ -57,7 +57,7 @@ const posts = [
       username: "@rivetspace",
       name: "rivetspace",
       image:
-        "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/318606393_189199460356194_8053637237304030267_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=zkOu87Xyc-oAX9y-2a6&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfA9_gk4MYVstoOVlXOwvsasXSb5SH1gxmzzT74C64pP6A&oe=639AA14E&_nc_sid=8fd12b",
+        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/318522840_535435355308384_7438745334382053657_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=G76VrzYQFb4AX--Yrtu&_nc_ht=scontent.fist13-1.fna&oh=00_AfBcGRTEzMX_fIg0SfRyhkpqK_nPFvWbLTJc9NmkrvMr_g&oe=63D34D75",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content: "Hello it's me",
