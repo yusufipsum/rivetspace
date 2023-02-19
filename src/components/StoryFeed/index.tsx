@@ -34,9 +34,7 @@ const StoryFeed = () => (
                 size={67}
                 borderWidth={2}
                 borderColor={"white"}
-                image={
-                  "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76"
-                }
+                image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
               />
             </View>
             <Text style={styles.nameText}>{"Hikayen"}</Text>

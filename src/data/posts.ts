@@ -5,8 +5,7 @@ const posts = [
       id: "u1",
       username: "@deneme",
       name: "deneme",
-      image:
-        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76",
+      image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content:
@@ -21,8 +20,7 @@ const posts = [
       id: "u1",
       username: "@yusufipsum",
       name: "Yusuf",
-      image:
-        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76",
+      image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content:
@@ -39,8 +37,7 @@ const posts = [
       id: "u3",
       username: "@hello",
       name: "Hello",
-      image:
-        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/322471732_1277548349458457_1573710981679399978_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=fMv8qzpJFpoAX9yB7W3&_nc_ht=scontent.fist13-1.fna&oh=00_AfCkiTxrul4qEohnGFU9u1-fjYnATgHsFHDR12U2LqnhlQ&oe=63D2FC76",
+      image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content: "I'm developing a new application. Join me in this project!",
@@ -56,8 +53,7 @@ const posts = [
       id: "u4",
       username: "@rivetspace",
       name: "rivetspace",
-      image:
-        "https://scontent.fist13-1.fna.fbcdn.net/v/t39.30808-6/318522840_535435355308384_7438745334382053657_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=G76VrzYQFb4AX--Yrtu&_nc_ht=scontent.fist13-1.fna&oh=00_AfBcGRTEzMX_fIg0SfRyhkpqK_nPFvWbLTJc9NmkrvMr_g&oe=63D34D75",
+      image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content: "Hello it's me",

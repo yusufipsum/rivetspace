@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   TextInput,
   Platform,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -32,11 +33,19 @@ export default function LoginScreen() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = async function name(event: any) {
-    event.preventDefault();
-    const response = await Auth.signIn(username, password);
-    console.log("auth response", response);
+    try {
+      event.preventDefault();
+      const user = await Auth.signIn(username, password);
+      console.log("auth response", user);
+    } catch (error) {
+      console.log("error signing up:", error);
+      setUsername("");
+      setPassword("");
+      setError(true);
+    }
   };
 
   const DismissKeyboard = ({ children }) => (
@@ -86,10 +95,27 @@ export default function LoginScreen() {
           </View>
           <View style={styles.footer}>
             <View style={styles.forgotPassword}>
+              {error ? (
+                <View>
+                  <Text
+                    style={{
+                      color: "red",
+                      fontSize: 13,
+                      position: "relative",
+                    }}
+                  >
+                    Kullanıcı adı ya da şifre yanlış!
+                  </Text>
+                </View>
+              ) : null}
               <TouchableOpacity
                 raised
                 activeOpacity={0.8}
                 hitSlop={{ bottom: 25 }}
+                style={{
+                  position: "absolute",
+                  right: 0,
+                }}
               >
                 <Text
                   style={{
