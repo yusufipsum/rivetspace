@@ -30,10 +30,6 @@ export default function LoginScreen() {
     navigation.navigate("Login");
   };
 
-  const Sign = () => {
-    navigation.navigate("Home");
-  };
-
   const [numberOrMail, setNumberOrMail] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -82,7 +78,6 @@ export default function LoginScreen() {
             phone_number: phoneNumber,
           },
           autoSignIn: {
-            // optional - enables auto sign in after user is confirmed
             enabled: true,
           },
         });

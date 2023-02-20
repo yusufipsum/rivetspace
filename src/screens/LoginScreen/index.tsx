@@ -23,10 +23,6 @@ import { useState } from "react";
 export default function LoginScreen() {
   const navigation = useNavigation();
 
-  const Login = () => {
-    navigation.navigate("Home");
-  };
-
   const Sign = () => {
     navigation.navigate("SignIn");
     setError(false);
