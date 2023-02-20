@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 
 import profiles from "../../data/profiles";
 import ProfilePicture from "../ProfilePicture";
@@ -34,9 +34,7 @@ const StoryFeed = () => (
                 size={67}
                 borderWidth={2}
                 borderColor={"white"}
-                image={
-                  "https://instagram.fist13-1.fna.fbcdn.net/v/t51.2885-19/317881261_514954124010496_344328476115875096_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fist13-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=SFswZBGNhzAAX8bc908&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDT_IiZLLSqKq_gDlbhsen9BBlAFchs3lRdWRrtJJDxpg&oe=639A14AF&_nc_sid=1527a3"
-                }
+                image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
               />
             </View>
             <Text style={styles.nameText}>{"Hikayen"}</Text>

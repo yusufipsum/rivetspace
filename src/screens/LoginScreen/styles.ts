@@ -48,7 +48,10 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     alignItems: "flex-end",
+    justifyContent: "space-between",
+    flexDirection: "row",
     width: "80%",
+    height: 15,
   },
   button: {
     alignItems: "center",

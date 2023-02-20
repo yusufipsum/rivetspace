@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-rivetspace-staging-225735-authRole",
+      "UnauthRoleArn": "arn:aws:iam::638269105267:role/amplify-rivetspace-staging-225735-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::638269105267:role/amplify-rivetspace-staging-225735-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-rivetspace-staging-225735-deployment",
+      "UnauthRoleName": "amplify-rivetspace-staging-225735-unauthRole",
+      "StackName": "amplify-rivetspace-staging-225735",
+      "StackId": "arn:aws:cloudformation:eu-west-1:638269105267:stack/amplify-rivetspace-staging-225735/7e0ed190-9c3a-11ed-9f3b-069126c04e93",
+      "AmplifyAppId": "d28olmuv1mrx6b"
+    },
+    "categories": {
+      "auth": {
+        "rivetspace": {}
+      }
+    }
+  }
+}

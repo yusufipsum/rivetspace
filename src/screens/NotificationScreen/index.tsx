@@ -36,13 +36,15 @@ export default function NotificationsScreen() {
           <SimpleLineIcons name="bell" size={20} style={styles.searchIcon} />
         </View>
       </View>*/}
-      <View style={{ flex: 1, justifyContent: "center" }}>
-        <Text style={styles.title}>Notifications Screen</Text>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={styles.title}>Hiç bildirim yok!</Text>
         <View
           style={styles.separator}
           lightColor="#eee"
           darkColor="rgba(255,255,255,0.1)"
         />
+        <Text style={styles.title}>Bir bildirim geldiğinde</Text>
+        <Text style={styles.title}>burada göreceksin</Text>
         {/* <NotificationFeed /> */}
         {/* Use a light status bar on iOS to account for the black space above the modal */}
         <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
