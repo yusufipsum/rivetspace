@@ -29,6 +29,7 @@ export default function LoginScreen() {
 
   const Sign = () => {
     navigation.navigate("SignIn");
+    setError(false);
   };
 
   const [username, setUsername] = useState("");
@@ -71,7 +72,9 @@ export default function LoginScreen() {
             <View style={styles.input}>
               <TextInput
                 value={username}
-                onChangeText={(username) => setUsername(username)}
+                onChangeText={(username) =>
+                  setUsername(username.replace(/\s+/g, "").trim().toLowerCase())
+                }
                 type="text"
                 fontSize={15}
                 width={"100%"}
