@@ -18,7 +18,7 @@ import { Auth } from "aws-amplify";
 
 import styles from "./styles";
 import { Logo } from "../../assets/svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -44,6 +44,8 @@ export default function LoginScreen() {
       setError(true);
     }
   };
+
+  const inputPassword = useRef(null);
 
   const DismissKeyboard = ({ children }) => (
     <KeyboardAvoidingView
@@ -71,6 +73,7 @@ export default function LoginScreen() {
                 onChangeText={(username) =>
                   setUsername(username.replace(/\s+/g, "").trim().toLowerCase())
                 }
+                onSubmitEditing={() => inputPassword.current.focus()}
                 type="text"
                 fontSize={15}
                 width={"100%"}
@@ -81,8 +84,9 @@ export default function LoginScreen() {
             </View>
             <View style={styles.input}>
               <TextInput
+                ref={inputPassword}
                 value={password}
-                onChangeText={(password) => setPassword(password)}
+                onChangeText={setPassword}
                 secureTextEntry={true}
                 fontSize={15}
                 width={"100%"}
