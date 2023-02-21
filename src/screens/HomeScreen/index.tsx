@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity
-} from "react-native";
+import { SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,11 +7,7 @@ import styles from "./styles.ts";
 import { Logo } from "../../assets/svg";
 
 import { Text, View } from "../../components/Themed";
-import {
-  PostFeed,
-  StoryFeed,
-  ProfileButton
-} from "../../components";
+import { PostFeed, StoryFeed, ProfileButton } from "../../components";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -29,15 +21,9 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={styles.button}
-          onPress={Login}
-        >
-          <View style={styles.logo}>
-            <Logo size={38} />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.logo}>
+          <Logo size={38} />
+        </View>
         <View>
           <Text style={styles.title}>rivetspace</Text>
         </View>

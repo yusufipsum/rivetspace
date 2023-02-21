@@ -82,8 +82,7 @@ export default function LoginScreen() {
           },
         });
         console.log(user);
-        Alert.alert("Neredeyse Bitti, Şimdi Giriş Yap!");
-        navigation.navigate("Login");
+        navigation.navigate("ConfirmSignIn");
       } catch (error) {
         console.log("error signing up:", error);
         Alert.alert("Bu kullanıcı adı daha önce alınmış!");

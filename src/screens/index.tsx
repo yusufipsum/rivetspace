@@ -1,4 +1,5 @@
 export { default as FriendsScreen } from "./FriendsScreen";
+export { default as ConfirmSignInScreen } from "./ConfirmSignInScreen";
 export { default as HomeScreen } from "./HomeScreen";
 export { default as LoginScreen } from "./LoginScreen";
 export { default as MessagesScreen } from "./MessagesScreen";
