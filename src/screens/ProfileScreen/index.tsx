@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { TouchableOpacity, SafeAreaView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Carousel from "react-native-reanimated-carousel";
 
 import styles from "./styles";
 
@@ -8,9 +9,13 @@ import { Text, View } from "../../components/Themed";
 import { ProfilePicture } from "../../components";
 
 import { Ionicons, Feather } from "@expo/vector-icons";
+import { Auth, Hub } from "aws-amplify";
 
 export default function ProfileScreen() {
+  const width = Dimensions.get("window").width;
+
   const navigation = useNavigation();
+
   const onPostShare = () => {
     navigation.navigate("ProfileEdit");
   };
@@ -19,52 +24,101 @@ export default function ProfileScreen() {
     navigation.goBack();
   };
 
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    Hub.listen("auth", (e) => {
+      if (e.payload.event == "signIn") {
+        console.log("auth event", e.payload.event);
+        setCurrentUser(e.payload.data);
+      } else {
+        setCurrentUser(undefined);
+      }
+    });
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={onPostCancel}>
-          <Feather name="chevron-left" size={30} style={styles.goBackIcon} />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Profil</Text>
-        <TouchableOpacity activeOpacity={0.5}>
-          <Ionicons name="md-menu-outline" size={30} style={styles.menuIcon} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.newPostContainer}>
-        <ProfilePicture
-          size={170}
-          image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
-        />
-        <Text style={styles.nameText}>Yusuf</Text>
-        <Text style={styles.buttonText}>@yusufipsum</Text>
-        <View style={styles.point}>
-          <View style={styles.dot}></View>
-          <Text style={styles.buttonText}>
-            Sosyallik Puanı:{" "}
-            <Text
-              style={{
-                fontWeight: "bold",
-              }}
-            >
-              146
-            </Text>
-          </Text>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={onPostCancel}>
+            <Feather name="chevron-left" size={30} style={styles.goBackIcon} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Profil</Text>
+          <TouchableOpacity activeOpacity={0.5}>
+            <Ionicons
+              name="md-menu-outline"
+              size={30}
+              style={styles.menuIcon}
+            />
+          </TouchableOpacity>
         </View>
-        <Text style={styles.textInput}>
-          Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
-          baksanalalalal lasllaslslaldklfalkfjklkkkksk
-        </Text>
-        <TouchableOpacity style={styles.button} onPress={onPostShare}>
-          <Text style={styles.shareButtonText}>Profili Düzenle</Text>
-        </TouchableOpacity>
-        <View
-          style={styles.separator}
-          lightColor="#eee"
-          darkColor="rgba(255,255,255,0.1)"
-        />
+        <View style={styles.newPostContainer}>
+          <ProfilePicture
+            size={170}
+            image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+          />
+          <Text style={styles.nameText}>Yusuf</Text>
+          <Text style={styles.buttonText}>@yusufipsum</Text>
+          <View style={styles.point}>
+            <View style={styles.dot}></View>
+            <Text style={styles.buttonText}>
+              Sosyallik Puanı:{" "}
+              <Text
+                style={{
+                  fontWeight: "bold",
+                }}
+              >
+                146
+              </Text>
+            </Text>
+          </View>
+          <Text style={styles.textInput}>
+            Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
+            baksanalalalal lasllaslslaldklfalkfjklkkkksk
+          </Text>
+          <TouchableOpacity style={styles.button} onPress={onPostShare}>
+            <Text style={styles.shareButtonText}>Profili Düzenle</Text>
+          </TouchableOpacity>
+          <View
+            style={styles.separator}
+            lightColor="#eee"
+            darkColor="rgba(255,255,255,0.1)"
+          />
+        </View>
       </View>
       <View style={styles.footerContainer}>
-        <Text>Will Add MyPictures Carousel</Text>
+        <Carousel
+          loop
+          width={width}
+          height={width * 0.8}
+          mode="parallax"
+          pagingEnabled={true}
+          snapEnabled={true}
+          autoPlay={false}
+          data={[...new Array(6).keys()]}
+          scrollAnimationDuration={1000}
+          onSnapToItem={(index) => console.log("current index:", index)}
+          renderItem={({ index }) => (
+            <View
+              style={{
+                flex: 1,
+                borderWidth: 1,
+                borderRadius: 20,
+                backgroundColor: "black",
+                justifyContent: "center",
+                alignSelf: "center",
+                width: width,
+              }}
+            >
+              <Text
+                style={{ color: "white", textAlign: "center", fontSize: 30 }}
+              >
+                {index}
+              </Text>
+            </View>
+          )}
+        />
       </View>
     </SafeAreaView>
   );

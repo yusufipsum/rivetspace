@@ -7,7 +7,7 @@ import profiles from "../../data/profiles";
 import ProfilePicture from "../ProfilePicture";
 
 const rest = profiles.length - 4;
-const lastProfile = profiles.slice(4,5);
+const lastProfile = profiles.slice(4, 5);
 
 const NearbyTopInfo = () => (
   <View style={styles.topContainer}>
@@ -20,6 +20,8 @@ const NearbyTopInfo = () => (
         <ProfilePicture
           marginRight={-10}
           marginLeft={-10}
+          borderRadius={50}
+          size={50}
           image={item.user.image}
         />
       )}
