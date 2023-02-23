@@ -37,6 +37,19 @@ export default function ProfileScreen() {
     });
   });
 
+  async function userInfo() {
+    try {
+      const userInfo = await Auth.currentUserInfo();
+      setName(userInfo.attributes.name);
+      setUsername(userInfo.username);
+      console.log("curr user response", userInfo);
+    } catch (error) {
+      console.log("error curr user:", error);
+    }
+  }
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  userInfo();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -58,8 +71,8 @@ export default function ProfileScreen() {
             size={170}
             image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
           />
-          <Text style={styles.nameText}>Yusuf</Text>
-          <Text style={styles.buttonText}>@yusufipsum</Text>
+          <Text style={styles.nameText}>{name}</Text>
+          <Text style={styles.buttonText}>@{username}</Text>
           <View style={styles.point}>
             <View style={styles.dot}></View>
             <Text style={styles.buttonText}>

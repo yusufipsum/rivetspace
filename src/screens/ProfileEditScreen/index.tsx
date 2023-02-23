@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   TouchableOpacity,
   SafeAreaView,
@@ -19,6 +19,7 @@ import profiles from "../../data/profiles";
 
 import * as ImagePicker from "expo-image-picker";
 import { Octicons, Feather, AntDesign } from "@expo/vector-icons";
+import { Auth } from "aws-amplify";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
@@ -66,8 +67,8 @@ export default function ProfileScreen() {
     navigation.goBack();
   };
 
-  const name = useRef(null);
-  const username = useRef(null);
+  const nameRef = useRef(null);
+  const usernameRef = useRef(null);
   const [imgIndex, setImageIndex] = useState(Number);
 
   const DismissKeyboard = ({ children }) => (
@@ -84,6 +85,23 @@ export default function ProfileScreen() {
     images.splice(index, 1);
     setImages(images);
   };
+
+  async function userInfo() {
+    try {
+      const userInfo = await Auth.currentUserInfo();
+      setName(userInfo.attributes.name);
+      setUsername(userInfo.username);
+      console.log("curr user response", userInfo);
+    } catch (error) {
+      console.log("error curr user:", error);
+    }
+  }
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    userInfo();
+  });
 
   return (
     //<DismissKeyboard>
@@ -109,14 +127,18 @@ export default function ProfileScreen() {
             </View>
           </View>
           <View style={styles.editContainer}>
-            <TextInput style={styles.nameText} ref={name} placeholder={"Adı"}>
-              Yusuf
+            <TextInput
+              style={styles.nameText}
+              ref={nameRef}
+              placeholder={"Adı"}
+            >
+              {name}
             </TextInput>
             <TouchableOpacity>
               <Octicons
                 name="pencil"
                 style={{ paddingLeft: 7 }}
-                onPress={() => name.current.focus()}
+                onPress={() => nameRef.current.focus()}
                 size={20}
               />
             </TouchableOpacity>
@@ -126,16 +148,16 @@ export default function ProfileScreen() {
 
             <TextInput
               style={styles.buttonText}
-              ref={username}
+              ref={usernameRef}
               placeholder={"Kullanıcı adı"}
             >
-              yusufipsum
+              {username}
             </TextInput>
             <TouchableOpacity>
               <Octicons
                 name="pencil"
                 style={{ paddingLeft: 7 }}
-                onPress={() => username.current.focus()}
+                onPress={() => usernameRef.current.focus()}
                 size={20}
               />
             </TouchableOpacity>
