@@ -140,7 +140,7 @@ export default function LoginScreen() {
             <View style={styles.input}>
               <TextInput
                 value={nameSurname}
-                onChangeText={(nameSurname) => setNameSurname(nameSurname)}
+                onChangeText={setNameSurname}
                 type="text"
                 required
                 fontSize={15}

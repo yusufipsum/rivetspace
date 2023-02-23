@@ -86,22 +86,21 @@ export default function ProfileScreen() {
     setImages(images);
   };
 
-  async function userInfo() {
-    try {
-      const userInfo = await Auth.currentUserInfo();
-      setName(userInfo.attributes.name);
-      setUsername(userInfo.username);
-      console.log("curr user response", userInfo);
-    } catch (error) {
-      console.log("error curr user:", error);
-    }
-  }
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
 
-  useEffect(() => {
-    userInfo();
-  });
+  const handleSubmit = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      const response = await Auth.updateUserAttributes(user, {
+        name: name,
+      });
+      console.log("update user", user);
+      console.log("update user", response);
+    } catch (error) {
+      console.log("update curr user:", error);
+    }
+  };
 
   return (
     //<DismissKeyboard>
@@ -130,10 +129,9 @@ export default function ProfileScreen() {
             <TextInput
               style={styles.nameText}
               ref={nameRef}
+              onChangeText={setName}
               placeholder={"Adı"}
-            >
-              {name}
-            </TextInput>
+            ></TextInput>
             <TouchableOpacity>
               <Octicons
                 name="pencil"
@@ -149,10 +147,12 @@ export default function ProfileScreen() {
             <TextInput
               style={styles.buttonText}
               ref={usernameRef}
+              value={username}
+              onChangeText={(username) =>
+                setUsername(username.replace(/\s+/g, "").trim().toLowerCase())
+              }
               placeholder={"Kullanıcı adı"}
-            >
-              {username}
-            </TextInput>
+            ></TextInput>
             <TouchableOpacity>
               <Octicons
                 name="pencil"
@@ -164,7 +164,7 @@ export default function ProfileScreen() {
           </View>
           <TextInput
             autoFocus={false}
-            multiline={true}
+            multiline={false}
             value={post}
             onChangeText={(value) => setPost(value)}
             numberOfLines={3}
@@ -220,7 +220,7 @@ export default function ProfileScreen() {
             <TouchableOpacity style={styles.button} onPress={onPostCancel}>
               <Text style={styles.vazgecButtonText}>Vazgeç</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={onPostShare}>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
               <Text style={styles.onaylaButtonText}>Onayla</Text>
             </TouchableOpacity>
           </View>
