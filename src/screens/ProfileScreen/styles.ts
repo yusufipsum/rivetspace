@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     justifyContent: "space-between",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
+  },
+  header: {
+    justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   footerContainer: {
-    top: 130,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: "100%",

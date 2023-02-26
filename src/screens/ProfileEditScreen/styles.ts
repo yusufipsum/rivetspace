@@ -84,6 +84,13 @@ const styles = StyleSheet.create({
     right: 15,
     bottom: 10,
   },
+  deleteImage: {
+    backgroundColor: "red",
+    borderRadius: 50,
+    position: "absolute",
+    bottom: -30,
+    alignSelf: "center",
+  },
 });
 
 export default styles;

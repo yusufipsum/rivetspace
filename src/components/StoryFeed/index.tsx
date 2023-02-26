@@ -18,6 +18,7 @@ const StoryFeed = () => (
             <View style={styles.stories}>
               <ProfilePicture
                 size={67}
+                borderRadius={67}
                 borderWidth={2}
                 borderColor={"white"}
                 image={item.user.image}
@@ -32,6 +33,7 @@ const StoryFeed = () => (
             <View style={styles.stories}>
               <ProfilePicture
                 size={67}
+                borderRadius={67}
                 borderWidth={2}
                 borderColor={"white"}
                 image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
