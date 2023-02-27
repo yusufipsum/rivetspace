@@ -147,7 +147,7 @@ export default function LoginScreen() {
             onPress={Sign}
             hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
           >
-            <Text style={{ fontSize: "14", fontWeight: "bold" }}>Kaydol</Text>
+            <Text style={{ fontSize: 14, fontWeight: "bold" }}>Kaydol</Text>
           </TouchableOpacity>
         </View>
       </View>

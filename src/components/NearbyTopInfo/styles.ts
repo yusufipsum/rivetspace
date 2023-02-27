@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   topContainer: {
     width: "90%",
     height: 90,
-    backgroundColor: "#C6EEFF",
+    backgroundColor: "#def2fa",
     alignItems: "center",
     alignSelf: "center",
     borderRadius: 20,
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
   text: {
     paddingBottom: 7,
     fontSize: 16,
+    color: "#016894",
   },
   images: {
     width: 50,

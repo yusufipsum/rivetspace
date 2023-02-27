@@ -225,9 +225,7 @@ export default function LoginScreen() {
             onPress={Login}
             hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
           >
-            <Text style={{ fontSize: "14", fontWeight: "bold" }}>
-              Giriş yap
-            </Text>
+            <Text style={{ fontSize: 14, fontWeight: "bold" }}>Giriş yap</Text>
           </TouchableOpacity>
         </View>
       </View>
