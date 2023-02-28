@@ -10,6 +10,8 @@ import { Amplify, Hub } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
 
 import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "./src/store";
 
 Amplify.configure(awsconfig);
 
@@ -36,12 +38,14 @@ function App() {
     return (
       <>
         <SafeAreaProvider>
-          {currentUser ? (
-            <Navigation colorScheme={colorScheme} />
-          ) : (
-            <Login colorScheme={colorScheme} />
-          )}
-          <StatusBar />
+          <Provider store={store}>
+            {currentUser ? (
+              <Navigation colorScheme={colorScheme} />
+            ) : (
+              <Login colorScheme={colorScheme} />
+            )}
+            <StatusBar />
+          </Provider>
         </SafeAreaProvider>
       </>
     );

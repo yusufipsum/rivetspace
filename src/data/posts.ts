@@ -45,7 +45,7 @@ const posts = [
       "https://hips.hearstapps.com/hmg-prod/images/screen-shot-2019-05-24-at-10-37-14-am-1558708961.png?crop=1.00xw:0.653xh;0,0.0647xh&resize=640:*",
     numberOfComments: 7,
     numberOfLikes: 24,
-    numberOfUnlikes: "",
+    numberOfUnlikes: 0,
   },
   {
     id: "p4",
