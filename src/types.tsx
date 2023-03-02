@@ -32,6 +32,7 @@ export type UserType = {
   id: string;
   name: string;
   username: string;
+  socialScore?: number;
   image?: string;
   biography?: string;
 };

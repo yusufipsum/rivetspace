@@ -3,7 +3,6 @@ import { View, FlatList } from "react-native";
 
 import styles from "./styles.ts";
 
-import profiles from "../../data/profiles";
 import NearbyProfile from "../NearbyProfile";
 import NearbyTopInfo from "../NearbyTopInfo";
 import { useSelector } from "react-redux";

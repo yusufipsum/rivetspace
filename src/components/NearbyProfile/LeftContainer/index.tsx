@@ -18,6 +18,14 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
 
   const onPress = () => {
     dispatch(profileSlice.actions.userProfile({ isUser: false }));
+    dispatch(
+      profileSlice.actions.userProfile({
+        name: user.name,
+        username: user.username,
+        image: user.image,
+        biography: user.biography,
+      })
+    );
     navigation.navigate("Profile");
   };
   return (

@@ -11,8 +11,16 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     userProfile: (state, action) => {
-      const { isUser } = action.payload;
+      const { name, username, image, biography, isUser } = action.payload;
       state.isUser = isUser;
+      state.profiles.find((user) => {
+        user.user.name === name,
+          user.user.username === username,
+          user.user.image === image,
+          user.user.biography === biography;
+      });
+
+      console.log("AD VE KULLANICI ADI: ", name, username, biography);
     },
   },
 });

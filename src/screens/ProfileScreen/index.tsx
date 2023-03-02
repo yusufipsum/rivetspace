@@ -19,6 +19,9 @@ export default function ProfileScreen() {
   const navigation = useNavigation();
 
   const isUser = useSelector((state: any) => state.profile.isUser);
+  const ad = useSelector((state: any) => state.profile.name);
+
+  console.log("AD:::", ad);
 
   const onPostShare = () => {
     navigation.navigate("ProfileEdit");
