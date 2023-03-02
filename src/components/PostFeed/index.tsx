@@ -6,7 +6,7 @@ import Post from "../Post";
 import { useSelector } from "react-redux";
 
 const Feed = () => {
-  const posts = useSelector((state: unknown) => state.posts.posts);
+  const posts = useSelector((state: any) => state.posts.posts);
 
   return (
     <View style={{ width: "100%", flex: 1 }}>

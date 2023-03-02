@@ -6,18 +6,23 @@ import styles from "./styles.ts";
 import profiles from "../../data/profiles";
 import NearbyProfile from "../NearbyProfile";
 import NearbyTopInfo from "../NearbyTopInfo";
+import { useSelector } from "react-redux";
 
-const NearbyFeed = () => (
-  <View style={styles.container}>
-    <NearbyTopInfo />
-    <FlatList
-      data={profiles}
-      renderItem={({ item }) => <NearbyProfile profiles={item} />}
-      keyExtractor={(item) => item.id}
-      showsVerticalScrollIndicator={false}
-      showsHorizontalScrollIndicator={false}
-    />
-  </View>
-);
+const NearbyFeed = () => {
+  const profiles = useSelector((state: any) => state.profile.profiles);
+
+  return (
+    <View style={styles.container}>
+      <NearbyTopInfo />
+      <FlatList
+        data={profiles}
+        renderItem={({ item }) => <NearbyProfile profiles={item} />}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      />
+    </View>
+  );
+};
 
 export default NearbyFeed;
