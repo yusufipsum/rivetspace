@@ -1,29 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 import posts from "../data/posts";
 
-const initialState = { posts: posts, likedPosts: [], unlikedPosts: [] };
+const initialState = { posts: posts, likedPosts: [], dislikedPosts: [] };
 
 export const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
     up: (state, action) => {
-      const { postId, like, style } = action.payload;
+      const { postId, like } = action.payload;
       const post = state.posts.find((currentPost) => currentPost.id === postId);
       const likedPost = state.likedPosts;
-      const unlikedPost = state.unlikedPosts;
+      const dislikedPost = state.dislikedPosts;
       const checkLikedPost = likedPost.includes(postId);
-      const checkUnlikedPost = unlikedPost.includes(postId);
+      const checkDislikedPost = dislikedPost.includes(postId);
 
-      if (post && !checkLikedPost && !checkUnlikedPost) {
+      if (post && !checkLikedPost && !checkDislikedPost) {
         post.numberOfLikes += like;
         state.likedPosts.push(postId);
-      } else if (post && !checkLikedPost && checkUnlikedPost) {
+      } else if (post && !checkLikedPost && checkDislikedPost) {
         post.numberOfLikes += like;
         post.numberOfUnlikes += like;
         state.likedPosts.push(postId);
-        let index = state.unlikedPosts.indexOf(postId);
-        delete state.unlikedPosts[index];
+        let index = state.dislikedPosts.indexOf(postId);
+        delete state.dislikedPosts[index];
       } else if (post && checkLikedPost) {
         post.numberOfLikes -= like;
         let index = state.likedPosts.indexOf(postId);
@@ -32,26 +32,26 @@ export const postsSlice = createSlice({
     },
 
     down: (state, action) => {
-      const { postId, unlike, style } = action.payload;
+      const { postId, dislike } = action.payload;
       const post = state.posts.find((currentPost) => currentPost.id === postId);
-      const unlikedPost = state.unlikedPosts;
+      const dislikedPost = state.dislikedPosts;
       const likedPost = state.likedPosts;
-      const checkUnlikedPost = unlikedPost.includes(postId);
+      const checkDislikedPost = dislikedPost.includes(postId);
       const checkLikedPost = likedPost.includes(postId);
 
-      if (post && !checkUnlikedPost && !checkLikedPost) {
-        post.numberOfUnlikes += unlike;
-        state.unlikedPosts.push(postId);
-      } else if (post && !checkUnlikedPost && checkLikedPost) {
-        post.numberOfUnlikes += unlike;
-        post.numberOfLikes += unlike;
-        state.unlikedPosts.push(postId);
+      if (post && !checkDislikedPost && !checkLikedPost) {
+        post.numberOfUnlikes += dislike;
+        state.dislikedPosts.push(postId);
+      } else if (post && !checkDislikedPost && checkLikedPost) {
+        post.numberOfUnlikes += dislike;
+        post.numberOfLikes += dislike;
+        state.dislikedPosts.push(postId);
         let index = state.likedPosts.indexOf(postId);
         delete state.likedPosts[index];
-      } else if (post && checkUnlikedPost) {
-        post.numberOfUnlikes -= unlike;
-        let index = state.unlikedPosts.indexOf(postId);
-        delete state.unlikedPosts[index];
+      } else if (post && checkDislikedPost) {
+        post.numberOfUnlikes -= dislike;
+        let index = state.dislikedPosts.indexOf(postId);
+        delete state.dislikedPosts[index];
       }
     },
   },

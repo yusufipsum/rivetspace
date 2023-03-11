@@ -17,8 +17,8 @@ const Footer = ({ post }: FooterContainerProps) => {
   const dispatch = useDispatch();
   const [isUp, setIsUp] = useState(false);
   const [isDown, setIsDown] = useState(false);
-  const [upColor, setUpColor] = useState("");
-  const [downColor, setDownColor] = useState("");
+  const [upColor, setUpColor] = useState("grey");
+  const [downColor, setDownColor] = useState("grey");
 
   useEffect(() => {
     if (isUp) {
@@ -47,7 +47,7 @@ const Footer = ({ post }: FooterContainerProps) => {
   };
 
   const down = () => {
-    dispatch(postsSlice.actions.down({ postId: post.id, unlike: -1 }));
+    dispatch(postsSlice.actions.down({ postId: post.id, dislike: -1 }));
     setIsDown(!isDown);
   };
 
