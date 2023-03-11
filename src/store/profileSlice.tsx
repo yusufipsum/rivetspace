@@ -19,8 +19,7 @@ export const profileSlice = createSlice({
           user.user.image === image,
           user.user.biography === biography;
       });
-
-      console.log("AD VE KULLANICI ADI: ", name, username, biography);
+      console.log("AD VE KULLANICI ADI: ", action.payload);
     },
   },
 });

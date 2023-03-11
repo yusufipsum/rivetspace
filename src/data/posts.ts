@@ -12,7 +12,7 @@ const posts = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.LALALALALALALALLAALAL LALALALALALALLALALA İYİ BAYRAMLAR TM",
     numberOfComments: 3,
     numberOfLikes: 27,
-    numberOfUnlikes: 2,
+    numberOfUnlikes: -2,
   },
   {
     id: "p2",
@@ -29,7 +29,7 @@ const posts = [
       "https://i2.milimaj.com/i/milliyet/75/0x0/61763db045d2a03848762a76.jpg",
     numberOfComments: 42,
     numberOfLikes: 74,
-    numberOfUnlikes: 1,
+    numberOfUnlikes: -1,
   },
   {
     id: "p3",
@@ -61,7 +61,7 @@ const posts = [
       "https://i4.hurimg.com/i/hurriyet/75/866x494/5efd782445d2a04ed8f62cb8.jpg",
     numberOfComments: 13,
     numberOfLikes: 103,
-    numberOfUnlikes: 11,
+    numberOfUnlikes: -11,
   },
 ];
 

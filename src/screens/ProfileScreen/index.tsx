@@ -17,10 +17,9 @@ export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
 
   const navigation = useNavigation();
-
   const isUser = useSelector((state: any) => state.profile.isUser);
-  const ad = useSelector((state: any) => state.profile.name);
 
+  const ad = useSelector((state: any) => state.profile.name);
   console.log("AD:::", ad);
 
   const onPostShare = () => {
@@ -42,7 +41,7 @@ export default function ProfileScreen() {
         setCurrentUser(undefined);
       }
     });
-  });
+  }, []);
 
   async function userInfo() {
     try {
