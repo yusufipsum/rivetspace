@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
@@ -15,13 +15,40 @@ export type FooterContainerProps = {
 
 const Footer = ({ post }: FooterContainerProps) => {
   const dispatch = useDispatch();
+  const [isUp, setIsUp] = useState(false);
+  const [isDown, setIsDown] = useState(false);
+  const [upColor, setUpColor] = useState("");
+  const [downColor, setDownColor] = useState("");
+
+  useEffect(() => {
+    if (isUp) {
+      if (downColor === "red") {
+        setDownColor("grey");
+        setIsDown(!isUp);
+      }
+      setUpColor("green");
+    } else {
+      setUpColor("grey");
+    }
+    if (isDown) {
+      if (upColor === "green") {
+        setUpColor("grey");
+        setIsUp(!isDown);
+      }
+      setDownColor("red");
+    } else {
+      setDownColor("grey");
+    }
+  });
 
   const up = () => {
-    dispatch(postsSlice.actions.up({ postId: post.id, numberOfLikes: 1 }));
+    dispatch(postsSlice.actions.up({ postId: post.id, like: 1 }));
+    setIsUp(!isUp);
   };
 
   const down = () => {
-    dispatch(postsSlice.actions.down({ postId: post.id, numberOfUnlikes: -1 }));
+    dispatch(postsSlice.actions.down({ postId: post.id, unlike: -1 }));
+    setIsDown(!isDown);
   };
 
   return (
@@ -33,7 +60,7 @@ const Footer = ({ post }: FooterContainerProps) => {
           hitSlop={{ top: 35, bottom: 35, left: 5, right: 30 }}
         >
           <View style={styles.upIcon}>
-            <EvilIcons size={30} name={"chevron-up"} />
+            <EvilIcons size={30} color={upColor} name={"chevron-up"} />
             <Text style={styles.info}>{post.numberOfLikes}</Text>
           </View>
         </TouchableOpacity>
@@ -43,7 +70,7 @@ const Footer = ({ post }: FooterContainerProps) => {
           hitSlop={{ top: 35, bottom: 35, left: 0, right: 30 }}
         >
           <View style={styles.downIcon}>
-            <EvilIcons size={30} name={"chevron-down"} />
+            <EvilIcons size={30} color={downColor} name={"chevron-down"} />
             <Text style={styles.info}>{post.numberOfUnlikes}</Text>
           </View>
         </TouchableOpacity>

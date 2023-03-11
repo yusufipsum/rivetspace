@@ -183,7 +183,7 @@ export default function ProfileScreen() {
         <View>
           <Carousel
             width={width}
-            height={width * 0.8}
+            height={width * 0.58}
             mode="parallax"
             pagingEnabled={true}
             snapEnabled={true}
@@ -204,7 +204,7 @@ export default function ProfileScreen() {
                 }}
               >
                 <ProfilePicture
-                  size={width - 50}
+                  size={width - 150}
                   borderRadius={20}
                   image={item.user.image}
                 />

@@ -5,11 +5,15 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
 import ProfilePicture from "../../components/ProfilePicture";
+import { useDispatch } from "react-redux";
+import { profileSlice } from "../../store/profileSlice";
 
 const ProfileButton = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onPress = () => {
+    dispatch(profileSlice.actions.userProfile({ isUser: true }));
     navigation.navigate("Profile");
   };
 

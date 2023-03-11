@@ -10,11 +10,17 @@ import { ProfilePicture } from "../../components";
 
 import { Ionicons, Feather } from "@expo/vector-icons";
 import { Auth, Hub } from "aws-amplify";
+import { useDispatch, useSelector } from "react-redux";
+import { profileSlice } from "../../store/profileSlice";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
 
   const navigation = useNavigation();
+  const isUser = useSelector((state: any) => state.profile.isUser);
+
+  const ad = useSelector((state: any) => state.profile.name);
+  console.log("AD:::", ad);
 
   const onPostShare = () => {
     navigation.navigate("ProfileEdit");
@@ -35,7 +41,7 @@ export default function ProfileScreen() {
         setCurrentUser(undefined);
       }
     });
-  });
+  }, []);
 
   async function userInfo() {
     try {
@@ -90,9 +96,11 @@ export default function ProfileScreen() {
             Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
             baksanalalalal lasllaslslaldklfalkfjklkkkksk
           </Text>
-          <TouchableOpacity style={styles.button} onPress={onPostShare}>
-            <Text style={styles.shareButtonText}>Profili Düzenle</Text>
-          </TouchableOpacity>
+          {isUser ? (
+            <TouchableOpacity style={styles.button} onPress={onPostShare}>
+              <Text style={styles.shareButtonText}>Profili Düzenle</Text>
+            </TouchableOpacity>
+          ) : null}
           <View
             style={styles.separator}
             lightColor="#eee"
