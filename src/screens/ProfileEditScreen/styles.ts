@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+const SRC_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -7,12 +8,47 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
-  headerContainer: {
-    justifyContent: "space-between",
-    flexDirection: "row",
+  header: {
+    width: "100%",
+  },
+  editableName: {
+    gap: 7,
+  },
+  footerContainer: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    paddingRight: 15,
+  },
+  tag: {
+    flex: 0.8,
+    backgroundColor: "white",
+    width: SRC_WIDTH - 50,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 60,
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+    alignItems: "flex-start",
+    padding: 20,
+    gap: 10,
+    shadowOffset: { width: -2, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  tagTop: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    gap: 30,
+  },
+  tagRight: {
+    marginTop: 10,
+    gap: 10,
+  },
+  social: {
+    flexDirection: "row",
+    gap: 5,
   },
   button: {
     marginTop: 5,
@@ -41,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   newPostContainer: {
+    flex: 1,
     width: "100%",
     height: 350,
     justifyContent: "space-around",
@@ -48,25 +85,23 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   textInput: {
-    width: "90%",
-    textAlign: "center",
-    fontSize: 16,
+    margin: 10,
+    fontSize: 14,
+    alignSelf: "center",
   },
   headerText: {
     paddingHorizontal: 20,
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 5,
-    marginTop: 5,
+    marginBottom: 10,
   },
   nameText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
   },
   editContainer: {
-    alignItems: "center",
     flexDirection: "row",
-    justifyContent: "center",
+    alignItems: "center",
   },
   separator: {
     height: 1,
@@ -81,8 +116,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 50,
     position: "absolute",
-    right: 15,
     bottom: 10,
+    right: 0,
   },
   deleteImage: {
     backgroundColor: "red",
@@ -90,6 +125,17 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: -30,
     alignSelf: "center",
+  },
+  dot: {
+    width: 15,
+    height: 15,
+    borderRadius: 50,
+    backgroundColor: "#26a9e1",
+    marginRight: 5,
+  },
+  point: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 

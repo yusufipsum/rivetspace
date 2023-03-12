@@ -14,11 +14,11 @@ import Carousel from "react-native-reanimated-carousel";
 import styles from "./styles";
 
 import { Text, View } from "../../components/Themed";
-import { ProfilePicture } from "../../components";
+import { Background, ProfilePicture } from "../../components";
 import profiles from "../../data/profiles";
 
 import * as ImagePicker from "expo-image-picker";
-import { Octicons, Feather, AntDesign } from "@expo/vector-icons";
+import { Octicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { Auth } from "aws-amplify";
 
 export default function ProfileScreen() {
@@ -105,66 +105,85 @@ export default function ProfileScreen() {
   return (
     //<DismissKeyboard>
     <SafeAreaView style={styles.container}>
-      <View style={{ width: "100%" }}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Profili düzenle</Text>
-        </View>
-        <View style={styles.newPostContainer}>
-          <View
-            style={styles.editContainer}
-            alignItems="flex-end"
-            justifyContent="flex-end"
-          >
-            <ProfilePicture
-              size={170}
-              image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
-            />
-            <View style={styles.changeImage}>
-              <TouchableOpacity onPress={pickImage}>
-                <AntDesign name="pluscircleo" size={30} />
-              </TouchableOpacity>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Profili Düzenle</Text>
+      </View>
+      <View style={styles.newPostContainer}>
+        <Background color="pink" />
+        <View style={styles.tag}>
+          <View style={styles.tagTop}>
+            <View>
+              <ProfilePicture
+                borderWidth={0.2}
+                borderRadius={100}
+                borderColor="grey"
+                size={120}
+                image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+              />
+              <View style={styles.changeImage}>
+                <TouchableOpacity onPress={pickImage}>
+                  <AntDesign name="pluscircleo" size={30} />
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-          <View style={styles.editContainer}>
-            <TextInput
-              style={styles.nameText}
-              ref={nameRef}
-              onChangeText={setName}
-              placeholder={"Adı"}
-            ></TextInput>
-            <TouchableOpacity>
-              <Octicons
-                name="pencil"
-                style={{ paddingLeft: 7 }}
-                onPress={() => nameRef.current.focus()}
-                size={20}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.editContainer}>
-            <Feather name="at-sign" color="grey" size={16} />
-
-            <TextInput
-              style={styles.buttonText}
-              ref={usernameRef}
-              value={username}
-              onChangeText={(username) =>
-                setUsername(username.replace(/\s+/g, "").trim().toLowerCase())
-              }
-              placeholder={"Kullanıcı adı"}
-            ></TextInput>
-            <TouchableOpacity>
-              <Octicons
-                name="pencil"
-                style={{ paddingLeft: 7 }}
-                onPress={() => usernameRef.current.focus()}
-                size={20}
-              />
-            </TouchableOpacity>
+            <View style={styles.tagRight}>
+              <View style={styles.editableName}>
+                <View style={styles.editContainer}>
+                  <TextInput
+                    style={styles.nameText}
+                    ref={nameRef}
+                    onChangeText={setName}
+                    placeholder={"Adı"}
+                  ></TextInput>
+                  <TouchableOpacity>
+                    <Octicons
+                      name="pencil"
+                      style={{ paddingLeft: 7 }}
+                      onPress={() => nameRef.current.focus()}
+                      size={18}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.editContainer}>
+                  <Feather name="at-sign" color="grey" size={16} />
+                  <TextInput
+                    style={styles.buttonText}
+                    ref={usernameRef}
+                    value={username}
+                    onChangeText={(username) =>
+                      setUsername(
+                        username.replace(/\s+/g, "").trim().toLowerCase()
+                      )
+                    }
+                    placeholder={"Kullanıcı adı"}
+                  ></TextInput>
+                  <TouchableOpacity>
+                    <Octicons
+                      name="pencil"
+                      style={{ paddingLeft: 7 }}
+                      onPress={() => usernameRef.current.focus()}
+                      size={18}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.social}>
+                <FontAwesome5 name={"instagram"} size={18} />
+                <Text>yusufipsum</Text>
+              </View>
+              <View style={styles.social}>
+                <FontAwesome5 name={"spotify"} size={18} />
+                <Text>raksıtaryusuf</Text>
+              </View>
+              {/* <View style={styles.social}>
+                  <FontAwesome5 name={"tiktok"} size={18} />
+                  <Text>yusufipsum</Text>
+                </View> */}
+            </View>
           </View>
           <TextInput
             autoFocus={false}
-            multiline={false}
+            multiline={true}
             value={post}
             onChangeText={(value) => setPost(value)}
             numberOfLines={3}
@@ -173,57 +192,60 @@ export default function ProfileScreen() {
             style={styles.textInput}
             placeholder={"Biyografine bir şeyler yaz"}
           />
-
-          <View
-            style={styles.separator}
-            lightColor="#eee"
-            darkColor="rgba(255,255,255,0.1)"
-          />
         </View>
-        <View>
-          <Carousel
-            width={width}
-            height={width * 0.58}
-            mode="parallax"
-            pagingEnabled={true}
-            snapEnabled={true}
-            autoPlay={false}
-            data={images}
-            //data={[...new Array(6).keys()]}
-            scrollAnimationDuration={1000}
-            onSnapToItem={(index) => {
-              setImageIndex(index);
-              console.log("current index:", index);
+      </View>
+      <View style={styles.point}>
+        <View style={styles.dot}></View>
+        <Text style={styles.buttonText}>
+          Sosyallik Puanı:{" "}
+          <Text
+            style={{
+              fontWeight: "bold",
             }}
-            renderItem={({ item }) => (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+          >
+            146
+          </Text>
+        </Text>
+      </View>
+      <View style={styles.footerContainer}>
+        <Carousel
+          loop
+          width={width}
+          height={width * 0.8}
+          mode="parallax"
+          pagingEnabled={true}
+          snapEnabled={true}
+          autoPlay={false}
+          data={[...new Array(6).keys()]}
+          scrollAnimationDuration={1000}
+          onSnapToItem={(index) => console.log("current index:", index)}
+          renderItem={({ index }) => (
+            <View
+              style={{
+                flex: 1,
+                borderWidth: 1,
+                borderRadius: 20,
+                backgroundColor: "black",
+                justifyContent: "center",
+                alignSelf: "center",
+                width: width,
+              }}
+            >
+              <Text
+                style={{ color: "white", textAlign: "center", fontSize: 30 }}
               >
-                <ProfilePicture
-                  size={width - 150}
-                  borderRadius={20}
-                  image={item.user.image}
-                />
-                <View style={styles.deleteImage}>
-                  <TouchableOpacity onPress={delImage}>
-                    <AntDesign color="white" name="minuscircleo" size={50} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-          />
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={onPostCancel}>
-              <Text style={styles.vazgecButtonText}>Vazgeç</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-              <Text style={styles.onaylaButtonText}>Onayla</Text>
-            </TouchableOpacity>
-          </View>
+                {index}
+              </Text>
+            </View>
+          )}
+        />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={onPostCancel}>
+            <Text style={styles.vazgecButtonText}>Vazgeç</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.onaylaButtonText}>Onayla</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
