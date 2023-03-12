@@ -1,4 +1,5 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, Platform, StatusBar, StyleSheet } from "react-native";
+const SRC_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -6,6 +7,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  tag: {
+    backgroundColor: "white",
+    width: SRC_WIDTH - 50,
+    marginTop: 10,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 60,
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+    alignItems: "flex-start",
+    padding: 20,
+    gap: 10,
+    shadowOffset: { width: -2, height: 4 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  tagTop: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-start",
+    gap: 30,
+  },
+  tagRight: {
+    marginTop: 10,
+    gap: 7,
+  },
+  social: {
+    flexDirection: "row",
+    gap: 5,
   },
   headerContainer: {
     justifyContent: "space-between",
@@ -46,9 +77,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   textInput: {
-    width: "90%",
-    textAlign: "center",
-    fontSize: 16,
+    margin: 10,
+    fontSize: 14,
   },
   headerText: {
     fontSize: 20,

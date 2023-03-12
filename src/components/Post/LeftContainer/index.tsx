@@ -31,7 +31,13 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
   return (
     <View>
       <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
-        <ProfilePicture image={user.image} size={50} />
+        <ProfilePicture
+          borderWidth={0.2}
+          borderColor="black"
+          borderRadius={100}
+          image={user.image}
+          size={50}
+        />
       </TouchableOpacity>
     </View>
   );

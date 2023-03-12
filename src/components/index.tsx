@@ -1,3 +1,4 @@
+export { default as Background } from "./Backgrounds";
 export { default as FriendProfile } from "./FriendProfile";
 export { default as FriendsFeed } from "./FriendsFeed";
 export { default as NearbyFeed } from "./NearbyFeed";

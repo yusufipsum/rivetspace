@@ -6,12 +6,13 @@ import Carousel from "react-native-reanimated-carousel";
 import styles from "./styles";
 
 import { Text, View } from "../../components/Themed";
-import { ProfilePicture } from "../../components";
+import { Background, ProfilePicture } from "../../components";
 
-import { Ionicons, Feather } from "@expo/vector-icons";
+import { Ionicons, Feather, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { Auth, Hub } from "aws-amplify";
 import { useDispatch, useSelector } from "react-redux";
 import { profileSlice } from "../../store/profileSlice";
+import Svg, { Path } from "react-native-svg";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
@@ -73,12 +74,40 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </View>
         <View style={styles.newPostContainer}>
-          <ProfilePicture
-            size={170}
-            image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
-          />
-          <Text style={styles.nameText}>{name}</Text>
-          <Text style={styles.buttonText}>@{username}</Text>
+          <Background color="pink" />
+          <View style={styles.tag}>
+            <View style={styles.tagTop}>
+              <ProfilePicture
+                borderWidth={0.2}
+                borderRadius={100}
+                borderColor="grey"
+                size={120}
+                image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+              />
+              <View style={styles.tagRight}>
+                <View>
+                  <Text style={styles.nameText}>{name}</Text>
+                  <Text style={styles.buttonText}>@{username}</Text>
+                </View>
+                <View style={styles.social}>
+                  <FontAwesome5 name={"instagram"} size={18} />
+                  <Text>yusufipsum</Text>
+                </View>
+                <View style={styles.social}>
+                  <FontAwesome5 name={"spotify"} size={18} />
+                  <Text>raksıtaryusuf</Text>
+                </View>
+                {/* <View style={styles.social}>
+                  <FontAwesome5 name={"tiktok"} size={18} />
+                  <Text>yusufipsum</Text>
+                </View> */}
+              </View>
+            </View>
+            <Text style={styles.textInput}>
+              Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
+              baksanalalalal lasllaslslaldklfalkfjklkkkksk
+            </Text>
+          </View>
           <View style={styles.point}>
             <View style={styles.dot}></View>
             <Text style={styles.buttonText}>
@@ -92,20 +121,11 @@ export default function ProfileScreen() {
               </Text>
             </Text>
           </View>
-          <Text style={styles.textInput}>
-            Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
-            baksanalalalal lasllaslslaldklfalkfjklkkkksk
-          </Text>
           {isUser ? (
             <TouchableOpacity style={styles.button} onPress={onPostShare}>
               <Text style={styles.shareButtonText}>Profili Düzenle</Text>
             </TouchableOpacity>
           ) : null}
-          <View
-            style={styles.separator}
-            lightColor="#eee"
-            darkColor="rgba(255,255,255,0.1)"
-          />
         </View>
       </View>
       <View style={styles.footerContainer}>
