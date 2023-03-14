@@ -1,6 +1,9 @@
+import ProfilePicture from "./ProfilePicture";
+
 export { default as Background } from "./Backgrounds";
 export { default as FriendProfile } from "./FriendProfile";
 export { default as FriendsFeed } from "./FriendsFeed";
+export { default as Images } from "./ProfileImages";
 export { default as NearbyFeed } from "./NearbyFeed";
 export { default as NearbyProfile } from "./NearbyProfile";
 export { default as NewMessageButton } from "./NewMessageButton";

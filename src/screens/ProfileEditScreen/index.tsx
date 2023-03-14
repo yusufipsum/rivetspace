@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
+  FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
@@ -102,6 +103,62 @@ export default function ProfileScreen() {
     }
   };
 
+  const array = [
+    {
+      key: "1",
+      title: "example title 1",
+      subtitle: "example subtitle 1",
+    },
+    {
+      key: "2",
+      title: "example title 2",
+      subtitle: "example subtitle 2",
+    },
+    {
+      key: "3",
+      title: "example title 3",
+      subtitle: "example subtitle 3",
+    },
+  ];
+
+  const list1 = () => {
+    return profiles.slice(0, 3).map((item) => {
+      return (
+        <View key={item.id} style={{ margin: 10 }}>
+          <ProfilePicture
+            size={100}
+            borderRadius={20}
+            image={item.user.image}
+          />
+          <View style={styles.deleteImage}>
+            <TouchableOpacity>
+              <AntDesign color="white" name="minuscircleo" size={30} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    });
+  };
+
+  const list2 = () => {
+    return profiles.slice(3, 5).map((item) => {
+      return (
+        <View key={item.id} style={{ margin: 10 }}>
+          <ProfilePicture
+            size={100}
+            borderRadius={20}
+            image={item.user.image}
+          />
+          <View style={styles.deleteImage}>
+            <TouchableOpacity>
+              <AntDesign color="white" name="minuscircleo" size={30} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    });
+  };
+
   return (
     //<DismissKeyboard>
     <SafeAreaView style={styles.container}>
@@ -109,7 +166,7 @@ export default function ProfileScreen() {
         <Text style={styles.headerText}>Profili Düzenle</Text>
       </View>
       <View style={styles.newPostContainer}>
-        <Background color="pink" />
+        <Background color="#E2C9FF" />
         <View style={styles.tag}>
           <View style={styles.tagTop}>
             <View>
@@ -183,7 +240,7 @@ export default function ProfileScreen() {
           </View>
           <TextInput
             autoFocus={false}
-            multiline={true}
+            multiline={false}
             value={post}
             onChangeText={(value) => setPost(value)}
             numberOfLines={3}
@@ -208,37 +265,20 @@ export default function ProfileScreen() {
         </Text>
       </View>
       <View style={styles.footerContainer}>
-        <Carousel
-          loop
-          width={width}
-          height={width * 0.8}
-          mode="parallax"
-          pagingEnabled={true}
-          snapEnabled={true}
-          autoPlay={false}
-          data={[...new Array(6).keys()]}
-          scrollAnimationDuration={1000}
-          onSnapToItem={(index) => console.log("current index:", index)}
-          renderItem={({ index }) => (
-            <View
-              style={{
-                flex: 1,
-                borderWidth: 1,
-                borderRadius: 20,
-                backgroundColor: "black",
-                justifyContent: "center",
-                alignSelf: "center",
-                width: width,
-              }}
-            >
-              <Text
-                style={{ color: "white", textAlign: "center", fontSize: 30 }}
-              >
-                {index}
-              </Text>
-            </View>
-          )}
-        />
+        <View style={styles.images}>
+          <View style={{ flexDirection: "row", alignSelf: "center" }}>
+            {list1()}
+          </View>
+          <View style={{ flexDirection: "row", alignSelf: "center" }}>
+            <View style={{ flexDirection: "row" }}>{list2()}</View>
+            <TouchableOpacity activeOpacity={0.6}>
+              <View style={styles.addImage}>
+                <AntDesign size={50} name="plus" />
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={onPostCancel}>
             <Text style={styles.vazgecButtonText}>Vazgeç</Text>

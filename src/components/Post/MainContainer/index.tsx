@@ -8,6 +8,8 @@ import { PostType } from "../../../types";
 
 import Footer from "./Footer";
 
+import Lightbox from "react-native-lightbox";
+
 export type MainContainerProps = {
   post: PostType;
 };
@@ -17,7 +19,9 @@ const MainContainer = ({ post }: MainContainerProps) => (
     <View>
       <Text style={styles.content}>{post.content}</Text>
       {!!post.image && (
-        <Image style={styles.image} source={{ uri: post.image }} />
+        <Lightbox resizeMode="contain" underlayColor="white">
+          <Image style={styles.image} source={{ uri: post.image }} />
+        </Lightbox>
       )}
     </View>
     <Footer post={post} />

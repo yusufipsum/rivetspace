@@ -12,6 +12,10 @@ export type ProfilePictureProps = {
   borderRadius?: number;
   //blurRadius?: undefined;
   backgroundColor?: string;
+  alignSelf?: any;
+  resizeMode?: any;
+  width?: number;
+  height?: number;
 };
 
 const ProfilePicture = ({
@@ -25,6 +29,8 @@ const ProfilePicture = ({
   image,
   backgroundColor,
   size,
+  alignSelf,
+  resizeMode,
 }: ProfilePictureProps) => {
   return (
     <Image
@@ -40,6 +46,8 @@ const ProfilePicture = ({
         borderWidth,
         borderColor,
         backgroundColor,
+        alignSelf,
+        resizeMode,
       }}
     />
   );
