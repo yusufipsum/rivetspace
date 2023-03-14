@@ -74,7 +74,7 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </View>
         <View style={styles.newPostContainer}>
-          <Background color="pink" />
+          <Background color="#E2C9FF" />
           <View style={styles.tag}>
             <View style={styles.tagTop}>
               <ProfilePicture
