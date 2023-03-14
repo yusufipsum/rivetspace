@@ -103,62 +103,6 @@ export default function ProfileScreen() {
     }
   };
 
-  const array = [
-    {
-      key: "1",
-      title: "example title 1",
-      subtitle: "example subtitle 1",
-    },
-    {
-      key: "2",
-      title: "example title 2",
-      subtitle: "example subtitle 2",
-    },
-    {
-      key: "3",
-      title: "example title 3",
-      subtitle: "example subtitle 3",
-    },
-  ];
-
-  const list1 = () => {
-    return profiles.slice(0, 3).map((item) => {
-      return (
-        <View key={item.id} style={{ margin: 10 }}>
-          <ProfilePicture
-            size={100}
-            borderRadius={20}
-            image={item.user.image}
-          />
-          <View style={styles.deleteImage}>
-            <TouchableOpacity>
-              <AntDesign color="white" name="minuscircleo" size={30} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    });
-  };
-
-  const list2 = () => {
-    return profiles.slice(3, 5).map((item) => {
-      return (
-        <View key={item.id} style={{ margin: 10 }}>
-          <ProfilePicture
-            size={100}
-            borderRadius={20}
-            image={item.user.image}
-          />
-          <View style={styles.deleteImage}>
-            <TouchableOpacity>
-              <AntDesign color="white" name="minuscircleo" size={30} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    });
-  };
-
   return (
     //<DismissKeyboard>
     <SafeAreaView style={styles.container}>
@@ -266,17 +210,40 @@ export default function ProfileScreen() {
       </View>
       <View style={styles.footerContainer}>
         <View style={styles.images}>
-          <View style={{ flexDirection: "row", alignSelf: "center" }}>
-            {list1()}
-          </View>
-          <View style={{ flexDirection: "row", alignSelf: "center" }}>
-            <View style={{ flexDirection: "row" }}>{list2()}</View>
-            <TouchableOpacity activeOpacity={0.6}>
-              <View style={styles.addImage}>
-                <AntDesign size={50} name="plus" />
+          <FlatList
+            data={images}
+            numColumns={3}
+            renderItem={({ item }) => (
+              <View key={item.id} style={{ margin: 15 }}>
+                <ProfilePicture
+                  size={100}
+                  borderRadius={20}
+                  image={item.user.image}
+                />
+                <View style={styles.deleteImage}>
+                  <TouchableOpacity>
+                    <AntDesign color="white" name="minuscircleo" size={30} />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </TouchableOpacity>
-          </View>
+            )}
+            keyExtractor={(item) => item.user.id}
+            ListFooterComponent={() => (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  bottom: 0,
+                  margin: 5,
+                }}
+              >
+                <View style={styles.addImage}>
+                  <AntDesign size={50} name="plus" />
+                </View>
+              </TouchableOpacity>
+            )}
+          />
         </View>
 
         <View style={styles.buttonContainer}>

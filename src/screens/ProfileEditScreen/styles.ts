@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     gap: 20,
     width: SRC_WIDTH,
     alignSelf: "flex-start",
+    alignItems: "center",
   },
   addImage: {
     width: 100,
