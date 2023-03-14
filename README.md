@@ -1,6 +1,6 @@
 # Install
 ```console
-yarn ci
+yarn
 ```
 # Build
 This is an expo project. Check this: https://docs.expo.dev
