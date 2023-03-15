@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
   images: {
     flex: 1,
     marginTop: 10,
-    gap: 20,
     width: SRC_WIDTH,
     alignSelf: "flex-start",
     alignItems: "center",

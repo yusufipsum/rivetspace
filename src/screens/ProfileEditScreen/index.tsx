@@ -10,7 +10,6 @@ import {
   FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Carousel from "react-native-reanimated-carousel";
 
 import styles from "./styles";
 
@@ -122,7 +121,11 @@ export default function ProfileScreen() {
                 image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
               />
               <View style={styles.changeImage}>
-                <TouchableOpacity onPress={pickImage}>
+                <TouchableOpacity
+                  hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
+                  activeOpacity={0.4}
+                  onPress={pickImage}
+                >
                   <AntDesign name="pluscircleo" size={30} />
                 </TouchableOpacity>
               </View>
@@ -136,11 +139,14 @@ export default function ProfileScreen() {
                     onChangeText={setName}
                     placeholder={"Adı"}
                   ></TextInput>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    hitSlop={{ top: 15, bottom: 15, right: 15 }}
+                    activeOpacity={0.6}
+                    onPress={() => nameRef.current.focus()}
+                  >
                     <Octicons
                       name="pencil"
                       style={{ paddingLeft: 7 }}
-                      onPress={() => nameRef.current.focus()}
                       size={18}
                     />
                   </TouchableOpacity>
@@ -158,11 +164,14 @@ export default function ProfileScreen() {
                     }
                     placeholder={"Kullanıcı adı"}
                   ></TextInput>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    hitSlop={{ top: 15, bottom: 15, right: 15 }}
+                    activeOpacity={0.6}
+                    onPress={() => usernameRef.current.focus()}
+                  >
                     <Octicons
                       name="pencil"
                       style={{ paddingLeft: 7 }}
-                      onPress={() => usernameRef.current.focus()}
                       size={18}
                     />
                   </TouchableOpacity>
@@ -211,10 +220,11 @@ export default function ProfileScreen() {
       <View style={styles.footerContainer}>
         <View style={styles.images}>
           <FlatList
+            contentContainerStyle={{ gap: 15 }}
             data={images}
             numColumns={3}
             renderItem={({ item }) => (
-              <View key={item.id} style={{ margin: 15 }}>
+              <View key={item.id} style={{ margin: 10 }}>
                 <ProfilePicture
                   size={100}
                   borderRadius={20}
@@ -234,12 +244,11 @@ export default function ProfileScreen() {
                 style={{
                   position: "absolute",
                   right: 0,
-                  bottom: 0,
-                  margin: 5,
+                  bottom: 15,
                 }}
               >
                 <View style={styles.addImage}>
-                  <AntDesign size={50} name="plus" />
+                  <AntDesign size={50} name="picture" />
                 </View>
               </TouchableOpacity>
             )}

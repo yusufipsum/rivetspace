@@ -45,6 +45,7 @@
     "react-native-gesture-handler": "~2.8.0",
     "react-native-google-nearby-messages": "^1.0.22",
     "react-native-lightbox": "^0.8.1",
+    "react-native-lightbox-v2": "^0.9.0",
     "react-native-link": "^4.1.0",
     "react-native-marquee": "^0.4.0",
     "react-native-reanimated": "~2.12.0",

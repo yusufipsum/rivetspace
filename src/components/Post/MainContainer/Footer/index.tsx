@@ -74,7 +74,7 @@ const Footer = ({ post }: FooterContainerProps) => {
           <View style={styles.downIcon}>
             <EvilIcons size={30} color={downColor} name={"chevron-down"} />
             <Text style={[styles.info, { color: downColor }]}>
-              {post.numberOfUnlikes}
+              {post.numberOfDislikes}
             </Text>
           </View>
         </TouchableOpacity>

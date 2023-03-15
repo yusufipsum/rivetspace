@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
-import Lightbox from "react-native-lightbox";
+import Lightbox from "react-native-lightbox-v2";
 
 import styles from "./styles";
 
@@ -135,33 +135,31 @@ export default function ProfileScreen() {
       </View>
       <View style={styles.footerContainer}>
         <Carousel
-          loop
           width={width}
           height={width * 0.8}
           mode="parallax"
           pagingEnabled={true}
-          snapEnabled={true}
           autoPlay={false}
           data={images}
           scrollAnimationDuration={1000}
           onSnapToItem={(index) => console.log("current index:", index)}
           renderItem={({ item }) => (
-            <View
+            <Lightbox
               style={{
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              resizeMode="contain"
+              underlayColor="white"
             >
-              <Lightbox resizeMode="contain" underlayColor="white">
-                <Images
-                  width={width}
-                  height={300}
-                  borderRadius={20}
-                  image={item.user.image}
-                />
-              </Lightbox>
-            </View>
+              <Images
+                width={width}
+                height={300}
+                borderRadius={20}
+                image={item.user.image}
+              />
+            </Lightbox>
           )}
         />
       </View>
