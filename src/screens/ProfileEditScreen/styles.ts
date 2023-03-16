@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     borderRadius: 50,
     position: "absolute",
-    bottom: -30,
+    bottom: -20,
     alignSelf: "center",
   },
   dot: {
@@ -136,6 +136,22 @@ const styles = StyleSheet.create({
   point: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  images: {
+    flex: 1,
+    marginTop: 10,
+    width: SRC_WIDTH,
+    alignSelf: "flex-start",
+    alignItems: "center",
+  },
+  addImage: {
+    width: 100,
+    height: 100,
+    borderWidth: 1,
+    borderRadius: 20,
+    margin: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

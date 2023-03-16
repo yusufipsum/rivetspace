@@ -34,7 +34,9 @@ export type UserType = {
   username: string;
   socialScore?: number;
   image?: string;
+  photos?: object;
   biography?: string;
+  color?: string;
 };
 
 export type ProfileType = {
@@ -50,7 +52,7 @@ export type PostType = {
   image?: string;
   numberOfComments?: number;
   numberOfLikes?: number;
-  numberOfUnlikes?: number;
+  numberOfDislikes?: number;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

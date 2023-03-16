@@ -7,9 +7,9 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   Keyboard,
+  FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Carousel from "react-native-reanimated-carousel";
 
 import styles from "./styles";
 
@@ -109,7 +109,7 @@ export default function ProfileScreen() {
         <Text style={styles.headerText}>Profili Düzenle</Text>
       </View>
       <View style={styles.newPostContainer}>
-        <Background color="pink" />
+        <Background color="#E2C9FF" />
         <View style={styles.tag}>
           <View style={styles.tagTop}>
             <View>
@@ -121,7 +121,11 @@ export default function ProfileScreen() {
                 image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
               />
               <View style={styles.changeImage}>
-                <TouchableOpacity onPress={pickImage}>
+                <TouchableOpacity
+                  hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
+                  activeOpacity={0.4}
+                  onPress={pickImage}
+                >
                   <AntDesign name="pluscircleo" size={30} />
                 </TouchableOpacity>
               </View>
@@ -135,11 +139,14 @@ export default function ProfileScreen() {
                     onChangeText={setName}
                     placeholder={"Adı"}
                   ></TextInput>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    hitSlop={{ top: 15, bottom: 15, right: 15 }}
+                    activeOpacity={0.6}
+                    onPress={() => nameRef.current.focus()}
+                  >
                     <Octicons
                       name="pencil"
                       style={{ paddingLeft: 7 }}
-                      onPress={() => nameRef.current.focus()}
                       size={18}
                     />
                   </TouchableOpacity>
@@ -157,11 +164,14 @@ export default function ProfileScreen() {
                     }
                     placeholder={"Kullanıcı adı"}
                   ></TextInput>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    hitSlop={{ top: 15, bottom: 15, right: 15 }}
+                    activeOpacity={0.6}
+                    onPress={() => usernameRef.current.focus()}
+                  >
                     <Octicons
                       name="pencil"
                       style={{ paddingLeft: 7 }}
-                      onPress={() => usernameRef.current.focus()}
                       size={18}
                     />
                   </TouchableOpacity>
@@ -183,7 +193,7 @@ export default function ProfileScreen() {
           </View>
           <TextInput
             autoFocus={false}
-            multiline={true}
+            multiline={false}
             value={post}
             onChangeText={(value) => setPost(value)}
             numberOfLines={3}
@@ -208,37 +218,43 @@ export default function ProfileScreen() {
         </Text>
       </View>
       <View style={styles.footerContainer}>
-        <Carousel
-          loop
-          width={width}
-          height={width * 0.8}
-          mode="parallax"
-          pagingEnabled={true}
-          snapEnabled={true}
-          autoPlay={false}
-          data={[...new Array(6).keys()]}
-          scrollAnimationDuration={1000}
-          onSnapToItem={(index) => console.log("current index:", index)}
-          renderItem={({ index }) => (
-            <View
-              style={{
-                flex: 1,
-                borderWidth: 1,
-                borderRadius: 20,
-                backgroundColor: "black",
-                justifyContent: "center",
-                alignSelf: "center",
-                width: width,
-              }}
-            >
-              <Text
-                style={{ color: "white", textAlign: "center", fontSize: 30 }}
+        <View style={styles.images}>
+          <FlatList
+            contentContainerStyle={{ gap: 15 }}
+            data={images}
+            numColumns={3}
+            renderItem={({ item }) => (
+              <View key={item.id} style={{ margin: 10 }}>
+                <ProfilePicture
+                  size={100}
+                  borderRadius={20}
+                  image={item.user.image}
+                />
+                <View style={styles.deleteImage}>
+                  <TouchableOpacity>
+                    <AntDesign color="white" name="minuscircleo" size={30} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item) => item.user.id}
+            ListFooterComponent={() => (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  bottom: 15,
+                }}
               >
-                {index}
-              </Text>
-            </View>
-          )}
-        />
+                <View style={styles.addImage}>
+                  <AntDesign size={50} name="picture" />
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={onPostCancel}>
             <Text style={styles.vazgecButtonText}>Vazgeç</Text>

@@ -20,7 +20,7 @@ export const postsSlice = createSlice({
         state.likedPosts.push(postId);
       } else if (post && !checkLikedPost && checkDislikedPost) {
         post.numberOfLikes += like;
-        post.numberOfUnlikes += like;
+        post.numberOfDislikes += like;
         state.likedPosts.push(postId);
         let index = state.dislikedPosts.indexOf(postId);
         delete state.dislikedPosts[index];
@@ -40,16 +40,16 @@ export const postsSlice = createSlice({
       const checkLikedPost = likedPost.includes(postId);
 
       if (post && !checkDislikedPost && !checkLikedPost) {
-        post.numberOfUnlikes += dislike;
+        post.numberOfDislikes += dislike;
         state.dislikedPosts.push(postId);
       } else if (post && !checkDislikedPost && checkLikedPost) {
-        post.numberOfUnlikes += dislike;
+        post.numberOfDislikes += dislike;
         post.numberOfLikes += dislike;
         state.dislikedPosts.push(postId);
         let index = state.likedPosts.indexOf(postId);
         delete state.likedPosts[index];
       } else if (post && checkDislikedPost) {
-        post.numberOfUnlikes -= dislike;
+        post.numberOfDislikes -= dislike;
         let index = state.dislikedPosts.indexOf(postId);
         delete state.dislikedPosts[index];
       }

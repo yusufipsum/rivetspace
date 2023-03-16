@@ -2,20 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
+import Lightbox from "react-native-lightbox-v2";
 
 import styles from "./styles";
 
 import { Text, View } from "../../components/Themed";
-import { Background, ProfilePicture } from "../../components";
+import { Background, Images, ProfilePicture } from "../../components";
 
 import { Ionicons, Feather, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { Auth, Hub } from "aws-amplify";
 import { useDispatch, useSelector } from "react-redux";
 import { profileSlice } from "../../store/profileSlice";
-import Svg, { Path } from "react-native-svg";
+import profiles from "../../data/profiles";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
+
+  const [images, setImages] = useState(profiles.slice(0, 5));
 
   const navigation = useNavigation();
   const isUser = useSelector((state: any) => state.profile.isUser);
@@ -42,21 +45,22 @@ export default function ProfileScreen() {
         setCurrentUser(undefined);
       }
     });
+    async function userInfo() {
+      try {
+        const userInfo = await Auth.currentUserInfo();
+        setName(userInfo.attributes.name);
+        setUsername(userInfo.username);
+        console.log("curr user response", userInfo);
+      } catch (error) {
+        console.log("error curr user:", error);
+      }
+    }
+    userInfo();
   }, []);
 
-  async function userInfo() {
-    try {
-      const userInfo = await Auth.currentUserInfo();
-      setName(userInfo.attributes.name);
-      setUsername(userInfo.username);
-      console.log("curr user response", userInfo);
-    } catch (error) {
-      console.log("error curr user:", error);
-    }
-  }
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
-  userInfo();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -82,6 +86,7 @@ export default function ProfileScreen() {
                 borderRadius={100}
                 borderColor="grey"
                 size={120}
+                alignSelf={"center"}
                 image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
               />
               <View style={styles.tagRight}>
@@ -130,34 +135,31 @@ export default function ProfileScreen() {
       </View>
       <View style={styles.footerContainer}>
         <Carousel
-          loop
           width={width}
           height={width * 0.8}
           mode="parallax"
           pagingEnabled={true}
-          snapEnabled={true}
           autoPlay={false}
-          data={[...new Array(6).keys()]}
+          data={images}
           scrollAnimationDuration={1000}
           onSnapToItem={(index) => console.log("current index:", index)}
-          renderItem={({ index }) => (
-            <View
+          renderItem={({ item }) => (
+            <Lightbox
               style={{
                 flex: 1,
-                borderWidth: 1,
-                borderRadius: 20,
-                backgroundColor: "black",
                 justifyContent: "center",
-                alignSelf: "center",
-                width: width,
+                alignItems: "center",
               }}
+              resizeMode="contain"
+              underlayColor="white"
             >
-              <Text
-                style={{ color: "white", textAlign: "center", fontSize: 30 }}
-              >
-                {index}
-              </Text>
-            </View>
+              <Images
+                width={width}
+                height={300}
+                borderRadius={20}
+                image={item.user.image}
+              />
+            </Lightbox>
           )}
         />
       </View>

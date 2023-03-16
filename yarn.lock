@@ -15624,6 +15624,18 @@ react-native-gradle-plugin@^0.71.15:
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.15.tgz#9e6b506f30729fe8eb086981702f4e3c891d2b13"
   integrity sha512-7S3pAuPaQJlhax6EZ4JMsDNpj05TfuzX9gPgWLrFfAIWIFLuJ6aDQYAZy2TEI9QJALPoWrj8LWaqP/DGYh14pw==
 
+react-native-lightbox-v2@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-lightbox-v2/-/react-native-lightbox-v2-0.9.0.tgz#b97be4d892ebb959069c451948b11da390bc46d8"
+  integrity sha512-Fc5VFHFj2vokS+OegyTsANKb1CYoUlOtAv+EBH5wtpJn1b5cey6jVXH7136G5+8OC9JmKWSgKHc5thFwOoZTUg==
+
+react-native-lightbox@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/react-native-lightbox/-/react-native-lightbox-0.8.1.tgz#4e561ec46e61617a0f3f12c88ec2695360998878"
+  integrity sha512-TFZA6iKEEHpAUIXjMTRb6vx0/9rHgEKy3ZBiRAy295PwldYg5c8opwnbyURLIl522ykeqhVx9uGdXjSMIowLvA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-link@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/react-native-link/-/react-native-link-4.1.0.tgz"
@@ -15635,6 +15647,11 @@ react-native-marquee@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmjs.org/react-native-marquee/-/react-native-marquee-0.4.0.tgz"
   integrity sha512-YLVqHGNllE6t6qDqMgPhJ5Qj5s6YMHx4MDR8l+FTDSyDsiM5FHV/aR7bx+yiMbU+3cHSGtm8W/7J1SwS/A/RKA==
+
+react-native-pinchable@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-pinchable/-/react-native-pinchable-0.2.1.tgz#93cf6ce78f65cef2f1364187320e363170d2e212"
+  integrity sha512-LRSLCrizUX/XtYwwBxyuYL4xDLUhyPbBvD/tUpzns0PX2Zs0pR0fd/LsFm/n6tEigCLL/0KlDrOVhOdW3wtz+Q==
 
 react-native-reanimated-carousel@^3.3.0:
   version "3.3.0"
