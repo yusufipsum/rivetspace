@@ -84,18 +84,13 @@ function RootNavigator() {
         options={{ headerTitle: "Yeni Mesaj", headerShown: false }}
       />
       <Stack.Screen
-        name="Notifications"
-        component={NotificationsScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="Profile"
         component={ProfileScreen}
         options={{ headerShown: false }}
       />
       <Stack.Group
         screenOptions={{
-          presentation: "pageSheet",
+          presentation: "fullScreenModal",
         }}
       >
         <Stack.Screen
@@ -112,7 +107,9 @@ function RootNavigator() {
         <Stack.Screen
           name="NewPost"
           component={NewPostScreen}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+          }}
         />
       </Stack.Group>
     </Stack.Navigator>
@@ -182,7 +179,7 @@ function BottomTabNavigator() {
         options={{
           title: "Yeni",
           headerShown: false,
-          tabBarIcon: ({ color }) => <NewPostButton />,
+          tabBarIcon: ({}) => <NewPostButton />,
         }}
       />
       <Tab.Screen
@@ -203,7 +200,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => (
             <Feather name="mail" color={color} size={25} />
           ),
-          headerRight: ({ color }) => <NewMessageButton />,
+          headerRight: ({}) => <NewMessageButton />,
         }}
       />
     </Tab.Navigator>
