@@ -17,13 +17,14 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
   const navigation = useNavigation();
 
   const onPress = () => {
-    dispatch(profileSlice.actions.userProfile({ isUser: false }));
     dispatch(
       profileSlice.actions.userProfile({
+        isUser: false,
         name: user.name,
         username: user.username,
         image: user.image,
         biography: user.biography,
+        color: user.color,
       })
     );
     navigation.navigate("Profile");
@@ -31,7 +32,7 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View>
-        <ProfilePicture image={user.image} borderRadius={50} size={50} />
+        <ProfilePicture image={user.image} borderRadius={100} size={120} />
       </View>
     </TouchableOpacity>
   );

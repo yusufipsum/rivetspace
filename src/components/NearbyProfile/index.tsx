@@ -13,9 +13,11 @@ export type ProfileProps = {
 };
 
 const Profile = ({ profiles }: ProfileProps) => (
-  <View style={styles.container}>
-    <LeftContainer user={profiles.user} />
-    <MainContainer profiles={profiles} />
+  <View style={styles.cards}>
+    <View style={styles.container}>
+      <LeftContainer user={profiles.user} />
+      <MainContainer profiles={profiles} />
+    </View>
   </View>
 );
 

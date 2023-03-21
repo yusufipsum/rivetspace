@@ -1,5 +1,3 @@
-import ProfilePicture from "./ProfilePicture";
-
 export { default as Background } from "./Backgrounds";
 export { default as FriendProfile } from "./FriendProfile";
 export { default as FriendsFeed } from "./FriendsFeed";

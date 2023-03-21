@@ -217,16 +217,20 @@ export default function LoginScreen() {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.sign}>
-          <Text style={styles.text}>Zaten bir hesabın var mı? </Text>
-          <TouchableOpacity
-            raised
-            activeOpacity={0.6}
-            onPress={Login}
-            hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
-          >
-            <Text style={{ fontSize: 14, fontWeight: "bold" }}>Giriş yap</Text>
-          </TouchableOpacity>
+        <View style={styles.signContainer}>
+          <View style={styles.sign}>
+            <Text style={styles.text}>Zaten bir hesabın var mı? </Text>
+            <TouchableOpacity
+              raised
+              activeOpacity={0.6}
+              onPress={Login}
+              hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
+            >
+              <Text style={{ fontSize: 14, fontWeight: "bold" }}>
+                Giriş yap
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

@@ -28,6 +28,11 @@ export default function LoginScreen() {
     setError(false);
   };
 
+  const Confirm = () => {
+    navigation.navigate("ConfirmSignIn");
+    setError(false);
+  };
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -139,16 +144,29 @@ export default function LoginScreen() {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.sign}>
-          <Text style={styles.text}>Henüz bir hesabın yok mu? </Text>
-          <TouchableOpacity
-            raised
-            activeOpacity={0.6}
-            onPress={Sign}
-            hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
-          >
-            <Text style={{ fontSize: 14, fontWeight: "bold" }}>Kaydol</Text>
-          </TouchableOpacity>
+        <View style={styles.signContainer}>
+          <View style={styles.sign}>
+            <Text style={styles.text}>Henüz bir hesabın yok mu? </Text>
+            <TouchableOpacity
+              raised
+              activeOpacity={0.6}
+              onPress={Sign}
+              hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
+            >
+              <Text style={{ fontSize: 14, fontWeight: "bold" }}>Kaydol</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.sign}>
+            <Text style={styles.text}>Hesabına giriş yapamıyor musun? </Text>
+            <TouchableOpacity
+              raised
+              activeOpacity={0.6}
+              onPress={Confirm}
+              hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
+            >
+              <Text style={{ fontSize: 14, fontWeight: "bold" }}>Doğrula</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

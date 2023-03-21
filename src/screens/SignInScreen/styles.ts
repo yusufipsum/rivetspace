@@ -79,6 +79,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "grey",
   },
+  signContainer: {
+    flexDirection: "column",
+    alignItems: "center",
+    gap: 20,
+  },
   sign: {
     flexDirection: "row",
     alignItems: "center",

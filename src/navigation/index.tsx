@@ -30,6 +30,7 @@ import {
   ProfileScreen,
   ProfileEditScreen,
   SignInScreen,
+  ConfirmSignInScreen,
 } from "../screens";
 
 import {
@@ -96,6 +97,11 @@ function RootNavigator() {
         <Stack.Screen
           name="ProfileEdit"
           component={ProfileEditScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ConfirmSignIn"
+          component={ConfirmSignInScreen}
           options={{ headerShown: false }}
         />
       </Stack.Group>
@@ -187,6 +193,7 @@ function BottomTabNavigator() {
         component={NotificationsScreen}
         options={{
           title: "Bildirimler",
+          headerTitleStyle: { fontSize: 20 },
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons name="bell" color={color} size={25} />
           ),
@@ -197,6 +204,7 @@ function BottomTabNavigator() {
         component={MessagesScreen}
         options={{
           title: "Mesajlar",
+          headerTitleStyle: { fontSize: 20 },
           tabBarIcon: ({ color }) => (
             <Feather name="mail" color={color} size={25} />
           ),

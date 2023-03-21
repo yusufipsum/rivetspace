@@ -23,6 +23,7 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
         username: user.username,
         image: user.image,
         biography: user.biography,
+        color: user.color,
       })
     );
     navigation.navigate("Profile");

@@ -19,10 +19,11 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 20,
     gap: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: { width: -2, height: 6 },
     shadowColor: "#171717",
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    zIndex: 1,
   },
   tagTop: {
     flexDirection: "row",
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   headerContainer: {
+    flex: 1,
     justifyContent: "space-between",
     flexDirection: "column",
     alignItems: "center",
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   newPostContainer: {
+    flex: 1,
     width: "100%",
     height: 350,
     justifyContent: "space-around",
@@ -102,6 +105,11 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
   },
   footerContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  uFooterContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -115,6 +123,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   point: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  uPoint: {
+    flex: 0.8,
     flexDirection: "row",
     alignItems: "center",
   },

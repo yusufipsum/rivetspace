@@ -13,12 +13,14 @@ export type ProfileProps = {
 };
 
 const Profile = ({ profiles }: ProfileProps) => (
-  <TouchableOpacity activeOpacity={0.8}>
-    <View style={styles.container}>
-      <LeftContainer user={profiles.user} />
-      <MainContainer profiles={profiles} />
-    </View>
-  </TouchableOpacity>
+  <View style={styles.friends}>
+    <TouchableOpacity activeOpacity={0.8}>
+      <View style={styles.container}>
+        <LeftContainer user={profiles.user} />
+        <MainContainer profiles={profiles} />
+      </View>
+    </TouchableOpacity>
+  </View>
 );
 
 export default Profile;

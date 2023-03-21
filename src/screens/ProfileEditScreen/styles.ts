@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, Platform, StatusBar, StyleSheet } from "react-native";
 const SRC_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   tag: {
-    flex: 0.8,
+    flex: 0.9,
     backgroundColor: "white",
     width: SRC_WIDTH - 50,
     borderTopLeftRadius: 0,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 20,
     gap: 10,
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: { width: -2, height: 6 },
     shadowColor: "#171717",
     shadowOpacity: 0.2,
     shadowRadius: 3,
@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   point: {
+    flex: 0.1,
     flexDirection: "row",
     alignItems: "center",
   },

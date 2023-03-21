@@ -34,16 +34,15 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: "row",
     alignItems: "center",
-    width: "80%",
     height: 35,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     borderColor: "#f7f7f7",
   },
   inputs: {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    width: "100%",
+    width: "80%",
     height: 90,
   },
   forgotPassword: {
@@ -77,6 +76,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color: "grey",
+  },
+  signContainer: {
+    alignItems: "center",
+    gap: 30,
   },
   sign: {
     flexDirection: "row",

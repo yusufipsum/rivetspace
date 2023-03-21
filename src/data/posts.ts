@@ -6,6 +6,7 @@ const posts = [
       username: "@deneme",
       name: "deneme",
       image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
+      color: "#FADC8E",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content:
@@ -21,6 +22,7 @@ const posts = [
       username: "@yusufipsum",
       name: "Yusuf",
       image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
+      color: "#E2C9FF",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content:
@@ -38,6 +40,7 @@ const posts = [
       username: "@hello",
       name: "Hello",
       image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
+      color: "#B7E0DA",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content: "I'm developing a new application. Join me in this project!",
@@ -54,6 +57,7 @@ const posts = [
       username: "@rivetspace",
       name: "rivetspace",
       image: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
+      color: "black",
     },
     createdAt: "2022-07-07T12:00:00.000Z",
     content: "Hello it's me",

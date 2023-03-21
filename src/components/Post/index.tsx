@@ -14,6 +14,7 @@ export type PostProps = {
 };
 
 const Post = ({ post }: PostProps) => (
+  //<View style={styles.posts}>
   <View style={styles.container}>
     <View style={{ flexDirection: "row" }}>
       <ProfileContainer user={post.user} />
@@ -21,6 +22,7 @@ const Post = ({ post }: PostProps) => (
     </View>
     <MainContainer post={post} />
   </View>
+  //</View>
 );
 
 export default Post;

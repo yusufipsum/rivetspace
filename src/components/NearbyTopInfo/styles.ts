@@ -4,10 +4,12 @@ const styles = StyleSheet.create({
   topContainer: {
     width: "90%",
     height: 90,
-    backgroundColor: "#def2fa",
+    backgroundColor: "#fff",
+    margin: 8,
     alignItems: "center",
     alignSelf: "center",
-    borderRadius: 20,
+    borderRadius: 40,
+    zIndex: 1,
   },
   topFlatList: {
     flexDirection: "row",

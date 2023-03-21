@@ -8,6 +8,7 @@ const profiles = [
       image:
         "https://cdn.r10.net/editor/100103/d47a30163f65d3e9785db0f3a8a6f125.jpg",
       biography: "She/Her - Insta: @ayca_22",
+      color: "#E2C9FF",
     },
   },
   {
@@ -19,6 +20,7 @@ const profiles = [
       image:
         "https://i.pinimg.com/236x/c5/0a/6e/c50a6e0cd709e5a886ac4bcbc04dadae--my-birthday-man-candy.jpg",
       biography: "Ben Levent, Marmara Üniversitesi'nde okuyorum.",
+      color: "#B7E0DA",
     },
   },
   {
@@ -30,6 +32,7 @@ const profiles = [
       image:
         "https://img.wattpad.com/04ad7d37f06664571ea6476267ec0fe74e0346da/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f64774f52477064625072726b35673d3d2d38362e313537376134323366373833383934343531323432303631373430342e6a7067?s=fit&w=720&h=720",
       biography: "Merhaba ben Merve, bu benim biyografim.",
+      color: "#A92701",
     },
   },
   {
@@ -41,6 +44,7 @@ const profiles = [
       image:
         "https://i.pinimg.com/736x/98/62/3a/98623a52d51771d6d597c0a4bc0f0d77.jpg",
       biography: "Kendimi anlatmaya üşeniyorum",
+      color: "#FF4B4C",
     },
   },
   {
@@ -52,6 +56,7 @@ const profiles = [
       image:
         "https://i.pinimg.com/736x/bf/f1/1d/bff11de83086515bdf280818ec8c3458.jpg",
       biography: "Selam ben Cemre, bu benim biyografim.",
+      color: "#CCF8BB",
     },
   },
   {
@@ -63,6 +68,7 @@ const profiles = [
       image:
         "https://i.pinimg.com/originals/a2/60/8d/a2608d52cb44d16fadb9cbaf5053e181.jpg",
       biography: "Selam ben Dilara, bu benim biyografim.",
+      color: "#5AA1FE",
     },
   },
   {
@@ -73,6 +79,7 @@ const profiles = [
       name: "Nil",
       image: "https://pbs.twimg.com/media/D5vTZr-WAAYUJGD.jpg",
       biography: "Selam ben Nil, bu benim biyografim.",
+      color: "#FFB5C4",
     },
   },
   {
@@ -84,6 +91,7 @@ const profiles = [
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpjdMuF40JddK_xrALpKHGZxdh7jNdiXI1g&usqp=CAU",
       biography: "Selam ben Gökhan, bu benim biyografim.",
+      color: "#D3D6FF",
     },
   },
 ];

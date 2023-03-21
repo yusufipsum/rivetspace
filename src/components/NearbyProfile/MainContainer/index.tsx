@@ -20,21 +20,22 @@ const MainContainer = ({ profiles }: MainContainerProps) => (
           <Text style={styles.username}>{profiles.user.username}</Text>
         </View>
       </TouchableOpacity>
-      <View>
-        <Text>{profiles.user.biography}</Text>
-      </View>
+      <Text style={styles.content} numberOfLines={2}>
+        {profiles.user.biography}
+      </Text>
     </View>
-
-    <TouchableOpacity style={styles.icon} activeOpacity={0.3}>
-      <Octicons size={20} name={"person-add"} style={{ color: "#26a9e1" }} />
-    </TouchableOpacity>
-    <TouchableOpacity style={styles.icon} activeOpacity={0.3}>
-      <Ionicons
-        size={25}
-        name={"game-controller"}
-        /*style={{ color: "#26a9e1" }}*/
-      />
-    </TouchableOpacity>
+    <View style={styles.icons}>
+      <TouchableOpacity style={styles.icon} activeOpacity={0.3}>
+        <Octicons size={25} name={"person-add"} style={{ color: "#26a9e1" }} />
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.icon} activeOpacity={0.3}>
+        <Ionicons
+          size={25}
+          name={"game-controller"}
+          /*style={{ color: "#26a9e1" }}*/
+        />
+      </TouchableOpacity>
+    </View>
   </View>
 );
 

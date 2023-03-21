@@ -109,7 +109,7 @@ export default function ProfileScreen() {
         <Text style={styles.headerText}>Profili Düzenle</Text>
       </View>
       <View style={styles.newPostContainer}>
-        <Background color="#E2C9FF" />
+        <Background color="#def2fa" />
         <View style={styles.tag}>
           <View style={styles.tagTop}>
             <View>
@@ -249,6 +249,17 @@ export default function ProfileScreen() {
               >
                 <View style={styles.addImage}>
                   <AntDesign size={50} name="picture" />
+                  <AntDesign
+                    style={{
+                      position: "absolute",
+                      right: 20,
+                      bottom: 20,
+                      zIndex: 1,
+                      backgroundColor: "white",
+                    }}
+                    name="pluscircleo"
+                    size={30}
+                  />
                 </View>
               </TouchableOpacity>
             )}
