@@ -135,16 +135,18 @@ export default function ConfirmSignInScreen() {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.sign}>
-          <Text style={styles.text}>Kayıt bilgilerin doğru değil mi? </Text>
-          <TouchableOpacity
-            raised
-            activeOpacity={0.6}
-            onPress={Sign}
-            hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
-          >
-            <Text style={{ fontSize: "14", fontWeight: "bold" }}>Geri Dön</Text>
-          </TouchableOpacity>
+        <View style={styles.signContainer}>
+          <View style={styles.sign}>
+            <Text style={styles.text}>Kayıt bilgilerin doğru değil mi? </Text>
+            <TouchableOpacity
+              raised
+              activeOpacity={0.6}
+              onPress={Sign}
+              hitSlop={{ top: 25, bottom: 25, left: 40, right: 40 }}
+            >
+              <Text style={{ fontSize: 14, fontWeight: "bold" }}>Geri Dön</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />

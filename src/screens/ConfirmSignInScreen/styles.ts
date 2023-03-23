@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "80%",
     height: 35,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     borderColor: "#f7f7f7",
   },
 
@@ -81,6 +81,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color: "grey",
+  },
+  signContainer: {
+    gap: 20,
+    alignItems: "center",
   },
   sign: {
     flexDirection: "row",
