@@ -40,7 +40,7 @@ export type UserType = {
   name: string;
   username: string;
   socialScore?: number;
-  image?: string;
+  profilePhoto?: string;
   photos?: object;
   biography?: string;
   color?: string;

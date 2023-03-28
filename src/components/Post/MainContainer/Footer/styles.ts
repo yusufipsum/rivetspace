@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   downIcon: {
+    width: 50,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

@@ -12,23 +12,27 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     userProfile: (state, action) => {
-      const { name, username, image, biography, color, isUser } =
+      const { name, username, profilePhoto, biography, color, isUser } =
         action.payload;
       state.isUser = isUser;
       if (!isUser) {
+        const photos = profiles.slice(0, 5);
+        console.log("aaaa", photos);
         state.profiles.find((user) => {
           user.user.name === name,
             user.user.username === username,
-            user.user.image === image,
-            user.user.biography === biography;
-          user.user.color === color;
-          state.user = {
-            name: name,
-            username: username,
-            image: image,
-            bio: biography,
-            color: color,
-          };
+            user.user.profilePhoto === profilePhoto,
+            user.user.biography === biography,
+            user.user.photos === photos,
+            user.user.color === color,
+            (state.user = {
+              name: name,
+              username: username,
+              profilePhoto: profilePhoto,
+              bio: biography,
+              photos: photos,
+              color: color,
+            });
         });
       }
     },

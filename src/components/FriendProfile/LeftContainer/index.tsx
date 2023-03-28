@@ -12,7 +12,7 @@ export type LeftContainerProps = {
 const LeftContainer = ({ user }: LeftContainerProps) => (
   <TouchableOpacity activeOpacity={0.7}>
     <View>
-      <ProfilePicture image={user.image} borderRadius={50} size={50} />
+      <ProfilePicture image={user.profilePhoto} borderRadius={50} size={50} />
     </View>
   </TouchableOpacity>
 );

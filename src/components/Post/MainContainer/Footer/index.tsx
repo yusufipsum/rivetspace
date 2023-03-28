@@ -57,7 +57,7 @@ const Footer = ({ post }: FooterContainerProps) => {
         <TouchableOpacity
           onPress={up}
           activeOpacity={0.5}
-          hitSlop={{ top: 35, bottom: 35, left: 5, right: 30 }}
+          hitSlop={{ top: 20, bottom: 30, left: 10, right: 20 }}
         >
           <View style={styles.upIcon}>
             <EvilIcons size={30} color={upColor} name={"chevron-up"} />
@@ -69,21 +69,18 @@ const Footer = ({ post }: FooterContainerProps) => {
         <TouchableOpacity
           onPress={down}
           activeOpacity={0.5}
-          hitSlop={{ top: 35, bottom: 35, left: 0, right: 30 }}
+          hitSlop={{ top: 10, bottom: 30 }}
         >
           <View style={styles.downIcon}>
             <EvilIcons size={30} color={downColor} name={"chevron-down"} />
-            <Text style={[styles.info, { color: downColor }]}>
+            {/* <Text style={[styles.info, { color: downColor }]}>
               {post.numberOfDislikes}
-            </Text>
+            </Text> */}
           </View>
         </TouchableOpacity>
       </View>
       <View style={styles.rightIcons}>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          hitSlop={{ top: 25, bottom: 25, left: 10, right: 10 }}
-        >
+        <TouchableOpacity activeOpacity={0.5} hitSlop={{ top: 25, bottom: 25 }}>
           <View style={styles.commentIcon}>
             <EvilIcons size={24} name={"comment"} />
             <Text style={styles.info}>{post.numberOfComments}</Text>

@@ -9,17 +9,17 @@ import styles from "./styles";
 import { Text, View } from "../../components/Themed";
 import { Background, Images, ProfilePicture } from "../../components";
 
-import { Ionicons, Feather, Entypo, FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
 import { Auth, Hub } from "aws-amplify";
-import { useDispatch, useSelector } from "react-redux";
-import { profileSlice } from "../../store/profileSlice";
+import { useSelector } from "react-redux";
 import profiles from "../../data/profiles";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
 
-  const [images, setImages] = useState(profiles.slice(0, 5));
+  const images = useSelector((state: any) => state.profile.user.photos);
   const randomNumber = Math.floor(Math.random() * 300) + 1;
+  console.log("ZAAAAAAA", images);
 
   const navigation = useNavigation();
   const isUser = useSelector((state: any) => state.profile.isUser);
@@ -38,7 +38,6 @@ export default function ProfileScreen() {
   useEffect(() => {
     Hub.listen("auth", (e) => {
       if (e.payload.event == "signIn") {
-        console.log("auth event", e.payload.event);
         setCurrentUser(e.payload.data);
       } else {
         setCurrentUser(undefined);
@@ -50,7 +49,6 @@ export default function ProfileScreen() {
         const userInfo = await Auth.currentUserInfo();
         setName(userInfo.attributes.name);
         setUsername(userInfo.username);
-        console.log("curr user response", userInfo);
       } catch (error) {
         console.log("error curr user:", error);
       }
@@ -145,7 +143,7 @@ export default function ProfileScreen() {
                     borderColor="grey"
                     size={120}
                     alignSelf={"center"}
-                    image={user.image}
+                    image={user.profilePhoto}
                   />
                   <View style={styles.tagRight}>
                     <View>
@@ -209,7 +207,7 @@ export default function ProfileScreen() {
                 width={width}
                 height={300}
                 borderRadius={20}
-                image={item.user.image}
+                image={item.user.profilePhoto}
               />
             </Lightbox>
           )}

@@ -48,11 +48,10 @@ export default function LoginScreen() {
 
     if (checkEmail) {
       setEmail(numberOrMail);
-      console.log(email);
+
       setResponse(true);
     } else if (checkPhoneNumber) {
       setPhoneNumber("+90" + numberOrMail.replace(/\s+/g, "").trim());
-      console.log(phoneNumber);
       setResponse(true);
     } else {
       Alert.alert(
@@ -81,7 +80,6 @@ export default function LoginScreen() {
             enabled: true,
           },
         });
-        console.log(user);
         navigation.navigate("ConfirmSignIn");
       } catch (error) {
         console.log("error signing up:", error);

@@ -41,7 +41,6 @@ export default function LoginScreen() {
     try {
       event.preventDefault();
       const user = await Auth.signIn(username, password);
-      console.log("auth response", user);
     } catch (error) {
       console.log("error signing up:", error);
       setUsername("");

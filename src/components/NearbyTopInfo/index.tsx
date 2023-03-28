@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, FlatList } from "react-native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 
 import profiles from "../../data/profiles";
 import ProfilePicture from "../ProfilePicture";
@@ -22,7 +22,7 @@ const NearbyTopInfo = () => (
           marginLeft={-10}
           borderRadius={50}
           size={50}
-          image={item.user.image}
+          image={item.user.profilePhoto}
         />
       )}
       keyExtractor={(item) => item.id}
@@ -33,7 +33,7 @@ const NearbyTopInfo = () => (
             style={styles.lastImage}
             blurRadius={7}
             source={{
-              uri: `${lastProfile[0].user.image}`,
+              uri: `${lastProfile[0].user.profilePhoto}`,
             }}
           />
           <Text style={styles.restText}>+{rest}</Text>

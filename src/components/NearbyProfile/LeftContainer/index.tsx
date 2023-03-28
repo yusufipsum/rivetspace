@@ -22,7 +22,7 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
         isUser: false,
         name: user.name,
         username: user.username,
-        image: user.image,
+        profilePhoto: user.profilePhoto,
         biography: user.biography,
         color: user.color,
       })
@@ -32,7 +32,11 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View>
-        <ProfilePicture image={user.image} borderRadius={100} size={120} />
+        <ProfilePicture
+          image={user.profilePhoto}
+          borderRadius={100}
+          size={120}
+        />
       </View>
     </TouchableOpacity>
   );

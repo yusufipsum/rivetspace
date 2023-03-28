@@ -16,6 +16,7 @@ import styles from "./styles";
 import { Text, View } from "../../components/Themed";
 import { Background, ProfilePicture } from "../../components";
 import profiles from "../../data/profiles";
+import { useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
 import { Octicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
@@ -77,14 +78,7 @@ export default function ProfileScreen() {
     </TouchableWithoutFeedback>
   );
 
-  const [images, setImages] = useState(profiles.slice(0, 5));
-  console.log(images);
-
-  const delImage = () => {
-    const index = images.indexOf(imgIndex - 1);
-    images.splice(index, 1);
-    setImages(images);
-  };
+  const images = useSelector((state: any) => state.profile.user.photos);
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -95,7 +89,6 @@ export default function ProfileScreen() {
       const response = await Auth.updateUserAttributes(user, {
         name: name,
       });
-      console.log("update user", user);
       console.log("update user", response);
     } catch (error) {
       console.log("update curr user:", error);
@@ -228,7 +221,7 @@ export default function ProfileScreen() {
                 <ProfilePicture
                   size={100}
                   borderRadius={20}
-                  image={item.user.image}
+                  image={item.user.profilePhoto}
                 />
                 <View style={styles.deleteImage}>
                   <TouchableOpacity>

@@ -34,7 +34,6 @@ export default function ConfirmSignInScreen() {
     try {
       event.preventDefault();
       const user = await Auth.confirmSignUp(username, authCode);
-      console.log("auth response", user);
     } catch (error) {
       console.log("error signing up:", error);
       setAuthCode("");

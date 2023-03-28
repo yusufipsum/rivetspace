@@ -21,7 +21,7 @@ const StoryFeed = () => (
                 borderRadius={67}
                 borderWidth={2}
                 borderColor={"white"}
-                image={item.user.image}
+                image={item.user.profilePhoto}
               />
             </View>
             <Text style={styles.nameText}>{item.user.name}</Text>

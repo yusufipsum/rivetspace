@@ -21,7 +21,7 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
       profileSlice.actions.userProfile({
         name: user.name,
         username: user.username,
-        image: user.image,
+        profilePhoto: user.profilePhoto,
         biography: user.biography,
         color: user.color,
       })
@@ -36,7 +36,7 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
           borderWidth={0.2}
           borderColor="black"
           borderRadius={100}
-          image={user.image}
+          image={user.profilePhoto}
           size={50}
         />
       </TouchableOpacity>
