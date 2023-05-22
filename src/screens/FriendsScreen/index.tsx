@@ -3,7 +3,7 @@ import { TouchableOpacity, SafeAreaView } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 
 import { Text, View } from "../../components/Themed";
 import { FriendsFeed } from "../../components";

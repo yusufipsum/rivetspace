@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 
 import LeftContainer from "./LeftContainer";
 import MainContainer from "./MainContainer";

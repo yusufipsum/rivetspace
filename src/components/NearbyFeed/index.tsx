@@ -1,7 +1,7 @@
 import React from "react";
 import { View, FlatList } from "react-native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 
 import NearbyProfile from "../NearbyProfile";
 import NearbyTopInfo from "../NearbyTopInfo";

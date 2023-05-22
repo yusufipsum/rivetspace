@@ -1,7 +1,7 @@
 import * as React from "react";
 import { SafeAreaView } from "react-native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 
 import { NearbyFeed } from "../../components";
 

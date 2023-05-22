@@ -3,7 +3,7 @@ import { SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 import { Logo } from "../../assets/svg";
 
 import { Text, View } from "../../components/Themed";

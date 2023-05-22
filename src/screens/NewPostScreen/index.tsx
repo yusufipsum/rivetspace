@@ -12,7 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import Marquee from "react-native-marquee";
 
-import styles from "./styles.ts";
+import styles from "./styles";
 import { Text, View } from "../../components/Themed";
 
 import { ProfilePicture } from "../../components";
