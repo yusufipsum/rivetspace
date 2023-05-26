@@ -51,7 +51,6 @@ export default function LoginScreen() {
 
   const inputPassword = useRef(null);
 
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.sectionCenter}>

@@ -18,7 +18,7 @@ import { Auth } from "aws-amplify";
 
 import styles from "./styles";
 import { Logo } from "../../assets/svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePasswordVisibilty";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -100,6 +100,10 @@ export default function LoginScreen() {
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
 
+  const inputNameSurname = useRef();
+  const inputUsername = useRef();
+  const inputPassword = useRef();
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.sectionCenter}>
@@ -115,6 +119,7 @@ export default function LoginScreen() {
                 onChangeText={(numberOrMail) =>
                   setNumberOrMail(numberOrMail.toLowerCase())
                 }
+                onSubmitEditing={() => inputNameSurname.current.focus()}
                 type="text"
                 fontSize={15}
                 width={"100%"}
@@ -125,8 +130,10 @@ export default function LoginScreen() {
             </View>
             <View style={styles.input}>
               <TextInput
+                ref={inputNameSurname}
                 value={nameSurname}
                 onChangeText={setNameSurname}
+                onSubmitEditing={() => inputUsername.current.focus()}
                 type="text"
                 required
                 fontSize={15}
@@ -138,10 +145,12 @@ export default function LoginScreen() {
             </View>
             <View style={styles.input}>
               <TextInput
+                ref={inputUsername}
                 value={username}
                 onChangeText={(username) =>
                   setUsername(username.replace(/\s+/g, "").trim().toLowerCase())
                 }
+                onSubmitEditing={() => inputPassword.current.focus()}
                 type="text"
                 fontSize={15}
                 width={"100%"}
@@ -152,6 +161,7 @@ export default function LoginScreen() {
             </View>
             <View style={styles.input}>
               <TextInput
+                ref={inputPassword}
                 value={password}
                 onChangeText={(password) =>
                   setPassword(password.replace(/\s+/g, "").trim())
