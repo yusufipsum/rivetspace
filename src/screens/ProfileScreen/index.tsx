@@ -19,7 +19,6 @@ export default function ProfileScreen() {
 
   const images = useSelector((state: any) => state.profile.user.photos);
   const randomNumber = Math.floor(Math.random() * 300) + 1;
-  console.log("ZAAAAAAA", images);
 
   const navigation = useNavigation();
   const isUser = useSelector((state: any) => state.profile.isUser);

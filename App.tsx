@@ -12,6 +12,7 @@ import awsconfig from "./src/aws-exports";
 import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "./src/store";
+import DismissKeyboard from "./src/components/DismissKeyboard";
 
 Amplify.configure(awsconfig);
 
@@ -35,7 +36,7 @@ function App() {
     return null;
   } else {
     return (
-      <>
+      <DismissKeyboard>
         <SafeAreaProvider>
           <Provider store={store}>
             {currentUser ? (
@@ -46,7 +47,7 @@ function App() {
             <StatusBar />
           </Provider>
         </SafeAreaProvider>
-      </>
+      </DismissKeyboard>
     );
   }
 }

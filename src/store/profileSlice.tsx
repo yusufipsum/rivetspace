@@ -16,8 +16,7 @@ export const profileSlice = createSlice({
         action.payload;
       state.isUser = isUser;
       if (!isUser) {
-        const photos = profiles.slice(0, 5);
-        console.log("aaaa", photos);
+        const photos = profiles.slice(0, 5);s
         state.profiles.find((user) => {
           user.user.name === name,
             user.user.username === username,

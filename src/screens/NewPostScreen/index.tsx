@@ -66,16 +66,6 @@ export default function NewPostScreen() {
     navigation.goBack();
   };
 
-  const DismissKeyboard = ({ children }) => (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-      enabled
-    >
-      {children}
-    </KeyboardAvoidingView>
-  );
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: "space-between" }}>
@@ -102,7 +92,6 @@ export default function NewPostScreen() {
         />*/}
           </View>
         </View>
-        <DismissKeyboard>
           <View style={styles.headerContainer}>
             <View style={styles.iconContainer}>
               <FlatList
@@ -137,7 +126,6 @@ export default function NewPostScreen() {
               </TouchableOpacity>
             </View>
           </View>
-        </DismissKeyboard>
       </View>
     </SafeAreaView>
   );

@@ -97,22 +97,10 @@ export default function LoginScreen() {
     }
   };
 
-  const DismissKeyboard = ({ children }) => (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        {children}
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
-  );
-
   const { passwordVisibility, rightIcon, handlePasswordVisibility } =
     useTogglePasswordVisibility();
 
   return (
-    //<DismissKeyboard>
     <SafeAreaView style={styles.container}>
       <View style={styles.sectionCenter}>
         <View style={styles.logo}>
@@ -233,6 +221,5 @@ export default function LoginScreen() {
       </View>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </SafeAreaView>
-    //</DismissKeyboard>
   );
 }

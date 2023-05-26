@@ -72,12 +72,6 @@ export default function ProfileScreen() {
   const usernameRef = useRef(null);
   const [imgIndex, setImageIndex] = useState(Number);
 
-  const DismissKeyboard = ({ children }) => (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      {children}
-    </TouchableWithoutFeedback>
-  );
-
   const images = useSelector((state: any) => state.profile.user.photos);
 
   const [name, setName] = useState("");
@@ -96,7 +90,6 @@ export default function ProfileScreen() {
   };
 
   return (
-    //<DismissKeyboard>
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Profili Düzenle</Text>
@@ -269,6 +262,5 @@ export default function ProfileScreen() {
         </View>
       </View>
     </SafeAreaView>
-    //</DismissKeyboard>
   );
 }
