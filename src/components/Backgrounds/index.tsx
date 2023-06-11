@@ -11,7 +11,7 @@ const Background = ({ color }: BackgroundProps) => {
         position: "absolute",
         top: 0,
       }}
-      height="100%"
+      height="70%"
       width="100%"
       viewBox="180 0 740 320"
       preserveAspectRatio="none"

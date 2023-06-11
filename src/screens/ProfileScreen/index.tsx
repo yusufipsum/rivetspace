@@ -6,7 +6,7 @@ import Lightbox from "react-native-lightbox-v2";
 
 import styles from "./styles";
 
-import { Text, View } from "../../components/Themed";
+import { Text, View } from '../../components/Themed';
 import { Background, Images, ProfilePicture } from "../../components";
 
 import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
@@ -60,9 +60,8 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={onPostCancel}>
+      <View style={styles.nav}>
+        <TouchableOpacity onPress={onPostCancel}>
             <Feather name="chevron-left" size={30} style={styles.goBackIcon} />
           </TouchableOpacity>
           <Text style={styles.headerText}>Profil</Text>
@@ -72,14 +71,14 @@ export default function ProfileScreen() {
               size={30}
               style={styles.menuIcon}
             />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.newPostContainer}>
-          {isUser ? (
+        </TouchableOpacity>
+      </View>
+      <View style={styles.mainContainer}>
+        {isUser ? (
             <>
               <Background color="#def2fa" />
-              <View style={styles.tag}>
-                <View style={styles.tagTop}>
+              <View style={styles.tagContainer}>
+                <View style={styles.tagLeft}>
                   <ProfilePicture
                     borderWidth={0.2}
                     borderRadius={100}
@@ -101,7 +100,7 @@ export default function ProfileScreen() {
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"spotify"} size={18} />
-                      <Text>raksıtaryusuf</Text>
+                      <Text>dev_y</Text>
                     </View>
                     {/* <View style={styles.social}>
                   <FontAwesome5 name={"tiktok"} size={18} />
@@ -128,14 +127,14 @@ export default function ProfileScreen() {
                 </Text>
               </View>
               <TouchableOpacity style={styles.button} onPress={onPostShare}>
-                <Text style={styles.shareButtonText}>Profili Düzenle</Text>
+                <Text style={styles.editButtonText}>Profili Düzenle</Text>
               </TouchableOpacity>
             </>
           ) : (
             <>
               <Background color={user.color} />
-              <View style={styles.tag}>
-                <View style={styles.tagTop}>
+              <View style={styles.tagContainer}>
+                <View style={styles.tagLeft}>
                   <ProfilePicture
                     borderWidth={0.2}
                     borderRadius={100}
@@ -165,7 +164,7 @@ export default function ProfileScreen() {
                 </View>
                 <Text style={styles.textInput}>{user.bio}</Text>
               </View>
-              <View style={styles.uPoint}>
+              <View style={styles.point}>
                 <View style={styles.dot}></View>
                 <Text style={styles.buttonText}>
                   Sosyallik Puanı:{" "}
@@ -180,9 +179,7 @@ export default function ProfileScreen() {
               </View>
             </>
           )}
-        </View>
-      </View>
-      <View style={isUser ? styles.footerContainer : styles.uFooterContainer}>
+      <View style={styles.photos}>
         <Carousel
           width={width}
           height={width * 0.8}
@@ -212,6 +209,7 @@ export default function ProfileScreen() {
           )}
         />
       </View>
+    </View>
     </SafeAreaView>
   );
 }

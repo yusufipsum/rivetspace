@@ -5,10 +5,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
-  tag: {
+  nav: {
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+  mainContainer: {
+    flex: 1,  
+    width: "100%",
+    height: 350,
+    alignItems: "center",
+    flexDirection: "column",
+    gap: 15,
+    justifyContent: "space-between",
+  },
+  tagContainer: {
     backgroundColor: "white",
     width: SRC_WIDTH - 50,
     marginTop: 10,
@@ -25,7 +41,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     zIndex: 1,
   },
-  tagTop: {
+  tagLeft: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-start",
@@ -38,13 +54,6 @@ const styles = StyleSheet.create({
   social: {
     flexDirection: "row",
     gap: 5,
-  },
-  headerContainer: {
-    flex: 1,
-    justifyContent: "space-between",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%",
   },
   header: {
     justifyContent: "space-between",
@@ -64,20 +73,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "grey",
   },
-  shareButtonText: {
+  editButtonText: {
     paddingHorizontal: 20,
     paddingVertical: 6,
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
-  },
-  newPostContainer: {
-    flex: 1,
-    width: "100%",
-    height: 350,
-    justifyContent: "space-around",
-    alignItems: "center",
-    flexDirection: "column",
   },
   textInput: {
     margin: 10,
@@ -91,11 +92,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  separator: {
-    height: 1,
-    width: "90%",
-    top: 15,
-  },
   goBackIcon: {
     paddingHorizontal: 12,
     paddingVertical: 7,
@@ -104,13 +100,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 7,
   },
-  footerContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-  },
-  uFooterContainer: {
+  photos: {
     flex: 1,
+    backgroundColor: 'rgba(52, 52, 52, 0)',
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
@@ -123,11 +115,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   point: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  uPoint: {
-    flex: 0.8,
+    backgroundColor: 'rgba(52, 52, 52, 0)',
     flexDirection: "row",
     alignItems: "center",
   },
