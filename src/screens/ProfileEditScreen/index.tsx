@@ -94,10 +94,10 @@ export default function ProfileScreen() {
       <View style={styles.header}>
         <Text style={styles.headerText}>Profili Düzenle</Text>
       </View>
-      <View style={styles.newPostContainer}>
+      <View style={styles.mainContainer}>
         <Background color="#def2fa" />
-        <View style={styles.tag}>
-          <View style={styles.tagTop}>
+        <View style={styles.tagContainer}>
+          <View style={styles.tagLeft}>
             <View>
               <ProfilePicture
                 borderWidth={0.2}
@@ -169,7 +169,7 @@ export default function ProfileScreen() {
               </View>
               <View style={styles.social}>
                 <FontAwesome5 name={"spotify"} size={18} />
-                <Text>raksıtaryusuf</Text>
+                <Text>dev_y</Text>
               </View>
               {/* <View style={styles.social}>
                   <FontAwesome5 name={"tiktok"} size={18} />
@@ -179,7 +179,7 @@ export default function ProfileScreen() {
           </View>
           <TextInput
             autoFocus={false}
-            multiline={false}
+            multiline={true}
             value={post}
             onChangeText={(value) => setPost(value)}
             numberOfLines={3}
@@ -189,19 +189,19 @@ export default function ProfileScreen() {
             placeholder={"Biyografine bir şeyler yaz"}
           />
         </View>
-      </View>
-      <View style={styles.point}>
-        <View style={styles.dot}></View>
-        <Text style={styles.buttonText}>
-          Sosyallik Puanı:{" "}
-          <Text
-            style={{
-              fontWeight: "bold",
-            }}
-          >
-            146
-          </Text>
-        </Text>
+        <View style={styles.point}>
+                <View style={styles.dot}></View>
+                <Text style={styles.buttonText}>
+                  Sosyallik Puanı:{" "}
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                    }}
+                  >
+                    146
+                  </Text>
+                </Text>
+              </View>
       </View>
       <View style={styles.footerContainer}>
         <View style={styles.images}>
@@ -226,11 +226,12 @@ export default function ProfileScreen() {
             keyExtractor={(item) => item.user.id}
             ListFooterComponent={() => (
               <TouchableOpacity
-                activeOpacity={0.6}
+                activeOpacity={0.8}
                 style={{
                   position: "absolute",
                   right: 0,
                   bottom: 15,
+                  zIndex: 3,
                 }}
               >
                 <View style={styles.addImage}>
@@ -251,7 +252,6 @@ export default function ProfileScreen() {
             )}
           />
         </View>
-
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={onPostCancel}>
             <Text style={styles.vazgecButtonText}>Vazgeç</Text>

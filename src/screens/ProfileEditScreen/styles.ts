@@ -18,12 +18,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
   },
-  tag: {
-    flex: 0.9,
+  tagContainer: {
     backgroundColor: "white",
     width: SRC_WIDTH - 50,
+    marginTop: 10,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 60,
     borderBottomLeftRadius: 60,
@@ -35,8 +34,11 @@ const styles = StyleSheet.create({
     shadowColor: "#171717",
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    zIndex: 1,
+    borderWidth: .4,
+    borderColor: "lightgrey",
   },
-  tagTop: {
+  tagLeft: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-start",
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
   },
   tagRight: {
     marginTop: 10,
-    gap: 10,
+    gap: 7,
   },
   social: {
     flexDirection: "row",
@@ -76,18 +78,18 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
-  newPostContainer: {
-    flex: 1,
+  mainContainer: {
     width: "100%",
-    height: 350,
-    justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "column",
+    gap: 15,
+    justifyContent: "space-between",
   },
   textInput: {
     margin: 10,
     fontSize: 14,
     alignSelf: "center",
+    height: 50,
   },
   headerText: {
     paddingHorizontal: 20,
@@ -111,6 +113,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
+    marginBottom: 12,
   },
   changeImage: {
     backgroundColor: "white",
@@ -134,9 +137,10 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   point: {
-    flex: 0.1,
+    backgroundColor: 'rgba(52, 52, 52, 0)',
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: 5,
   },
   images: {
     flex: 1,
