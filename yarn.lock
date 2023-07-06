@@ -15568,11 +15568,6 @@ react-native-get-random-values@^1.4.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
-react-native-google-nearby-messages@^1.0.22:
-  version "1.0.22"
-  resolved "https://registry.npmjs.org/react-native-google-nearby-messages/-/react-native-google-nearby-messages-1.0.22.tgz"
-  integrity sha512-uiBL6BR31fBnxccOM0KeQRCMI5YpYLOuLPo6xEoO92pNxsd09jDsqtOdexyLaXM0yWBdXM3ERyHNZTDDlvRhyg==
-
 react-native-gradle-plugin@^0.71.15:
   version "0.71.15"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.15.tgz#9e6b506f30729fe8eb086981702f4e3c891d2b13"
