@@ -42,6 +42,8 @@
     "expo-system-ui": "~2.2.1",
     "expo-web-browser": "~12.1.1",
     "fix": "^0.0.6",
+    "hermesvm": "^0.1.1",
+    "jsc-android": "^250231.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.8",

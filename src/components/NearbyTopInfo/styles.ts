@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   topFlatList: {
+    width: "90%",
     flexDirection: "row",
     alignSelf: "center",
     justifyContent: "center",
