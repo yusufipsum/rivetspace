@@ -4,7 +4,7 @@
     "slug": "rivetspace",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/rs.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "plugins": [
@@ -37,18 +37,19 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/rs.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.finxterslab.rivetspace",
       "permissions": [
         "android.permission.BLUETOOTH",
         "android.permission.BLUETOOTH_ADMIN",
-        "android.permission.BLUETOOTH_CONNECT"
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.ACCESS_WIFI_STATE"
       ]
     },
     "web": {
-      "favicon": "./src/assets/images/favicon.png"
+      "favicon": "./src/assets/images/rs.png"
     },
     "extra": {
       "eas": {

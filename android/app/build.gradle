@@ -142,7 +142,7 @@ def reactNativeArchitectures() {
 android {
 
     packagingOptions {
-     jniLibs.useLegacyPackaging = true
+        jniLibs.useLegacyPackaging = true
     }
 
     ndkVersion rootProject.ext.ndkVersion
@@ -183,7 +183,7 @@ android {
             }
             if (!enableSeparateBuildPerCPUArchitecture) {
                 ndk {
-                    abiFilters (*reactNativeArchitectures())
+                    abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64", 'armeabi'
                 }
             }
         }
@@ -301,7 +301,9 @@ dependencies {
     implementation 'com.facebook.soloader:soloader:0.9.0+'
 
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation ("com.facebook.react:react-native") version {
+      strictly "0.71.8"  
+    }  // From node_modules
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";

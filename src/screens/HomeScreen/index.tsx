@@ -8,15 +8,14 @@ import { Logo } from "../../assets/svg";
 
 import { Text, View } from "../../components/Themed";
 import { PostFeed, StoryFeed, ProfileButton } from "../../components";
+import DeviceInfo from "react-native-device-info";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-
+  console.log(DeviceInfo.getApplicationName());
+  console.log(DeviceInfo.getMacAddress());
   const onPress = () => {
     navigation.navigate("Profile");
-  };
-  const Login = () => {
-    navigation.navigate("Login");
   };
   return (
     <SafeAreaView style={styles.container}>

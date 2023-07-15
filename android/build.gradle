@@ -1,5 +1,7 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
+def REACT_NATIVE_VERSION = "0.71.8"
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -56,5 +58,11 @@ allprojects {
             }
         }
         maven { url 'https://www.jitpack.io' }
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "com.facebook.react:react-native:" + REACT_NATIVE_VERSION
     }
 }
