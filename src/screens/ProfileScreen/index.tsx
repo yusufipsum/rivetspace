@@ -13,9 +13,13 @@ import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
 import { Auth, Hub } from "aws-amplify";
 import { useSelector } from "react-redux";
 import profiles from "../../data/profiles";
+import DeviceInfo from "react-native-device-info";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
+
+  console.log(DeviceInfo.getApplicationName());
+  console.log(DeviceInfo.getMacAddress());
 
   const images = useSelector((state: any) => state.profile.user.photos);
   const randomNumber = Math.floor(Math.random() * 300) + 1;
