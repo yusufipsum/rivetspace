@@ -18,6 +18,7 @@ import { Text, View } from "../../components/Themed";
 import { ProfilePicture } from "../../components";
 
 import { MaterialIcons } from "@expo/vector-icons";
+import DeviceInfo from "react-native-device-info";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -58,8 +59,10 @@ export default function NewPostScreen() {
 
   const onPostShare = () => {
     console.log(`${post}`);
+    const a = DeviceInfo.getApplicationName();
+    const b = DeviceInfo.getMacAddress();
     navigation.goBack();
-    Alert.alert("Paylaşıldı");
+    Alert.alert("Paylaşıldı", `${post} ` + a + " " + b);
   };
 
   const onPostCancel = () => {

@@ -24,16 +24,6 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState();
 
-  useEffect(() => {
-    Hub.listen("auth", (e) => {
-      if (e.payload.event == "signIn") {
-        setCurrentUser(e.payload.data);
-      } else {
-        setCurrentUser(undefined);
-      }
-    });
-  });
-
   const getRandomPhoto = () => {
     return 'https://cdn-icons-png.flaticon.com/512/666/666201.png'
   }
@@ -45,15 +35,24 @@ function App() {
   }
 
   useEffect(() => {
+
+    Hub.listen("auth", (e) => {
+      if (e.payload.event == "signIn") {
+        setCurrentUser(e.payload.data);
+      } else {
+        setCurrentUser(undefined);
+      }
+    });
+    
     const updateUser = async () => {
       //get current authenticated user
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
 
-      if(userInfo) {
+      if (userInfo) {
         //check if user already exist in database
         const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
         console.log("aa", userInfo);
-        if(!userData.data.getUser){
+        if (!userData.data.getUser){
           const user = {
             id: userInfo.attributes.sub,
             username: userInfo.username,

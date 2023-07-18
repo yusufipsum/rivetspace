@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
+
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,6 +8,9 @@ import styles from "./styles";
 import ProfilePicture from "../../components/ProfilePicture";
 import { useDispatch } from "react-redux";
 import { profileSlice } from "../../store/profileSlice";
+
+import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { getUser } from "../../graphql/queries";
 
 const ProfileButton = () => {
   const dispatch = useDispatch();
@@ -17,6 +21,28 @@ const ProfileButton = () => {
     navigation.navigate("Profile");
   };
 
+  // const [user, setUser] = useState();
+
+  // useEffect( () => {
+  //   //get the current user
+  //   const fetchUser = async () => {
+  //     const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+  //     if (!userInfo) {
+  //       return;
+  //     }
+
+  //     try {
+  //       const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
+  //       if (userData) {
+  //         setUser(userData.data.getUser); 
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  //   fetchUser();
+  // },[]);
+  
   return (
     <TouchableOpacity
       activeOpacity={0.8}
@@ -25,7 +51,7 @@ const ProfileButton = () => {
     >
       <ProfilePicture
         size={30}
-        image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+        image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"} // {user?.image}
       />
     </TouchableOpacity>
   );
