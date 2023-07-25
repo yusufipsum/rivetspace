@@ -21,7 +21,7 @@
       ]
     ],
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./src/assets/images/adaptive-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -55,6 +55,16 @@
       "eas": {
         "projectId": "8694239c-2431-47ad-8d77-c2a6d150ea0d"
       }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "autoUpload": false
+          }
+        }
+      ]
     }
   }
 }
