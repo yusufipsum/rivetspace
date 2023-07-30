@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Pressable } from "react-native";
 
 import styles from "./styles";
 
@@ -19,7 +19,9 @@ const NearbyFeed = () => {
         data={profiles}
         numColumns={2}
         renderItem={({ item }) => (
-          <NearbyProfile key={item.id} profiles={item} />
+          <Pressable style={{flex: 1}}>
+            <NearbyProfile key={item.id} profiles={item} />
+          </Pressable>
         )}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}

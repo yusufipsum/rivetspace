@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, Pressable } from "react-native";
 
 import Post from "../Post";
 
@@ -12,7 +12,11 @@ const Feed = () => {
     <View style={{ width: "100%", flex: 1 }}>
       <FlatList
         data={posts}
-        renderItem={({ item }) => <Post post={item} />}
+        renderItem={({ item }) => 
+          <Pressable style={{flex: 1}}>
+            <Post post={item} />
+          </Pressable>
+        }
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
