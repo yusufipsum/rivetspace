@@ -18,8 +18,17 @@ import DeviceInfo from "react-native-device-info";
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
 
-  console.log(DeviceInfo.getApplicationName());
-  console.log(DeviceInfo.getMacAddress());
+  useEffect(() => {
+    const getMac = async()=>{
+      DeviceInfo.getUniqueId()
+      .then(macAddress => {
+           console.log("bbb", macAddress)
+       })
+       .catch(error => console.log("aaa",error))
+    }
+    getMac();
+    console.log(DeviceInfo.getApplicationName());
+  },[]);
 
   const images = useSelector((state: any) => state.profile.user.photos);
   const randomNumber = Math.floor(Math.random() * 300) + 1;

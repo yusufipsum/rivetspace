@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TouchableOpacity,
   SafeAreaView,
@@ -57,12 +57,23 @@ export default function NewPostScreen() {
   const [post, setPost] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
+  const [mac, setMac] = useState("");
+
   const onPostShare = () => {
+    const getMac = async()=>{
+      DeviceInfo.getUniqueId()
+      .then(macAddress => {
+           console.log("bbb", macAddress)
+           setMac(macAddress);
+       })
+       .catch(error => console.log("aaa", error))
+    }
+    getMac();
     console.log(`${post}`);
     const a = DeviceInfo.getApplicationName();
     const b = DeviceInfo.getMacAddress();
     navigation.goBack();
-    Alert.alert("Paylaşıldı", `${post} ` + a + " " + b);
+    Alert.alert("Paylaşıldı", `${post} ` + a + " " + mac);
   };
 
   const onPostCancel = () => {
