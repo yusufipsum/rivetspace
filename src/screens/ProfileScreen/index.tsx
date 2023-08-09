@@ -103,17 +103,17 @@ export default function ProfileScreen() {
                     }
                   />
                   <View style={styles.tagRight}>
-                    <View>
+                    <View style={{height: 45}}>
                       <Text style={styles.nameText}>{name}</Text>
                       <Text style={styles.buttonText}>@{username}</Text>
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"instagram"} size={18} />
-                      <Text>yusufipsum</Text>
+                      <Text style={{width: "100%"}}>yusufipsum</Text>
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"spotify"} size={18} />
-                      <Text>dev_y</Text>
+                      <Text style={{width: "100%"}}>dev_y</Text>
                     </View>
                     {/* <View style={styles.social}>
                   <FontAwesome5 name={"tiktok"} size={18} />
@@ -157,17 +157,17 @@ export default function ProfileScreen() {
                     image={user.profilePhoto}
                   />
                   <View style={styles.tagRight}>
-                    <View>
+                    <View style={{height: 45}}>
                       <Text style={styles.nameText}>{user.name}</Text>
                       <Text style={styles.buttonText}>{user.username}</Text>
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"instagram"} size={18} />
-                      <Text>{user.name}</Text>
+                      <Text style={{width: "100%"}}>{user.name}</Text>
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"spotify"} size={18} />
-                      <Text>{user.name}</Text>
+                      <Text style={{width: "100%"}}>{user.name}</Text>
                     </View>
                     {/* <View style={styles.social}>
                   <FontAwesome5 name={"tiktok"} size={18} />

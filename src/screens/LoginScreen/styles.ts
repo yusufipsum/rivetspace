@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     color: "white",
+    width: "100%",
+    textAlign: "center",
   },
   footer: {
     marginTop: 10,

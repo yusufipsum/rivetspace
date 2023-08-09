@@ -20,17 +20,23 @@ const styles = StyleSheet.create({
 
   profilesHeaderNames: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    width: "100%"
   },
 
   name: {
     marginRight: 5,
     fontWeight: "bold",
+    width: "100%",
   },
 
   username: {
     marginRight: 5,
     color: "grey",
+    width: 120,
+    position: "absolute",
+    textAlign: "right",
+    right: 0,
   },
 
   content: {

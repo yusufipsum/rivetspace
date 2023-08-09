@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
+    width: "100%",
   },
 
   user: {
@@ -19,11 +20,13 @@ const styles = StyleSheet.create({
   name: {
     marginRight: 5,
     fontWeight: "bold",
+    minWidth: "100%",
   },
 
   username: {
     marginRight: 5,
     color: "grey",
+    minWidth: "100%",
   },
 
   createdAt: {

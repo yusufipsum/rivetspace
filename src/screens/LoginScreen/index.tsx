@@ -98,6 +98,8 @@ export default function LoginScreen() {
                       color: "red",
                       fontSize: 13,
                       position: "relative",
+                      minWidth: "80%",
+                      height: 20,
                     }}
                   >
                     Kullanıcı adı ya da şifre yanlış!
@@ -111,11 +113,15 @@ export default function LoginScreen() {
                 style={{
                   position: "absolute",
                   right: 0,
+                  minWidth: "80%",
                 }}
               >
                 <Text
                   style={{
                     color: "grey",
+                    width: 110,
+                    textAlign: "right",
+                    height: 20,
                   }}
                 >
                   Şifremi Unuttum

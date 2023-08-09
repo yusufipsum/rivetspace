@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: 400,
+    height: 350,
   },
   input: {
     flexDirection: "row",
@@ -51,8 +51,10 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   infoText: {
+    textAlign: "center",
     fontSize: 12,
     color: "grey",
+    width: "100%",
   },
   button: {
     alignItems: "center",
@@ -63,9 +65,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   },
   buttonText: {
+    textAlign: "center",
     fontWeight: "bold",
     fontSize: 18,
     color: "white",
+    width: "100%",
   },
   footer: {
     marginTop: 10,
@@ -78,6 +82,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color: "grey",
+    flex: 2,
+    alignSelf: "center",
+    textAlign: "right",
   },
   signContainer: {
     flexDirection: "column",
@@ -87,6 +94,7 @@ const styles = StyleSheet.create({
   sign: {
     flexDirection: "row",
     alignItems: "center",
+    width: "80%",
   },
   principles: {
     top: 2.8,

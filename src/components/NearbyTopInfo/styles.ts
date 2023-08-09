@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     paddingBottom: 7,
     fontSize: 16,
     color: "#016894",
+    width: "100%",
+    textAlign: "center",
   },
   images: {
     width: 50,
@@ -44,6 +46,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     color: "white",
+    width: "100%",
+    textAlign: "center",
   },
 });
 

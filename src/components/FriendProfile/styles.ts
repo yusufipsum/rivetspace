@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 0.3,
     borderColor: "lightgrey",
+    borderRadius: 20,
   },
 
   friends: {

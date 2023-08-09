@@ -24,16 +24,21 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    minWidth: "100%",
   },
 
   name: {
     marginRight: 5,
     fontWeight: "bold",
+    width: "100%",
+    textAlign: "center",
   },
 
   username: {
     marginRight: 5,
     color: "grey",
+    width: "100%",
+    textAlign: "center",
   },
 
   content: {

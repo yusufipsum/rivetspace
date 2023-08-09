@@ -20,6 +20,8 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 18,
+    width: 120,
+    textAlign: "center",
   },
 
   header: {

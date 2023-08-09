@@ -50,10 +50,12 @@ const styles = StyleSheet.create({
   tagRight: {
     marginTop: 10,
     gap: 7,
+    flex: 1,
   },
   social: {
     flexDirection: "row",
     gap: 5,
+    width: "100%",
   },
   header: {
     justifyContent: "space-between",
@@ -72,6 +74,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "grey",
+    width: "100%",
   },
   editButtonText: {
     paddingHorizontal: 20,
@@ -79,18 +82,24 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
+    width: "100%",
+    textAlign: "center",
   },
   textInput: {
     margin: 10,
     fontSize: 14,
+    width: "100%",
   },
   headerText: {
     fontSize: 20,
     fontWeight: "bold",
+    width: 100,
+    textAlign: "center",
   },
   nameText: {
     fontSize: 20,
     fontWeight: "bold",
+    flex: 1,
   },
   goBackIcon: {
     paddingHorizontal: 12,
@@ -118,6 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0)',
     flexDirection: "row",
     alignItems: "center",
+    width: 150,
   },
 });
 
