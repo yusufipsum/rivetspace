@@ -13,11 +13,14 @@ npx expo start
 - Expo
 - Redux Toolkit
 - AWS Amplify
+- BLE(Bluetooth Low Energy)
 # Whats Left?
-- Installation of the BLE or Nearby system.
+- Adressing users with BLE.
 - Authentication will be arranged.
 - Contracts will be added.
 - The settings page will be designed.
+- Redesign for android x. 
+- Android - IOS users interaction.
 # Review
 ![Simulator Screen Shot - iPhone 14 - 2023-03-21 at 16 10 57](https://user-images.githubusercontent.com/35937773/226784590-908e2d5e-0007-4376-b34f-65eadfebf558.png)
 ![Simulator Screen Shot - iPhone 14 - 2023-03-21 at 16 11 15](https://user-images.githubusercontent.com/35937773/226784610-4a3d674e-6527-4278-b61d-1fc2bded4413.png)
