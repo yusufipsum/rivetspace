@@ -9,11 +9,46 @@ import { Logo } from "../../assets/svg";
 import { Text, View } from "../../components/Themed";
 import { PostFeed, StoryFeed, ProfileButton } from "../../components";
 
+import { useAppDispatch, useAppSelector } from "../../store";
+import { useEffect } from "react";
+import { startScanning, stopScanning } from "../../store/bleSlice";
+import useBLE from "../../useBLE";
+
 export default function HomeScreen() {
   const navigation = useNavigation();
   const onPress = () => {
     navigation.navigate("Profile");
   };
+
+//WITH USEBLE
+//   const {
+//     requestPermissions,
+//     scanForPeripherals,
+//     allDevices,
+//   } = useBLE();
+
+// useEffect(() => {
+//   const scanForDevices = async () => {
+//     const isPermissionsEnabled = await requestPermissions();
+//     if(isPermissionsEnabled){
+//       scanForPeripherals();
+//       console.log("zzz");
+//     }
+//   }
+//   scanForDevices();
+// });
+  
+//WITH REDUX TOOLKIT 
+  const dispatch = useAppDispatch();
+  const discoveredDevices = useAppSelector(state => state.ble.allDevices);
+
+  useEffect(() => {
+    dispatch(startScanning());
+    //dispatch(stopScanning());
+    //getMac();
+    console.log("disc: ", discoveredDevices);
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -31,6 +66,16 @@ export default function HomeScreen() {
           <ProfileButton />
         </TouchableOpacity>
       </View>
+      <FlatList
+        contentContainerStyle={{}}
+        style={{width: "100%"}}
+        data={discoveredDevices}
+        renderItem={({ item }) => {
+          return (
+            <Text>{item.id} {item.name}</Text>
+          )
+        }}
+      />
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
