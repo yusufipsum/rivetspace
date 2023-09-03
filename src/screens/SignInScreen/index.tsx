@@ -36,6 +36,7 @@ export default function LoginScreen() {
   const [nameSurname, setNameSurname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [UUID, setUUID] = useState("");
   const [response, setResponse] = useState(false);
 
   const handleSubmit = async function name(event: any) {
@@ -75,6 +76,7 @@ export default function LoginScreen() {
             name: nameSurname,
             email: email,
             phone_number: phoneNumber,
+            'custom:UUID': UUID,
           },
           autoSignIn: {
             enabled: true,
