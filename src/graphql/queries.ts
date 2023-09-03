@@ -9,6 +9,7 @@ export const getUser = /* GraphQL */ `
       userName
       name
       email
+      uuid
       biography
       profilePhoto
       color
@@ -41,6 +42,7 @@ export const listUsers = /* GraphQL */ `
         userName
         name
         email
+        uuid
         biography
         profilePhoto
         color
@@ -66,6 +68,7 @@ export const getPost = /* GraphQL */ `
         userName
         name
         email
+        uuid
         biography
         profilePhoto
         color
@@ -98,6 +101,7 @@ export const listPosts = /* GraphQL */ `
           userName
           name
           email
+          uuid
           biography
           profilePhoto
           color

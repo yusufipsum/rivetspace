@@ -3,6 +3,7 @@ type User @model @auth(rules: [{allow: public}]) {
   userName: String!
   name: String!
   email: String!
+  uuid: String
   biography: String
   profilePhoto: String
   color: String

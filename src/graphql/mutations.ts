@@ -12,6 +12,7 @@ export const createUser = /* GraphQL */ `
       userName
       name
       email
+      uuid
       biography
       profilePhoto
       color
@@ -42,6 +43,7 @@ export const updateUser = /* GraphQL */ `
       userName
       name
       email
+      uuid
       biography
       profilePhoto
       color
@@ -72,6 +74,7 @@ export const deleteUser = /* GraphQL */ `
       userName
       name
       email
+      uuid
       biography
       profilePhoto
       color
@@ -107,6 +110,7 @@ export const createPost = /* GraphQL */ `
         userName
         name
         email
+        uuid
         biography
         profilePhoto
         color
@@ -137,6 +141,7 @@ export const updatePost = /* GraphQL */ `
         userName
         name
         email
+        uuid
         biography
         profilePhoto
         color
@@ -167,6 +172,7 @@ export const deletePost = /* GraphQL */ `
         userName
         name
         email
+        uuid
         biography
         profilePhoto
         color
