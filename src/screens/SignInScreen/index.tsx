@@ -5,9 +5,6 @@ import {
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
   TextInput,
   Platform,
   Alert,
@@ -69,7 +66,7 @@ export default function LoginScreen() {
     ) {
       try {
         event.preventDefault();
-        const { user } = await Auth.signUp({
+        await Auth.signUp({
           username: username,
           password: password,
           attributes: {

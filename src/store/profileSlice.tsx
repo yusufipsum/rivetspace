@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import profiles from "../data/profiles";
 
 const initialState = {
-  isUser: false,
+  isCurrentUser: false,
   profiles: profiles,
   user: {},
+  currentUser: {},
 };
 
 export const profileSlice = createSlice({
@@ -12,10 +13,18 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     userProfile: (state, action) => {
-      const { name, username, profilePhoto, biography, color, isUser } =
-        action.payload;
-      state.isUser = isUser;
-      if (!isUser) {
+      const { 
+        id,
+        name, 
+        username, 
+        profilePhoto, 
+        biography, 
+        color, 
+        isCurrentUser, 
+      } 
+      = action.payload;
+      state.isCurrentUser = isCurrentUser;
+      if (!isCurrentUser && username) {
         const photos = profiles.slice(0, 5);
         state.profiles.find((user) => {
           user.user.name === name,
@@ -25,6 +34,7 @@ export const profileSlice = createSlice({
             user.user.photos === photos,
             user.user.color === color,
             (state.user = {
+              sub: id,
               name: name,
               username: username,
               profilePhoto: profilePhoto,
@@ -33,6 +43,16 @@ export const profileSlice = createSlice({
               color: color,
             });
         });
+      } else if(isCurrentUser && username){
+        (state.currentUser = {
+          sub: id,
+          name: name,
+          username: username,
+          profilePhoto: profilePhoto,
+          bio: biography,
+          color: color,  
+        });
+        console.log("state curr", state.currentUser);
       }
     },
   },

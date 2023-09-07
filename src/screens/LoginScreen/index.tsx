@@ -5,23 +5,27 @@ import {
   TouchableOpacity,
   StatusBar,
   SafeAreaView,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
   TextInput,
   Platform,
-  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { Auth } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 
 import styles from "./styles";
 import { Logo } from "../../assets/svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createUser, updateUser } from "../../graphql/mutations";
+import DeviceInfo from "react-native-device-info";
+import { getUser } from '../../graphql/queries';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+
 
   const Sign = () => {
     navigation.navigate("SignIn");
@@ -33,14 +37,82 @@ export default function LoginScreen() {
     setError(false);
   };
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [MACAddress, setMACAddress] = useState("");
+  const [customUUID, setCustomUUID] = useState("");
+
+  const saveUserToDB = async (user: any) => {
+    await API.graphql(graphqlOperation(createUser, { input: user}));
+    console.log("User Created: ", user);
+  }
+
+  const updateUserToDB = async (updateUserUUID: any) => {
+    await API.graphql(graphqlOperation(updateUser, { input: updateUserUUID }))
+    console.log("User Updated: ", updateUserUUID);
+  }
+
+  const getMac = async () => {
+    DeviceInfo.getMacAddress()
+    .then(macAddress => {
+         console.log("MAC Address:", macAddress)
+         setMACAddress(macAddress);
+     })
+     .catch(error => console.log("error", error))
+  }
+
+  const getRandomPhoto = () => {
+    return 'https://cdn-icons-png.flaticon.com/512/666/666201.png'
+  }
+
+  useEffect(() => {
+    const user = async () => {
+      //get current authenticated user
+      const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
+      if (userInfo) {
+        //check if user already exist in database
+        const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
+        setCustomUUID(userData.data.getUser.uuid);
+        console.log("aa", userData);
+        if (!userData.data.getUser){
+          console.log(userInfo.attributes.email)
+          try {
+            const user = {
+              id: userInfo.attributes.sub,
+              userName: userInfo.username,
+              name: userInfo.attributes.name,
+              email: userInfo.attributes.email,
+              uuid: MACAddress,
+              profilePhoto: getRandomPhoto(),
+            }
+            await saveUserToDB(user);
+          } catch (error) {
+            console.log("Hata", error)
+          }
+        } else {
+          console.log("User already exists")
+        }
+      }
+      //if doesn't, create the user in the database
+    }
+    getMac();
+    user();
+  }, [customUUID]);
 
   const handleSubmit = async function name(event: any) {
     try {
       event.preventDefault();
-      const user = await Auth.signIn(username, password);
+      await Auth.signIn(username, password);
+      console.log("uuid: ", customUUID + " MACAddress: ", MACAddress);
+      if(customUUID !== MACAddress){
+        const userInfo = await Auth.currentAuthenticatedUser();
+        const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
+        console.log("USER IN ", userData)
+        const updateUserUUID = {
+          id: userInfo.attributes.sub,
+          uuid: MACAddress,        
+        }
+        await updateUserToDB(updateUserUUID);
+        console.log("update user", updateUserUUID);
+      }
     } catch (error) {
       console.log("error signing up:", error);
       setUsername("");

@@ -16,9 +16,10 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
   const navigation = useNavigation();
 
   const onPress = () => {
-    dispatch(profileSlice.actions.userProfile({ isUser: false }));
     dispatch(
       profileSlice.actions.userProfile({
+        isCurrentUser: false,
+        id: user.id,
         name: user.name,
         username: user.username,
         profilePhoto: user.profilePhoto,

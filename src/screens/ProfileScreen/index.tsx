@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
@@ -10,32 +10,21 @@ import { Text, View } from '../../components/Themed';
 import { Background, Images, ProfilePicture } from "../../components";
 
 import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
-import { Auth, Hub } from "aws-amplify";
-import { useSelector } from "react-redux";
-import profiles from "../../data/profiles";
-import DeviceInfo from "react-native-device-info";
 
+import { useSelector } from "react-redux";
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
-
-  useEffect(() => {
-    const getMac = async()=>{
-      DeviceInfo.getUniqueId()
-      .then(macAddress => {
-           console.log("bbb", macAddress)
-       })
-       .catch(error => console.log("aaa",error))
-    }
-    getMac();
-    console.log(DeviceInfo.getApplicationName());
-  },[]);
 
   const images = useSelector((state: any) => state.profile.user.photos);
   const randomNumber = Math.floor(Math.random() * 300) + 1;
 
   const navigation = useNavigation();
-  const isUser = useSelector((state: any) => state.profile.isUser);
+  const isCurrentUser = useSelector((state: any) => state.profile.isCurrentUser);
   const user = useSelector((state: any) => state.profile.user);
+  const currentUser = useSelector((state: any) => state.profile.currentUser);
+
+
+  console.log("currentuser ", currentUser.name , isCurrentUser);
 
   const onPostShare = () => {
     navigation.navigate("ProfileEdit");
@@ -44,32 +33,6 @@ export default function ProfileScreen() {
   const onPostCancel = () => {
     navigation.goBack();
   };
-
-  const [currentUser, setCurrentUser] = useState();
-
-  useEffect(() => {
-    Hub.listen("auth", (e) => {
-      if (e.payload.event == "signIn") {
-        setCurrentUser(e.payload.data);
-      } else {
-        setCurrentUser(undefined);
-      }
-    });
-
-    async function userInfo() {
-      try {
-        const userInfo = await Auth.currentUserInfo();
-        setName(userInfo.attributes.name);
-        setUsername(userInfo.username);
-      } catch (error) {
-        console.log("error curr user:", error);
-      }
-    }
-    userInfo();
-  }, []);
-
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
 
   return (
     <SafeAreaView style={styles.container}>
@@ -87,7 +50,7 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
       <View style={styles.mainContainer}>
-        {isUser ? (
+        {isCurrentUser ? (
             <>
               <Background color="#def2fa" />
               <View style={styles.tagContainer}>
@@ -104,8 +67,8 @@ export default function ProfileScreen() {
                   />
                   <View style={styles.tagRight}>
                     <View style={{height: 45}}>
-                      <Text style={styles.nameText}>{name}</Text>
-                      <Text style={styles.buttonText}>@{username}</Text>
+                      <Text style={styles.nameText}>{currentUser.name}</Text>
+                      <Text style={styles.buttonText}>@{currentUser.username}</Text>
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"instagram"} size={18} />

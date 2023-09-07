@@ -19,7 +19,8 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
   const onPress = () => {
     dispatch(
       profileSlice.actions.userProfile({
-        isUser: false,
+        isCurrentUser: false,
+        id: user.id,
         name: user.name,
         username: user.username,
         profilePhoto: user.profilePhoto,

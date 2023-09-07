@@ -13,8 +13,16 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { useEffect } from "react";
 import { startScanning, stopScanning } from "../../store/bleSlice";
 import useBLE from "../../useBLE";
+import { Auth } from "aws-amplify";
+import { profileSlice } from "../../store/profileSlice";
+import { UserType } from "../../types";
+import { useSelector } from "react-redux";
 
-export default function HomeScreen() {
+export type ProfileContainerProps = {
+  user: UserType;
+};
+
+export default function HomeScreen({ user }: ProfileContainerProps) {
   const navigation = useNavigation();
   const onPress = () => {
     navigation.navigate("Profile");
@@ -45,9 +53,27 @@ export default function HomeScreen() {
   useEffect(() => {
     dispatch(startScanning());
     //dispatch(stopScanning());
-    //getMac();
     console.log("disc: ", discoveredDevices);
-  });
+  }, []);
+
+  useEffect(() => {
+    async function userInfo() {
+      try {
+        const userInfo = await Auth.currentAuthenticatedUser();
+        dispatch(
+          profileSlice.actions.userProfile({
+            id: userInfo.attributes.sub,
+            name: userInfo.attributes.name,
+            username: userInfo.username,
+            isCurrentUser: true,
+          })
+        );
+      } catch (error) {
+        console.log("error curr user:", error);
+      }
+    }
+    userInfo();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
