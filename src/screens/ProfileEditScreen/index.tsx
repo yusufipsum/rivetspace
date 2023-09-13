@@ -8,19 +8,24 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 
-import { Text, View } from "../../components/Themed";
+import { Text, View } from '../../components/Themed';
 import { Background, ProfilePicture } from "../../components";
 import profiles from "../../data/profiles";
 import { useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
 import { Octicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
-import { Auth } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
+import { getUser } from "../../graphql/queries";
+import { updateUser } from "../../graphql/mutations";
+import { useAppDispatch } from "../../store";
+import { profileSlice } from "../../store/profileSlice";
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
@@ -30,6 +35,8 @@ export default function ProfileScreen() {
   const [post, setPost] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
+
+  const currentUser = useSelector((state: any) => state.profile.currentUser);
 
   const CheckImage = () => {
     return (
@@ -74,16 +81,38 @@ export default function ProfileScreen() {
 
   const images = useSelector((state: any) => state.profile.user.photos);
 
+  const dispatch = useAppDispatch();
+
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+
+  const updateUserToDB = async (update: any) => {
+    await API.graphql(graphqlOperation(updateUser, { input: update }))
+    console.log("User Updated: ", update);
+  }
 
   const handleSubmit = async () => {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      const response = await Auth.updateUserAttributes(user, {
-        name: name,
-      });
-      console.log("update user", response);
+      const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
+      const update = {
+        id: user.attributes.sub,
+        name: name,     
+      }
+      await updateUserToDB(update);
+      dispatch(
+        profileSlice.actions.userProfile({
+          id: userData.data.getUser.id,
+          name: name,
+          username: userData.data.getUser.userName,
+          profilePhoto: userData.data.getUser.profilePhoto,
+          biography: userData.data.getUser.biography,
+          color: userData.data.getUser.color,
+          isCurrentUser: true,
+        })
+      );
+      console.log("update user", update);
+      navigation.goBack();
     } catch (error) {
       console.log("update curr user:", error);
     }
@@ -95,7 +124,7 @@ export default function ProfileScreen() {
         <Text style={styles.headerText}>Profili Düzenle</Text>
       </View>
       <View style={styles.mainContainer}>
-        <Background color="#def2fa" />
+        <Background color={currentUser.color}/>
         <View style={styles.tagContainer}>
           <View style={styles.tagLeft}>
             <View>
@@ -104,7 +133,7 @@ export default function ProfileScreen() {
                 borderRadius={100}
                 borderColor="grey"
                 size={120}
-                image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+                image={currentUser.profilePhoto}
               />
               <View style={styles.changeImage}>
                 <TouchableOpacity
@@ -189,58 +218,41 @@ export default function ProfileScreen() {
             placeholder={"Biyografine bir şeyler yaz"}
           />
         </View>
-        <View style={styles.point}>
-                <View style={styles.dot}></View>
-                <Text style={styles.buttonText}>
-                  Sosyallik Puanı:{" "}
-                  <Text
-                    style={{
-                      fontWeight: "bold",
-                    }}
-                  >
-                    146
-                  </Text>
-                </Text>
-              </View>
       </View>
       <View style={styles.footerContainer}>
         <View style={styles.images}>
           <FlatList
-            contentContainerStyle={{ gap: 15 }}
+            contentContainerStyle={{ gap: 10 }}
             data={images}
             numColumns={3}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <View key={item.id} style={{ margin: 10 }}>
-                <ProfilePicture
-                  size={100}
-                  borderRadius={20}
-                  image={item.user.profilePhoto}
-                />
-                <View style={styles.deleteImage}>
-                  <TouchableOpacity>
-                    <AntDesign color="white" name="minuscircleo" size={30} />
-                  </TouchableOpacity>
-                </View>
+                <Pressable style={{flex: 1}}>
+                  <ProfilePicture
+                    size={80}
+                    borderRadius={20}
+                    image={item.user.profilePhoto}
+                  />
+                  <View style={styles.deleteImage}>
+                    <TouchableOpacity activeOpacity={.7}>
+                      <AntDesign color="white" name="minuscircleo" size={30} />
+                    </TouchableOpacity>
+                  </View>
+                </Pressable>
               </View>
             )}
             keyExtractor={(item) => item.user.id}
             ListFooterComponent={() => (
               <TouchableOpacity
-                activeOpacity={0.8}
-                style={{
-                  position: "absolute",
-                  right: 0,
-                  bottom: 15,
-                  zIndex: 3,
-                }}
+                activeOpacity={0.8} 
               >
                 <View style={styles.addImage}>
                   <AntDesign size={50} name="picture" />
                   <AntDesign
                     style={{
                       position: "absolute",
-                      right: 20,
-                      bottom: 20,
+                      bottom: -15,
                       zIndex: 1,
                       backgroundColor: "white",
                     }}

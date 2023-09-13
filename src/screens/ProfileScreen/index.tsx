@@ -52,7 +52,7 @@ export default function ProfileScreen() {
       <View style={styles.mainContainer}>
         {isCurrentUser ? (
             <>
-              <Background color="#def2fa" />
+              <Background color={currentUser.color} />
               <View style={styles.tagContainer}>
                 <View style={styles.tagLeft}>
                   <ProfilePicture
@@ -61,9 +61,7 @@ export default function ProfileScreen() {
                     borderColor="grey"
                     size={120}
                     alignSelf={"center"}
-                    image={
-                      "https://cdn-icons-png.flaticon.com/512/666/666201.png"
-                    }
+                    image={currentUser.profilePhoto}
                   />
                   <View style={styles.tagRight}>
                     <View style={{height: 45}}>
@@ -85,8 +83,7 @@ export default function ProfileScreen() {
                   </View>
                 </View>
                 <Text style={styles.textInput}>
-                  Burası benim biyografim. Lorem ipsum dolor sit amet - IAU
-                  baksanalalalal lasllaslslaldklfalkfjklkkkksk
+                  {currentUser.bio}
                 </Text>
               </View>
               <View style={styles.point}>
@@ -102,7 +99,7 @@ export default function ProfileScreen() {
                   </Text>
                 </Text>
               </View>
-              <TouchableOpacity style={styles.button} onPress={onPostShare}>
+              <TouchableOpacity style={styles.button} activeOpacity={.8} onPress={onPostShare}>
                 <Text style={styles.editButtonText}>Profili Düzenle</Text>
               </TouchableOpacity>
             </>
@@ -177,7 +174,7 @@ export default function ProfileScreen() {
             >
               <Images
                 width={width}
-                height={300}
+                height={240}
                 borderRadius={20}
                 image={item.user.profilePhoto}
               />

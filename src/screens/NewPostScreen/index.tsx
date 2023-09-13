@@ -19,6 +19,7 @@ import { ProfilePicture } from "../../components";
 
 import { MaterialIcons } from "@expo/vector-icons";
 import DeviceInfo from "react-native-device-info";
+import { useSelector } from "react-redux";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -67,13 +68,15 @@ export default function NewPostScreen() {
     navigation.goBack();
   };
 
+  const currentUser = useSelector((state: any) => state.profile.currentUser);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ justifyContent: "space-between" }}>
         <View style={styles.newPostContainer}>
           <ProfilePicture
             size={35}
-            image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+            image={currentUser.profilePhoto}
           />
           <View style={styles.inputContainer}>
             <TextInput
