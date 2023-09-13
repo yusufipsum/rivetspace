@@ -4,10 +4,19 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     flexDirection: "column",
-    padding: 15,
+    padding: 5,
     borderTopWidth: 0.3,
+    backgroundColor: "#f7f7f7",
     borderColor: "lightgrey",
     gap: 5,
+  },
+
+  posts: {
+    padding: 10,
+    backgroundColor: "#fff", 
+    borderColor: "lightgrey", 
+    borderRadius: 10, 
+    borderWidth: .3
   },
 
   // posts: {

@@ -18,14 +18,10 @@ export type MainContainerProps = {
 const MainContainer = ({ post }: MainContainerProps) => {
   return (
     <View style={styles.container}>
-      <View>
         <Text style={styles.content}>{post.content}</Text>
         {!!post.image && (
-          <Lightbox resizeMode="contain" underlayColor="white">
-            <Image style={styles.image} source={{ uri: post.image }} />
-          </Lightbox>
+          <Image style={styles.image} source={{ uri: post.image }} />
         )}
-      </View>
       <Footer post={post} />
     </View>
   );

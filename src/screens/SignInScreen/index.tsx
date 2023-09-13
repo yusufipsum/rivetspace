@@ -122,7 +122,7 @@ export default function LoginScreen() {
                 type="text"
                 fontSize={15}
                 width={"100%"}
-                placeholder="E-Posta veya Cep Telefonu Numarası (5xx xxx xxxx)"
+                placeholder="E-Posta"
                 placeholderFontWeight="bold"
                 hitSlop={{ top: 30, bottom: 30 }}
               />
@@ -189,16 +189,10 @@ export default function LoginScreen() {
             <View style={styles.info}>
               <Text style={styles.infoText}>
                 Kaydolarak,{" "}
-                <TouchableOpacity raised activeOpacity={0.8}>
-                  <Text style={styles.principles}>Koşullarımızı,</Text>
-                </TouchableOpacity>
-                <TouchableOpacity raised activeOpacity={0.8}>
-                  <Text style={styles.principles}> Gizlilik İlkemizi</Text>
-                </TouchableOpacity>{" "}
+                <Text style={styles.principles}>Koşullarımızı,</Text>
+                <Text style={styles.principles}> Gizlilik İlkemizi </Text>
                 ve
-                <TouchableOpacity raised activeOpacity={0.8}>
-                  <Text style={styles.principles}>Çerezler İlkemizi</Text>
-                </TouchableOpacity>{" "}
+                <Text style={styles.principles}> Çerezler İlkemizi </Text>
                 kabul etmiş olursun.
               </Text>
             </View>

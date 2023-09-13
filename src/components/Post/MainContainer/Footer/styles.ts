@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   commentIcon: {
     color: "white",
-    marginHorizontal: 40,
+    marginHorizontal: 30,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",

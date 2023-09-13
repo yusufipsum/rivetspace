@@ -1,33 +1,11 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 10,
-  },
-
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-
-  user: {
-    flexDirection: "column",
-  },
-
-  name: {
-    marginRight: 5,
-    fontWeight: "bold",
-  },
-
-  username: {
-    marginRight: 5,
-    color: "grey",
-  },
-
-  createdAt: {
-    marginRight: 5,
-    color: "grey",
   },
 
   content: {
@@ -36,13 +14,16 @@ const styles = StyleSheet.create({
   },
 
   image: {
+    marginHorizontal: -25.7,
     marginVertical: 10,
-    width: "100%",
-    height: 200,
+    width: windowWidth,
+    position: "relative",
+    left: 0,
+    height: 220,
     resizeMode: "cover",
     borderWidth: 0.2,
     borderColor: "lightgrey",
-    borderRadius: 15,
+    //borderRadius: 15,
     overflow: "hidden",
   },
 });

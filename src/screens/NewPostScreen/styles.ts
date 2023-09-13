@@ -5,6 +5,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: "center",
     margin: 0,
     height: windowHeight,
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   newPostContainer: {
+    flex: 1,
     flexDirection: "row",
     top: 8,
     padding: 10,

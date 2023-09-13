@@ -22,7 +22,7 @@ const TopContainer = ({ post }: TopContainerProps) => (
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        style={{ paddingLeft: 5, paddingRight: 5 }}
+        style={{right: 20, paddingLeft: 5, paddingRight: 5 }}
         activeOpacity={0.3}
       >
         <Ionicons name={"ellipsis-horizontal"} color={"grey"} size={15} />

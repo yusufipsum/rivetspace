@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     width: SRC_WIDTH - 50,
     marginTop: 10,
     borderTopLeftRadius: 0,
-    borderTopRightRadius: 60,
-    borderBottomLeftRadius: 60,
-    borderBottomRightRadius: 60,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
     alignItems: "flex-start",
     padding: 20,
     gap: 10,
@@ -42,15 +42,18 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
   tagLeft: {
+    
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-start",
+    backgroundColor: 'rgba(52, 52, 52, 0)',
     gap: 30,
   },
   tagRight: {
     marginTop: 10,
     gap: 7,
     flex: 1,
+    backgroundColor: 'rgba(52, 52, 52, 0)',
   },
   social: {
     flexDirection: "row",
@@ -64,6 +67,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   button: {
+    zIndex: 1,
     top: 5,
     width: "80%",
     height: 35,
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textInput: {
-    margin: 10,
+    margin: 8,
     fontSize: 14,
     width: "100%",
   },

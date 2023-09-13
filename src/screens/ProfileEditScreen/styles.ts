@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   footerContainer: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   tagContainer: {
@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
     width: SRC_WIDTH - 50,
     marginTop: 10,
     borderTopLeftRadius: 0,
-    borderTopRightRadius: 60,
-    borderBottomLeftRadius: 60,
-    borderBottomRightRadius: 60,
+    borderTopRightRadius: 50,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
     alignItems: "flex-start",
     padding: 20,
     gap: 10,
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   button: {
-    marginTop: 5,
     width: "30%",
     height: 35,
     backgroundColor: "black",
@@ -62,6 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   buttonText: {
+    width: 90,
     color: "grey",
     fontSize: 16,
   },
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   nameText: {
+    width: 106,
     fontSize: 18,
     fontWeight: "bold",
   },
@@ -110,10 +111,12 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   buttonContainer: {
+    position: "absolute",
+    bottom: 0,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginBottom: 12,
+    marginBottom: 8,
   },
   changeImage: {
     backgroundColor: "white",
@@ -129,34 +132,22 @@ const styles = StyleSheet.create({
     bottom: -20,
     alignSelf: "center",
   },
-  dot: {
-    width: 15,
-    height: 15,
-    borderRadius: 50,
-    backgroundColor: "#26a9e1",
-    marginRight: 5,
-  },
-  point: {
-    backgroundColor: 'rgba(52, 52, 52, 0)',
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 5,
-  },
   images: {
-    flex: 1,
     marginTop: 10,
     width: SRC_WIDTH,
-    alignSelf: "flex-start",
     alignItems: "center",
+
   },
   addImage: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderWidth: 1,
     borderRadius: 20,
     margin: 10,
     alignItems: "center",
     justifyContent: "center",
+    alignSelf: "flex-end",
+    bottom: 110,
   },
 });
 
