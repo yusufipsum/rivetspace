@@ -32,7 +32,6 @@ export default function ProfileScreen() {
 
   const navigation = useNavigation();
   const [focused, setFocused] = React.useState(false);
-  const [post, setPost] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [image, setImage] = useState(null);
 
@@ -66,7 +65,7 @@ export default function ProfileScreen() {
   };
 
   const onPostShare = () => {
-    console.warn(`${post}`);
+    console.warn(`${biography}`);
     navigation.goBack();
     Alert.alert("Düzenlendi");
   };
@@ -85,33 +84,36 @@ export default function ProfileScreen() {
 
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [biography, setBiography] = useState("");
 
   const updateUserToDB = async (update: any) => {
     await API.graphql(graphqlOperation(updateUser, { input: update }))
+    const user = await Auth.currentUserInfo();
+    const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
     console.log("User Updated: ", update);
+    dispatch(
+      profileSlice.actions.userProfile({
+        id: userData.data.getUser.id,
+        name: userData.data.getUser.name,
+        username: userData.data.getUser.userName,
+        profilePhoto: userData.data.getUser.profilePhoto,
+        biography: userData.data.getUser.biography,
+        color: userData.data.getUser.color,
+        isCurrentUser: true,
+      })
+    );
+    console.log("update user", update);
   }
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
+      const user = await Auth.currentUserInfo();
+      await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
       const update = {
         id: user.attributes.sub,
-        name: name,     
+        name: name,
       }
       await updateUserToDB(update);
-      dispatch(
-        profileSlice.actions.userProfile({
-          id: userData.data.getUser.id,
-          name: name,
-          username: userData.data.getUser.userName,
-          profilePhoto: userData.data.getUser.profilePhoto,
-          biography: userData.data.getUser.biography,
-          color: userData.data.getUser.color,
-          isCurrentUser: true,
-        })
-      );
-      console.log("update user", update);
       navigation.goBack();
     } catch (error) {
       console.log("update curr user:", error);
@@ -209,8 +211,8 @@ export default function ProfileScreen() {
           <TextInput
             autoFocus={false}
             multiline={true}
-            value={post}
-            onChangeText={(value) => setPost(value)}
+            value={biography}
+            onChangeText={(value) => setBiography(value)}
             numberOfLines={3}
             maxLength={300}
             maxHeight={100}
