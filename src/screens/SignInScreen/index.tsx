@@ -61,6 +61,7 @@ export default function LoginScreen() {
       response &&
       (checkPhoneNumber || checkEmail) &&
       nameSurname.length > 0 &&
+      nameSurname != "" &&
       username.length >= 4 &&
       password.length >= 8
     ) {
