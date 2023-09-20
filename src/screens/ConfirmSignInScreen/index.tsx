@@ -11,15 +11,12 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import { Auth } from "aws-amplify";
 
 import styles from "./styles";
 import { Logo } from "../../assets/svg";
 
-import { useEffect, useRef, useState } from "react";
-import { createUser, updateUser } from "../../graphql/mutations";
-import DeviceInfo from "react-native-device-info";
-import { getUser } from "../../graphql/queries";
+import { useRef, useState } from "react";
 
 export default function ConfirmSignInScreen() {
   const navigation = useNavigation();
@@ -33,71 +30,10 @@ export default function ConfirmSignInScreen() {
   const [authCode, setAuthCode] = useState("");
   const [error, setError] = useState(false);
 
-  const [MACAddress, setMACAddress] = useState("");
-  const [customUUID, setCustomUUID] = useState("");
-
-  const saveUserToDB = async (user: any) => {
-    await API.graphql(graphqlOperation(createUser, { input: user}));
-    console.log("User Created: ", user);
-  }
-
-  const getMac = async () => {
-    DeviceInfo.getMacAddress()
-    .then(macAddress => {
-         console.log("MAC Address:", macAddress)
-         setMACAddress(macAddress);
-     })
-     .catch(error => console.log("error", error))
-  }
-
-  const getRandomPhoto = () => {
-    return 'https://cdn-icons-png.flaticon.com/512/666/666201.png'
-  }
-
-  const getRandomColor = () => {
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-      const randomDigit = Math.floor(Math.random() * 16);
-      color += randomDigit.toString(16);
-    }
-    return color;
-  };
-  
-  useEffect(() => {
-    getMac();
-  }, [MACAddress]);
-
   const handleSubmit = async function name(event: any) {
     try {
       event.preventDefault();
-      const confirm = await Auth.confirmSignUp(username, authCode);
-      if (confirm) {
-        const userInfo = await Auth.currentUserInfo();
-        console.log("bajabkabak::  ", customUUID)
-        //check if user already exist in database
-        const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
-        console.log("aa", userData.data.getUser);
-        if(!userData.data.getUser && MACAddress != ""){
-          try {
-            const user = {
-              id: userInfo.attributes.sub,
-              userName: userInfo.username,
-              name: userInfo.attributes.name,
-              email: userInfo.attributes.email,
-              biography: "Merhaba, ben de RivetSpace kullanıyorum!",
-              uuid: MACAddress,
-              profilePhoto: getRandomPhoto(),
-              color: getRandomColor(),
-            }
-            await saveUserToDB(user);
-          } catch (error) {
-            console.log("Hata", error)
-          }
-        } else {
-          setCustomUUID(userData.data.getUser.uuid);
-          console.log("User already exists")
-        }
-      }
+      await Auth.confirmSignUp(username, authCode);
     } catch (error) {
       console.log("error signing up:", error);
       setAuthCode("");
@@ -145,6 +81,7 @@ export default function ConfirmSignInScreen() {
                 value={authCode}
                 onChangeText={setAuthCode}
                 keyboardType={"number-pad"}
+                inputMode="number"
                 fontSize={15}
                 width={"100%"}
                 maxLength={6}

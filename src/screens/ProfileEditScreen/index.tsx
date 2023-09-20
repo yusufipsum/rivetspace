@@ -15,14 +15,14 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 
 import { Text, View } from '../../components/Themed';
-import { Background, ProfilePicture } from "../../components";
+import { Background, PostFeed, ProfilePicture } from "../../components";
 import profiles from "../../data/profiles";
 import { useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
 import { Octicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { API, Auth, graphqlOperation } from "aws-amplify";
-import { getUser } from "../../graphql/queries";
+import { getUser } from '../../graphql/queries';
 import { updateUser } from "../../graphql/mutations";
 import { useAppDispatch } from "../../store";
 import { profileSlice } from "../../store/profileSlice";
@@ -88,7 +88,7 @@ export default function ProfileScreen() {
 
   const updateUserToDB = async (update: any) => {
     await API.graphql(graphqlOperation(updateUser, { input: update }))
-    const user = await Auth.currentUserInfo();
+    const user = await Auth.currentAuthenticatedUser();
     const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
     console.log("User Updated: ", update);
     dispatch(
@@ -103,18 +103,36 @@ export default function ProfileScreen() {
       })
     );
     console.log("update user", update);
+    navigation.goBack();
   }
 
   const handleSubmit = async () => {
     try {
-      const user = await Auth.currentUserInfo();
-      await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
-      const update = {
+      const user = await Auth.currentAuthenticatedUser();
+      const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
+      const check = {
         id: user.attributes.sub,
         name: name,
+        userName: username,
+        biography: biography,
       }
-      await updateUserToDB(update);
-      navigation.goBack();
+      const update: Partial<typeof check> = {...check};
+      try{
+        if(name == "" || name.length <= 0 || name === userData.data.getUser.name){
+          delete update.name;
+        }
+        if(username.length <= 4 || username === userData.data.getUser.userName){
+          delete update.userName;
+          console.log("hayirdir", update);
+        }
+        if(biography === userData.data.getUser.biography){
+          delete update.biography;
+        }
+      } catch (e) { 
+        console.log("not deleted:::: ", e);
+      } finally {
+        await updateUserToDB(update);
+      }
     } catch (error) {
       console.log("update curr user:", error);
     }
@@ -217,12 +235,25 @@ export default function ProfileScreen() {
             maxLength={300}
             maxHeight={100}
             style={styles.textInput}
-            placeholder={"Biyografine bir şeyler yaz"}
+            placeholder={"Biyografine bir şeyler yaz..."}
           />
         </View>
       </View>
       <View style={styles.footerContainer}>
-        <View style={styles.images}>
+      <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={onPostCancel}>
+            <Text style={styles.vazgecButtonText}>Vazgeç</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.onaylaButtonText}>Onayla</Text>
+          </TouchableOpacity>
+        </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={() => <PostFeed />}
+      />
+        {/* <View style={styles.images}>
           <FlatList
             contentContainerStyle={{ gap: 10 }}
             data={images}
@@ -265,15 +296,7 @@ export default function ProfileScreen() {
               </TouchableOpacity>
             )}
           />
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={onPostCancel}>
-            <Text style={styles.vazgecButtonText}>Vazgeç</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <Text style={styles.onaylaButtonText}>Onayla</Text>
-          </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );

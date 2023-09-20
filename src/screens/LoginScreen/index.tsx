@@ -18,6 +18,9 @@ import { useEffect, useRef, useState } from "react";
 import { createUser, deleteUser, updateUser } from "../../graphql/mutations";
 import DeviceInfo from "react-native-device-info";
 import { getUser } from '../../graphql/queries';
+import { useAppDispatch } from "../../store";
+import { deviceSlice } from "../../store/deviceSlice";
+import RNBluetoothClassic from 'react-native-bluetooth-classic';
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -26,6 +29,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
+  const dispatch = useAppDispatch();
 
   const Sign = () => {
     navigation.navigate("SignIn");
@@ -37,11 +41,31 @@ export default function LoginScreen() {
     setError(false);
   };
 
+  const Forgot = () => {
+    navigation.navigate("ForgotPassword");
+    setError(false);
+  };
+
+  const getMac = async () => {
+    DeviceInfo.getMacAddress()
+    .then(uuid => {
+        console.log("UUID Address: ", uuid)
+        dispatch(
+          deviceSlice.actions.setMACAddress({uuid})
+        );
+        RNBluetoothClassic.setBluetoothAdapterName(uuid);
+    })
+    .catch(error => console.log("error", error))
+  }
+  
+  useEffect(() => {
+    getMac();
+  },[]);
 
   const handleSubmit = async function name(event: any) {
     try {
       event.preventDefault();
-      await Auth.currentAuthenticatedUser({bypassCache: true});
+      //await Auth.currentAuthenticatedUser({bypassCache: true});
       await Auth.signIn(username, password);
     } catch (error) {
       console.log("error signing up:", error);
@@ -117,6 +141,7 @@ export default function LoginScreen() {
                     textAlign: "right",
                     height: 20,
                   }}
+                  onPress={Forgot}
                 >
                 Şifremi Unuttum
                 </Text>

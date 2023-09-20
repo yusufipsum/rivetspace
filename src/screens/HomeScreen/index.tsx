@@ -11,15 +11,18 @@ import { PostFeed, StoryFeed, ProfileButton } from "../../components";
 
 import { useAppDispatch, useAppSelector } from "../../store";
 import { useEffect, useState } from "react";
-import { startScanning, stopScanning } from "../../store/bleSlice";
-import useBLE from "../../useBLE";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { profileSlice } from "../../store/profileSlice";
 import { UserType } from "../../types";
-import { useSelector } from "react-redux";
-import { getUser } from '../../graphql/queries';
+
+import { getUser, listUsers } from '../../graphql/queries';
 import DeviceInfo from "react-native-device-info";
 import { createUser, updateUser } from "../../graphql/mutations";
+import { startScanning } from "../../store/bleSlice";
+
+import { getProfiles } from "../../store/profileSlice";
+
+import RNBluetoothClassic, { BluetoothDevice } from 'react-native-bluetooth-classic';
 
 export type ProfileContainerProps = {
   user: UserType;
@@ -30,44 +33,61 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
   const onPress = () => {
     navigation.navigate("Profile");
   };
-
-//WITH USEBLE
-//   const {
-//     requestPermissions,
-//     scanForPeripherals,
-//     allDevices,
-//   } = useBLE();
-
-// useEffect(() => {
-//   const scanForDevices = async () => {
-//     const isPermissionsEnabled = await requestPermissions();
-//     if(isPermissionsEnabled){
-//       scanForPeripherals();
-//       console.log("zzz");
-//     }
-//   }
-//   scanForDevices();
-// });
   
-//WITH REDUX TOOLKIT 
   const dispatch = useAppDispatch();
   const discoveredDevices = useAppSelector(state => state.ble.allDevices);
+  const macAddress = useAppSelector((state: any) => state.device.macAddress);
 
-  const [MACAddress, setMACAddress] = useState("");
   const [customUUID, setCustomUUID] = useState("");
 
-  const getMac = async () => {
-    DeviceInfo.getMacAddress()
-    .then(macAddress => {
-         console.log("MAC Address:", macAddress)
-         setMACAddress(macAddress);
-     })
-     .catch(error => console.log("error", error))
-  }
+  //BLUETOOTH CLASSIC
+  let scanInterval;
+
+  // const startDiscovery = async () => {
+  //   try {
+  //     const unpaired = await RNBluetoothClassic.startDiscovery();
+  //     const devices: Record<string, { name: string, address: string }> = {};
+  //     unpaired.forEach(item => {
+  //       devices[item.id.toString()] = { name: item["_nativeDevice"]["name"], address: item["_nativeDevice"]["address"] };
+  //     });
+  //     console.log("unpaired: ", devices);
+  //   } catch (err) {
+  //     console.log("ulanhataamk: ", err);
+  //   } finally {
+  //     await RNBluetoothClassic.cancelDiscovery();
+  //   }
+  // }
+
+  // function startScanInterval(){
+  //   scanInterval = setInterval(() =>{
+  //     startDiscovery();
+  //   }, 15000)
+  // }
+ 
+  // useEffect(() => {
+  //   //startDiscovery();
+  //   //startScanInterval();
+  //   console.log("discaaa: ", discoveredDevices);
+  //   //dispatch(startScanning());
+  //   //dispatch(stopScanning());
+  // },[]);
 
   const saveUserToDB = async (user: any) => {
     await API.graphql(graphqlOperation(createUser, { input: user}));
     console.log("User Created: ", user);
+    const userInfo = await Auth.currentUserInfo();
+    const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
+    dispatch(
+      profileSlice.actions.userProfile({
+        id: userData.data.getUser.id,
+        name: userData.data.getUser.name,
+        username: userData.data.getUser.userName,
+        profilePhoto: userData.data.getUser.profilePhoto,
+        biography: userData.data.getUser.biography,
+        color: userData.data.getUser.color,
+        isCurrentUser: true,
+      })
+    );
   }
   
   const updateUserToDB = async (updateUserUUID: any) => {
@@ -89,21 +109,14 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
   };
 
   useEffect(() => {
-    getMac();
-    //dispatch(startScanning());
-    //dispatch(stopScanning());
-    console.log("disc: ", discoveredDevices);
-  }, []);
-
-  useEffect(() => {
     const userUpdate = async () => {
       const userInfo = await Auth.currentAuthenticatedUser();
       const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
-      if(customUUID !== "" && customUUID !== MACAddress){
+      if(customUUID !== "" && customUUID !== macAddress.uuid){
         console.log("USER IN ", userData.data.getUser)
         const updateUserUUID = {
           id: userInfo.attributes.sub,
-          uuid: MACAddress,        
+          uuid: macAddress.uuid,        
         }
         await updateUserToDB(updateUserUUID);
         console.log("update user", updateUserUUID);
@@ -119,7 +132,7 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
       const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
       console.log("YETERULAAAN::: ", userData)
       if (userInfo) {
-        if(!userData.data.getUser && MACAddress != ""){
+        if(!userData.data.getUser && macAddress.uuid != ""){
           try {
             const user = {
               id: userInfo.attributes.sub,
@@ -127,7 +140,7 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
               name: userInfo.attributes.name,
               email: userInfo.attributes.email,
               biography: "Merhaba, ben de RivetSpace kullanıyorum!",
-              uuid: MACAddress,
+              uuid: macAddress.uuid,
               profilePhoto: getRandomPhoto(),
               color: getRandomColor(),
             }
@@ -138,17 +151,6 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
         } else {
           setCustomUUID(userData.data.getUser.uuid);
         }
-      }
-    }
-    user();
-  }, [MACAddress]);
-
-  useEffect(() => {
-    async function userInfo() {
-      const userInfo = await Auth.currentAuthenticatedUser();
-      const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
-      try {
-        console.log("USER INFO: ", userData);
         dispatch(
           profileSlice.actions.userProfile({
             id: userData.data.getUser.id,
@@ -160,12 +162,37 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
             isCurrentUser: true,
           })
         );
-      } catch (error) {
-        console.log("error curr user:", error);
       }
     }
-    userInfo();
-  }, [MACAddress]);
+
+    const fetchProfiles = async () => {
+      try {
+        const profilesData = await API.graphql(graphqlOperation(listUsers));
+        const allProfiles: {id: string, user: string}[] = [];
+        profilesData.data.listUsers.items.forEach(item => {
+          const user = {
+            id: item.uuid,
+            user: item
+          };
+          allProfiles.push(user);
+        });
+        const profiles = allProfiles.filter(item => item.id !== macAddress.uuid);
+        dispatch(profileSlice.actions.setProfiles(profiles));
+      } catch (error) {
+        console.log("fetchProfiels::: ", error);
+      }
+    }
+
+    function startUpdateProfiles(){
+      scanInterval = setInterval(() =>{
+        fetchProfiles();
+      }, 120000)
+    }
+    
+    user();
+    fetchProfiles();
+    startUpdateProfiles();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -184,7 +211,7 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
           <ProfileButton />
         </TouchableOpacity>
       </View>
-      <FlatList
+      {/* <FlatList
         contentContainerStyle={{}}
         style={{width: "100%"}}
         data={discoveredDevices}
@@ -193,7 +220,7 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
             <Text>{item.id} {item.name}</Text>
           )
         }}
-      />
+      /> */}
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
