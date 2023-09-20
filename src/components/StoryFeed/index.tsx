@@ -3,11 +3,33 @@ import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 
 import styles from "./styles";
 
-import profiles from "../../data/profiles";
 import ProfilePicture from "../ProfilePicture";
+import { useSelector } from "react-redux";
 
-const StoryFeed = () => (
-  <View style={styles.container}>
+const StoryFeed = () => {
+  const currentUser = useSelector((state: any) => state.profile.currentUser);
+
+  const data = useSelector((state: any) => state.profile.allProfiles);
+  const allProfiles = data.reduce((acc, inner) => {
+    return acc.concat(inner);
+  },[]);
+ 
+  function filter(allProfiles: any) {
+    const profiles = new Set();
+
+    return allProfiles.filter((item: any) => {
+      if (profiles.has(item.id)) {
+        return false; 
+      }
+      profiles.add(item.id);
+      return true; 
+    });
+  }
+
+  const profiles = filter(allProfiles);
+
+  return(
+    <View style={styles.container}>
     <View style={styles.topContainer}>
       <FlatList
         contentContainerStyle={styles.topFlatList}
@@ -36,10 +58,10 @@ const StoryFeed = () => (
                 borderRadius={67}
                 borderWidth={2}
                 borderColor={"white"}
-                image={"https://cdn-icons-png.flaticon.com/512/666/666201.png"}
+                image={currentUser.profilePhoto}
               />
             </View>
-            <Text style={styles.nameText}>{"Hikayen"}</Text>
+            <Text style={styles.nameText}>{"Sen"}</Text>
           </TouchableOpacity>
         )}
         showsVerticalScrollIndicator={false}
@@ -47,6 +69,7 @@ const StoryFeed = () => (
       />
     </View>
   </View>
-);
+  );
+};
 
 export default StoryFeed;
