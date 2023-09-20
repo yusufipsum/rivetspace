@@ -13,6 +13,7 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  ForgotPassword: undefined;
   ConfirmSignIn: undefined;
   Login: undefined;
   Modal: undefined;
@@ -39,6 +40,7 @@ export type UserType = {
   id: string;
   name: string;
   username: string;
+  userName: string;
   socialScore?: number;
   profilePhoto?: string;
   photos?: object;
