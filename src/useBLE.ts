@@ -43,28 +43,47 @@ function useBLE(): BluetoothLowEnergyApi {
         )
     };
     
-        const requestPermissions = async () => {
-            if(Platform.OS === "android"){
-                if((ExpoDevice.platformApiLevel ?? -1) < 31){
-                    const granted = await PermissionsAndroid.request(
-                        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-                        {
-                            title: "Location Permission",
-                            message: "Bluetooth requires Location",
-                            buttonPositive: "OK",
-                        }
-                    );
-
-                return granted === PermissionsAndroid.RESULTS.GRANTED;
-                } else {
-                    const isAndroid31PermissionGranted = 
-                        await requestAndroidPermissions();
-                    return isAndroid31PermissionGranted;
-                }
+    const requestPermissions = async () => {
+        if(Platform.OS === "android"){
+            if((ExpoDevice.platformApiLevel ?? -1) < 31){
+                const granted = await PermissionsAndroid.request(
+                    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                    {
+                        title: "Location Permission",
+                        message: "Bluetooth requires Location",
+                        buttonPositive: "OK",
+                    }    
+                );
+                // const bluetoothScanPermission = await PermissionsAndroid.request(
+                //     PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+                //     {
+                //         title: "Scan Permission",
+                //         message: "App requires Bluetooth Scanning",
+                //         buttonPositive: "OK",
+                //     }
+                // );
+                // const bluetoothConnectPermission = await PermissionsAndroid.request(
+                //     PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+                //     {
+                //         title: "Bluetooth Connect",
+                //         message: "App requires Bluetooth Connect",
+                //         buttonPositive: "OK",
+                //     }
+                // );
+            return (
+                granted === PermissionsAndroid.RESULTS.GRANTED
+                // bluetoothScanPermission === PermissionsAndroid.RESULTS.GRANTED &&
+                // bluetoothConnectPermission === PermissionsAndroid.RESULTS.GRANTED
+                )
             } else {
-                return true;
+                const isAndroid31PermissionGranted = 
+                    await requestAndroidPermissions();
+                return isAndroid31PermissionGranted;
             }
-        };
+        } else {
+            return true;
+        }
+    };
 
         const isDuplicateDevice = (devices: Device[], nextDevice: Device) => 
             devices.findIndex((device) => nextDevice.id === device.id) > -1;
@@ -74,9 +93,7 @@ function useBLE(): BluetoothLowEnergyApi {
                 if (error) {
                     console.log(error, "location");
                 }
-                console.log(device, "bbb");
                 if(device){
-                    console.log("yyy");
                     setAllDevices((prevState) => {
                         if(!isDuplicateDevice(prevState, device)){
                             return [...prevState, device];
