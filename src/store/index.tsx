@@ -5,12 +5,14 @@ import { profileSlice } from "./profileSlice";
 import { bleState } from "./bleSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { bleMiddleware } from "./bleListener";
+import { deviceSlice } from "./deviceSlice";
 
 export const store = configureStore({
   reducer: {
     posts: postsSlice.reducer,
     profile: profileSlice.reducer,
     ble: bleState.reducer,
+    device: deviceSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(bleMiddleware.middleware)

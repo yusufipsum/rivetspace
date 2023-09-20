@@ -1,11 +1,24 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import profiles from "../data/profiles";
+import { useEffect, useState } from "react";
+import { API, graphqlOperation } from 'aws-amplify';
 
-const initialState = {
+import { listUsers } from "../graphql/queries";
+
+interface UserState {
+  allProfiles: object[];
+  isCurrentUser: boolean;
+  profiles: object;
+  user: object;
+  currentUser: object;
+}
+
+const initialState: UserState = {
   isCurrentUser: false,
   profiles: profiles,
   user: {},
   currentUser: {},
+  allProfiles: [],
 };
 
 export const profileSlice = createSlice({
@@ -54,6 +67,16 @@ export const profileSlice = createSlice({
         });
         console.log("state curr", state.currentUser);
       }
+    },
+    setProfiles: (state, action) => {
+      try{
+        state.allProfiles = [];
+      }catch (e){
+        console.log(e);
+      }finally{
+        state.allProfiles = [...state.allProfiles, action.payload];
+        console.log("proFİLESS::: ", state.allProfiles);
+      }    
     },
   },
 });
