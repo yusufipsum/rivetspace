@@ -3,7 +3,7 @@ const posts = [
     id: "p1",
     user: {
       id: "u1",
-      username: "@deneme",
+      username: "deneme",
       name: "deneme",
       profilePhoto: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
       color: "#FADC8E",
@@ -19,7 +19,7 @@ const posts = [
     id: "p2",
     user: {
       id: "u1",
-      username: "@yusufipsum",
+      username: "yusufipsum",
       name: "Yusuf",
       profilePhoto: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
       color: "#E2C9FF",
@@ -37,7 +37,7 @@ const posts = [
     id: "p3",
     user: {
       id: "u3",
-      username: "@hello",
+      username: "hello",
       name: "Hello",
       profilePhoto: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
       color: "#B7E0DA",
@@ -54,7 +54,7 @@ const posts = [
     id: "p4",
     user: {
       id: "u4",
-      username: "@rivetspace",
+      username: "rivetspace",
       name: "rivetspace",
       profilePhoto: "https://cdn-icons-png.flaticon.com/512/666/666201.png",
       color: "black",
