@@ -17,7 +17,7 @@ const TopContainer = ({ post }: TopContainerProps) => (
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.user}>
           <Text style={styles.name}>{post.user.name}</Text>
-          <Text style={styles.username}>{post.user.username}</Text>
+          <Text style={styles.username}>@{post.user.username}</Text>
           {/*<Text style={styles.createdAt}>{moment(post.createdAt).startOf('hour').fromNow()}7s</Text>*/}
         </View>
       </TouchableOpacity>

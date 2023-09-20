@@ -22,7 +22,7 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
         isCurrentUser: false,
         id: user.id,
         name: user.name,
-        username: user.username,
+        username: user.userName,
         profilePhoto: user.profilePhoto,
         biography: user.biography,
         color: user.color,

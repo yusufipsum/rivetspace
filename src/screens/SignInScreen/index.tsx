@@ -19,9 +19,11 @@ import { useRef, useState } from "react";
 
 import { useTogglePasswordVisibility } from "../../hooks/useTogglePasswordVisibilty";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useAppSelector } from "../../store";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
+  const macAddress = useAppSelector((state: any) => state.device.macAddress);
 
   const Login = () => {
     navigation.navigate("Login");
@@ -33,7 +35,7 @@ export default function LoginScreen() {
   const [nameSurname, setNameSurname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [UUID, setUUID] = useState("");
+  
   const [response, setResponse] = useState(false);
 
   const handleSubmit = async function name(event: any) {
@@ -74,7 +76,7 @@ export default function LoginScreen() {
             name: nameSurname,
             email: email,
             phone_number: phoneNumber,
-            'custom:UUID': UUID,
+            'custom:UUID': macAddress.uuid,
           },
           autoSignIn: {
             enabled: true,
@@ -97,8 +99,7 @@ export default function LoginScreen() {
     }
   };
 
-  const { passwordVisibility, rightIcon, handlePasswordVisibility } =
-    useTogglePasswordVisibility();
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
 
   const inputNameSurname = useRef();
   const inputUsername = useRef();

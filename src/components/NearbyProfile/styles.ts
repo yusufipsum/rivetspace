@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "column",
     padding: 15,
-    borderWidth: 0.3,
     borderColor: "lightgrey",
     alignItems: "center",
     gap: 5,
@@ -15,6 +14,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     borderRadius: 20,
+    elevation: 8,
   },
   cards: {
     flex: 1,

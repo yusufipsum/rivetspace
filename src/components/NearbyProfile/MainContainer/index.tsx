@@ -17,7 +17,7 @@ const MainContainer = ({ profiles }: MainContainerProps) => (
       <TouchableOpacity activeOpacity={0.7}>
         <View style={styles.profilesHeaderNames}>
           <Text style={styles.name}>{profiles.user.name}</Text>
-          <Text style={styles.username}>{profiles.user.username}</Text>
+          <Text style={styles.username}>@{profiles.user.userName}</Text>
         </View>
       </TouchableOpacity>
       <Text style={styles.content} numberOfLines={2}>

@@ -29,17 +29,16 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     borderRadius: 30,
     alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
     paddingHorizontal: 20,
-    paddingVertical: 10,
     color: "black",
   },
   shareButtonText: {
-    paddingHorizontal: 20,
-    paddingVertical: 6,
     color: "white",
     fontWeight: "bold",
+    textAlign: "center",
   },
   newPostContainer: {
     flex: 1,

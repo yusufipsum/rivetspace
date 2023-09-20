@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 3,
     zIndex: 1,
-    borderWidth: .4,
+    marginBottom: 5,
     borderColor: "lightgrey",
+    elevation: 6,
   },
   tagLeft: {
     flexDirection: "row",
@@ -63,20 +64,18 @@ const styles = StyleSheet.create({
   buttonText: {
     width: 90,
     color: "grey",
-    fontSize: 16,
+    fontSize: 14,
   },
   onaylaButtonText: {
-    paddingHorizontal: 20,
-    paddingVertical: 6,
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
+    textAlign: "center",
   },
   vazgecButtonText: {
-    paddingHorizontal: 20,
-    paddingVertical: 6,
     color: "white",
     fontSize: 16,
+    textAlign: "center",
   },
   mainContainer: {
     width: "100%",
@@ -86,10 +85,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   textInput: {
-    margin: 10,
     fontSize: 14,
-    alignSelf: "center",
-    height: 50,
+    alignSelf: "flex-start",
+    height: 40,
   },
   headerText: {
     paddingHorizontal: 20,
@@ -111,12 +109,10 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   buttonContainer: {
-    position: "absolute",
-    bottom: 0,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    marginBottom: 8,
+    margin: 8,
   },
   changeImage: {
     backgroundColor: "white",

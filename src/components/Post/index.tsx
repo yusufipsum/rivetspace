@@ -14,7 +14,6 @@ export type PostProps = {
 };
 
 const Post = ({ post }: PostProps) => (
-  //<View style={styles.posts}>
   <View style={styles.container}>
     <View style={styles.posts}>
       <View style={{ flexDirection: "row" }}>
@@ -24,7 +23,6 @@ const Post = ({ post }: PostProps) => (
       <MainContainer post={post} />
     </View>
   </View>
-  //</View>
 );
 
 export default Post;

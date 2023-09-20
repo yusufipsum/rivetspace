@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     shadowColor: "#171717",
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation: 6,
     zIndex: 1,
   },
   tagLeft: {
-    
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-start",
@@ -81,8 +81,6 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   editButtonText: {
-    paddingHorizontal: 20,
-    paddingVertical: 6,
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
@@ -103,7 +101,6 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 20,
     fontWeight: "bold",
-    flex: 1,
   },
   goBackIcon: {
     paddingHorizontal: 12,

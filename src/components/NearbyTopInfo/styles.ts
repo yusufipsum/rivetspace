@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: "center",
     alignSelf: "center",
+    justifyContent: "center",
     borderRadius: 40,
     zIndex: 1,
   },
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
   },
   text: {
     paddingBottom: 7,
-    fontSize: 16,
+    fontSize: 14,
     color: "#016894",
     width: "100%",
     textAlign: "center",

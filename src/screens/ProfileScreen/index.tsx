@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, TouchableOpacity, SafeAreaView } from "react-native";
+import { Dimensions, TouchableOpacity, SafeAreaView, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Carousel from "react-native-reanimated-carousel";
 import Lightbox from "react-native-lightbox-v2";
@@ -7,15 +7,12 @@ import Lightbox from "react-native-lightbox-v2";
 import styles from "./styles";
 
 import { Text, View } from '../../components/Themed';
-import { Background, Images, ProfilePicture } from "../../components";
+import { Background, Images, PostFeed, ProfilePicture } from "../../components";
 
 import { Ionicons, Feather, FontAwesome5 } from "@expo/vector-icons";
 
 import { useSelector } from "react-redux";
 export default function ProfileScreen() {
-  const width = Dimensions.get("window").width;
-
-  const images = useSelector((state: any) => state.profile.user.photos);
   const randomNumber = Math.floor(Math.random() * 300) + 1;
 
   const navigation = useNavigation();
@@ -64,7 +61,7 @@ export default function ProfileScreen() {
                     image={currentUser.profilePhoto}
                   />
                   <View style={styles.tagRight}>
-                    <View style={{height: 45}}>
+                    <View style={{gap: -5}}>
                       <Text style={styles.nameText}>{currentUser.name}</Text>
                       <Text style={styles.buttonText}>@{currentUser.username}</Text>
                     </View>
@@ -117,9 +114,9 @@ export default function ProfileScreen() {
                     image={user.profilePhoto}
                   />
                   <View style={styles.tagRight}>
-                    <View style={{height: 45}}>
+                    <View style={{gap: -5}}>
                       <Text style={styles.nameText}>{user.name}</Text>
-                      <Text style={styles.buttonText}>{user.username}</Text>
+                      <Text style={styles.buttonText}>@{user.username}</Text>
                     </View>
                     <View style={styles.social}>
                       <FontAwesome5 name={"instagram"} size={18} />
@@ -152,36 +149,11 @@ export default function ProfileScreen() {
               </View>
             </>
           )}
-      <View style={styles.photos}>
-        <Carousel
-          width={width}
-          height={width * 0.8}
-          mode="parallax"
-          pagingEnabled={true}
-          autoPlay={false}
-          data={images}
-          scrollAnimationDuration={1000}
-          onSnapToItem={(index) => console.log("current index:", index)}
-          renderItem={({ item }) => (
-            <Lightbox
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              resizeMode="contain"
-              underlayColor="white"
-            >
-              <Images
-                width={width}
-                height={240}
-                borderRadius={20}
-                image={item.user.profilePhoto}
-              />
-            </Lightbox>
-          )}
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          ListHeaderComponent={() => <PostFeed />}
         />
-      </View>
     </View>
     </SafeAreaView>
   );
