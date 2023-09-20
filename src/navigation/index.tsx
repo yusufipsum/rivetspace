@@ -20,7 +20,9 @@ import {
 import { ProfileButton, NewMessageButton, NewPostButton } from "../components";
 
 import {
+  ConfirmSignInScreen,
   FriendsScreen,
+  ForgotPasswordScreen,
   HomeScreen,
   LoginScreen,
   MessagesScreen,
@@ -30,7 +32,6 @@ import {
   ProfileScreen,
   ProfileEditScreen,
   SignInScreen,
-  ConfirmSignInScreen,
 } from "../screens";
 
 import {
@@ -102,6 +103,11 @@ function RootNavigator() {
         <Stack.Screen
           name="ConfirmSignIn"
           component={ConfirmSignInScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordScreen}
           options={{ headerShown: false }}
         />
       </Stack.Group>

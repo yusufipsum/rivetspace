@@ -7,7 +7,7 @@ import {
   DarkTheme,
 } from "@react-navigation/native";
 
-import { ConfirmSignInScreen, LoginScreen, SignInScreen } from "../screens";
+import { ConfirmSignInScreen, ForgotPasswordScreen, LoginScreen, SignInScreen } from "../screens";
 
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -49,6 +49,11 @@ function Login() {
       <Stack.Screen
         name="ConfirmSignIn"
         component={ConfirmSignInScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPasswordScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
