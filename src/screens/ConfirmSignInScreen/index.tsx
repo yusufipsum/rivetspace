@@ -81,7 +81,6 @@ export default function ConfirmSignInScreen() {
                 value={authCode}
                 onChangeText={setAuthCode}
                 keyboardType={"number-pad"}
-                inputMode="number"
                 fontSize={15}
                 width={"100%"}
                 maxLength={6}

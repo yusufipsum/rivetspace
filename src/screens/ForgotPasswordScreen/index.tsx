@@ -138,7 +138,6 @@ export default function ForgotPasswordScreen() {
                 value={code}
                 onChangeText={setCode}
                 keyboardType={"number-pad"}
-                inputMode="number"
                 fontSize={15}
                 width={"100%"}
                 maxLength={6}
