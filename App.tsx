@@ -31,10 +31,10 @@ function App() {
   //WITH CLASSIC
   useEffect(() => {
     const request = async () => {
-      RNBluetoothClassic.requestBluetoothEnabled();
       const isPermissionsEnabled = await requestPermissions();
       if(isPermissionsEnabled){
         console.log("enabled");
+        await RNBluetoothClassic.requestBluetoothEnabled();
       } else {
         console.log("")
       }
