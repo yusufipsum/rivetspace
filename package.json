@@ -56,6 +56,7 @@
     "react-native-device-info": "^10.7.0",
     "react-native-eject": "^0.1.2",
     "react-native-gesture-handler": "~2.9.0",
+    "react-native-ibeacon-simulator": "^1.0.10",
     "react-native-lightbox": "^0.8.1",
     "react-native-lightbox-v2": "^0.9.0",
     "react-native-link": "^4.1.0",
