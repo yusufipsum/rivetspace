@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, FlatList, Pressable } from "react-native";
 
 import styles from "./styles";
@@ -9,11 +9,16 @@ import { useSelector } from "react-redux";
 import Background from "../Backgrounds";
 
 const NearbyFeed = () => {
-  const data = useSelector((state: any) => state.profile.allProfiles);
-  const allProfiles = data.reduce((acc, inner) => {
+  const profilesData = useSelector((state: any) => state.profile.allProfiles);
+  const MACsData = useSelector((state: any) => state.profile.allMACs);
+  const allProfiles = profilesData.reduce((acc, inner) => {
     return acc.concat(inner);
   },[]);
   console.log("BUNLAR BOYLE: ", allProfiles)
+  const allMACs = MACsData.reduce((acc, inner) => {
+    return acc.concat(inner);
+  },[]);
+  console.log("MACLAR BOYLE: ", MACsData)
 
   function filter(allProfiles: any) {
     const profiles = new Set();
@@ -28,14 +33,21 @@ const NearbyFeed = () => {
   }
 
   const profiles = filter(allProfiles);
-  console.log(profiles);
 
+  const matches = profiles.filter(profile => {
+    const matched = allMACs.filter(device => device.mac === profile.id);
+    return matched.length > 0;
+  });
+  console.log("Eşleşenler: ", matches);
+
+  console.log(profiles);
+ 
   return (
     <View style={styles.container}>
       <NearbyTopInfo />
       <Background color="#def2fa" />
       <FlatList
-        data={profiles}
+        data={matches}
         numColumns={2}
         renderItem={({ item }) => (
           <Pressable style={{flex: 1}}>

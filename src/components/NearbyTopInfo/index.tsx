@@ -8,7 +8,11 @@ import { useSelector } from "react-redux";
 
 const NearbyTopInfo = () => {
   const data = useSelector((state: any) => state.profile.allProfiles);
+  const MACsData = useSelector((state: any) => state.profile.allMACs);
   const allProfiles = data.reduce((acc, inner) => {
+    return acc.concat(inner);
+  },[]);
+  const allMACs = MACsData.reduce((acc, inner) => {
     return acc.concat(inner);
   },[]);
 
@@ -26,17 +30,31 @@ const NearbyTopInfo = () => {
 
   const profiles = filter(allProfiles);
 
-  const rest = profiles.length;
-  const lastProfile = profiles.slice(0, 1); //4,5
+  const matches = profiles.filter(profile => {
+    const matched = allMACs.filter(device => device.mac === profile.id);
+    return matched.length > 0;
+  });
+  console.log("Eşleşenler: ", matches);
 
-  if(rest < 5){
+  const rest = matches.length;
+  const lastProfile = matches.slice(0, 1); //4,5
+
+  if(rest < 1){
+    return (
+      <View style={styles.topContainer}>
+        <Text style={styles.text}>
+          Etrafında hiç RivetSpace kullanıcısı yok, taramaya devam ediyoruz...
+        </Text>
+      </View>
+    )
+  } else if(rest < 5){
     return (
       <View style={styles.topContainer}>
         <FlatList
           contentContainerStyle={styles.topFlatList}
           horizontal
           scrollEnabled={false}
-          data={profiles}
+          data={matches}
           renderItem={({ item }) => (
             <ProfilePicture
               marginRight={-10}
@@ -56,14 +74,6 @@ const NearbyTopInfo = () => {
         </Text>
       </View>
     )
-  } else if(rest < 1){
-    return (
-      <View style={styles.topContainer}>
-        <Text style={styles.text}>
-          Ortamında uygulamayı kullanan kimse yok, büyümemiz için bize yardım et!
-        </Text>
-      </View>
-    )
   } else {
     return (
       <View style={styles.topContainer}>
@@ -71,7 +81,7 @@ const NearbyTopInfo = () => {
           contentContainerStyle={styles.topFlatList}
           horizontal
           scrollEnabled={false}
-          data={profiles.slice(0, 4)}
+          data={matches.slice(0, 4)}
           renderItem={({ item }) => (
             <ProfilePicture
               marginRight={-10}

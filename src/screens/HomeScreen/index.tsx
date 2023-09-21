@@ -43,34 +43,48 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
   //BLUETOOTH CLASSIC
   let scanInterval;
 
-  // const startDiscovery = async () => {
-  //   try {
-  //     const unpaired = await RNBluetoothClassic.startDiscovery();
-  //     const devices: Record<string, { name: string, address: string }> = {};
-  //     unpaired.forEach(item => {
-  //       devices[item.id.toString()] = { name: item["_nativeDevice"]["name"], address: item["_nativeDevice"]["address"] };
-  //     });
-  //     console.log("unpaired: ", devices);
-  //   } catch (err) {
-  //     console.log("ulanhataamk: ", err);
-  //   } finally {
-  //     await RNBluetoothClassic.cancelDiscovery();
-  //   }
-  // }
+  const startDiscovery = async () => {
+    try {
+      const unpaired = await RNBluetoothClassic.startDiscovery();
+      const allMACs: Record<string, { mac: string }>[] = [];
+      unpaired.forEach(item => {
+        const mac = {
+            mac: item["_nativeDevice"]["name"],
+          };
+          allMACs.push(mac);
+      });
+      console.log("unpaired: ", allMACs);
+      dispatch(
+        profileSlice.actions.setMACs(allMACs)
+      );
+      // const discoveredMACs: Record<string, { mac: string}>[] = [];
+      // discoveredDevices.forEach(item => {
+      //   const mac = {
+      //     mac: item.name
+      //   };
+      //   discoveredMACs.push(mac);
+      // })
+      // console.log(discoveredMACs);
+    } catch (err) {
+      console.log("ulanhataamk: ", err);
+    } finally {
+      await RNBluetoothClassic.cancelDiscovery();
+    }
+  }
 
-  // function startScanInterval(){
-  //   scanInterval = setInterval(() =>{
-  //     startDiscovery();
-  //   }, 15000)
-  // }
+  function startScanInterval(){
+    scanInterval = setInterval(() =>{
+      startDiscovery();
+    }, 15000)
+  }
  
-  // useEffect(() => {
-  //   //startDiscovery();
-  //   //startScanInterval();
-  //   console.log("discaaa: ", discoveredDevices);
-  //   //dispatch(startScanning());
-  //   //dispatch(stopScanning());
-  // },[]);
+  useEffect(() => {
+    startDiscovery();
+    //startScanInterval();
+    console.log("discaaa: ", discoveredDevices);
+    //dispatch(startScanning());
+    //dispatch(stopScanning());
+  },[]);
 
   const saveUserToDB = async (user: any) => {
     await API.graphql(graphqlOperation(createUser, { input: user}));
@@ -191,7 +205,7 @@ export default function HomeScreen({ user }: ProfileContainerProps) {
     
     user();
     fetchProfiles();
-    startUpdateProfiles();
+    // startUpdateProfiles();
   }, []);
 
   return (

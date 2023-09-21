@@ -10,7 +10,12 @@ const StoryFeed = () => {
   const currentUser = useSelector((state: any) => state.profile.currentUser);
 
   const data = useSelector((state: any) => state.profile.allProfiles);
+  const MACsData = useSelector((state: any) => state.profile.allMACs);
+
   const allProfiles = data.reduce((acc, inner) => {
+    return acc.concat(inner);
+  },[]);
+  const allMACs = MACsData.reduce((acc, inner) => {
     return acc.concat(inner);
   },[]);
  
@@ -28,13 +33,19 @@ const StoryFeed = () => {
 
   const profiles = filter(allProfiles);
 
+  const matches = profiles.filter(profile => {
+    const matched = allMACs.filter(device => device.mac === profile.id);
+    return matched.length > 0;
+  });
+  console.log("Eşleşenler: ", matches);
+
   return(
     <View style={styles.container}>
     <View style={styles.topContainer}>
       <FlatList
         contentContainerStyle={styles.topFlatList}
         horizontal
-        data={profiles}
+        data={matches}
         renderItem={({ item }) => (
           <TouchableOpacity activeOpacity={0.8}>
             <View style={styles.stories}>

@@ -7,6 +7,7 @@ import { listUsers } from "../graphql/queries";
 
 interface UserState {
   allProfiles: object[];
+  allMACs: object[];
   isCurrentUser: boolean;
   profiles: object;
   user: object;
@@ -19,6 +20,7 @@ const initialState: UserState = {
   user: {},
   currentUser: {},
   allProfiles: [],
+  allMACs: [],
 };
 
 export const profileSlice = createSlice({
@@ -76,6 +78,16 @@ export const profileSlice = createSlice({
       }finally{
         state.allProfiles = [...state.allProfiles, action.payload];
         console.log("proFİLESS::: ", state.allProfiles);
+      }    
+    },
+    setMACs: (state, action) => {
+      try{
+        state.allMACs = [];
+      }catch (e){
+        console.log(e);
+      }finally{
+        state.allMACs = [...state.allMACs, action.payload];
+        console.log("MAcsSSSS::: ", state.allMACs);
       }    
     },
   },
