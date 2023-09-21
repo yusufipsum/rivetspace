@@ -20,15 +20,11 @@ import DeviceInfo from "react-native-device-info";
 import { createUser, updateUser } from "../../graphql/mutations";
 import { startScanning } from "../../store/bleSlice";
 
-import { getProfiles } from "../../store/profileSlice";
+//import { getProfiles } from "../../store/profileSlice";
 
 import RNBluetoothClassic, { BluetoothDevice } from 'react-native-bluetooth-classic';
 
-export type ProfileContainerProps = {
-  user: UserType;
-};
-
-export default function HomeScreen({ user }: ProfileContainerProps) {
+export default function HomeScreen() {
   const navigation = useNavigation();
   const onPress = () => {
     navigation.navigate("Profile");
