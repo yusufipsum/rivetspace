@@ -3,6 +3,7 @@ import { BleManager, Device, ScanCallbackType, ScanMode } from "react-native-ble
 export interface DeviceReference {
     name?: string | null;
     id?: string;
+    mac?: string | undefined | null;
 }
 
 class BluetoothLeManager {

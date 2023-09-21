@@ -1,7 +1,7 @@
 import Svg, { Path } from "react-native-svg";
 
 export type BackgroundProps = {
-  color: string;
+  color: string | undefined;
 };
 
 const Background = ({ color }: BackgroundProps) => {
