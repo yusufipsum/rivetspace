@@ -14,13 +14,10 @@ npx expo start
 - Redux Toolkit
 - AWS Amplify
 - GraphQL
-- BLE(Bluetooth Low Energy)
+- BL(Bluetooth Classic -for now-)
 # Whats Left?
-- Advertising device(user) will be created for scanning.
-- Authentication will be arranged.
+- BLE (Bluetooth Low Energy) will be used together with Bluetooth Advertiser for iOS. (Should create a config plugin (bluetooth advertiser module) for Expo.)
 - Contracts will be added.
-- The settings page will be designed.
-- Redesign for android x.
 - Socket will be created.
 # Review
 ![Simulator Screen Shot - iPhone 14 - 2023-03-21 at 16 10 57](https://user-images.githubusercontent.com/35937773/226784590-908e2d5e-0007-4376-b34f-65eadfebf558.png)
