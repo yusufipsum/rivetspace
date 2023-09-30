@@ -17,10 +17,11 @@ import { Logo } from "../../assets/svg";
 import { useEffect, useRef, useState } from "react";
 import { createUser, deleteUser, updateUser } from "../../graphql/mutations";
 import DeviceInfo from "react-native-device-info";
-import { getUser } from '../../graphql/queries';
+import { getUser, listUsers } from '../../graphql/queries';
 import { useAppDispatch } from "../../store";
 import { deviceSlice } from "../../store/deviceSlice";
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { profileSlice } from "../../store/profileSlice";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
@@ -46,6 +47,8 @@ export default function LoginScreen() {
     setError(false);
   };
 
+  let scanInterval;
+
   const getMac = async () => {
     DeviceInfo.getMacAddress()
     .then(uuid => {
@@ -54,10 +57,47 @@ export default function LoginScreen() {
           deviceSlice.actions.setMACAddress({uuid})
         );
         RNBluetoothClassic.setBluetoothAdapterName(uuid);
+        const fetchProfiles = async () => {
+          try {
+            const profilesData = await API.graphql(graphqlOperation(listUsers));
+            const allProfiles: {id: string, user: string}[] = [];
+            profilesData.data.listUsers.items.forEach(item => {
+              const user = {
+                id: item.uuid,
+                user: item
+              };
+              allProfiles.push(user);
+            });
+            const profiles = allProfiles.filter(item => item.id !== uuid);
+    
+            function filter(allProfiles: any) {
+              const profiles = new Set();
+          
+              return allProfiles.filter((item: any) => {
+                if (profiles.has(item.id)) {
+                  return false; // Aynı objeyi daha önce ekledik, bu objeyi filtrele
+                }
+                profiles.add(item.id);
+                return true; // Objeyi benzersiz olarak kabul et ve yeni dizide sakla
+              });
+            }
+            const users = filter(profiles);  
+            dispatch(profileSlice.actions.setProfiles(users));
+          } catch (er){
+            console.log(er);
+          }
+        }
+      //  function startUpdateProfiles(){
+      //   scanInterval = setInterval(() =>{
+      //     fetchProfiles();
+      //   }, 120000)
+      // }
+      fetchProfiles();
+      // startUpdateProfiles();
     })
     .catch(error => console.log("error", error))
   }
-  
+
   useEffect(() => {
     getMac();
   },[]);
@@ -135,7 +175,7 @@ export default function LoginScreen() {
                 <Text
                   style={{
                     color: "grey",
-                    width: 'auto',
+                    width: '100%',
                     position: "absolute",
                     right: 0,
                     textAlign: "right",

@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 
 import { UserType } from "../../../types";
 import ProfilePicture from "../../ProfilePicture";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { profileSlice } from "../../../store/profileSlice";
 
@@ -15,19 +15,33 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const currentUser = useSelector((state: any) => state.profile.currentUser);
+
+  const [currUser, setCurrUser] = useState(false);
+  
   const onPress = () => {
-    dispatch(
-      profileSlice.actions.userProfile({
-        isCurrentUser: false,
-        id: user.id,
-        name: user.name,
-        username: user.username,
-        profilePhoto: user.profilePhoto,
-        biography: user.biography,
-        color: user.color,
-      })
-    );
-    navigation.navigate("Profile");
+    console.log(user.id)
+    console.log(currentUser.sub)
+    try {
+      if(currentUser.sub === user.id){
+        setCurrUser(true);
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(
+        profileSlice.actions.userProfile({
+          isCurrentUser: currUser,
+          id: user.id,
+          name: user.name,
+          username: user.userName,
+          profilePhoto: user.profilePhoto,
+          biography: user.biography,
+          color: user.color,
+        })
+      );
+      navigation.navigate("Profile");
+    }
   };
 
   return (

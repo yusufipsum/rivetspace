@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, Image, FlatList, TouchableOpacity, ActivityIndicator } from "react-native";
 
 import styles from "./styles";
 
@@ -9,35 +9,15 @@ import { useSelector } from "react-redux";
 const StoryFeed = () => {
   const currentUser = useSelector((state: any) => state.profile.currentUser);
 
-  const data = useSelector((state: any) => state.profile.allProfiles);
-  const MACsData = useSelector((state: any) => state.profile.allMACs);
+  const matches = useSelector((state: any) => state.profile.matches);
 
-  const allProfiles = data.reduce((acc, inner) => {
-    return acc.concat(inner);
-  },[]);
-  const allMACs = MACsData.reduce((acc, inner) => {
-    return acc.concat(inner);
-  },[]);
- 
-  function filter(allProfiles: any) {
-    const profiles = new Set();
+   const [isLoading, setIsLoading] = useState(true);
 
-    return allProfiles.filter((item: any) => {
-      if (profiles.has(item.id)) {
-        return false; 
-      }
-      profiles.add(item.id);
-      return true; 
-    });
-  }
-
-  const profiles = filter(allProfiles);
-
-  const matches = profiles.filter(profile => {
-    const matched = allMACs.filter(device => device.mac === profile.id);
-    return matched.length > 0;
-  });
-  console.log("Eşleşenler: ", matches);
+   useEffect(() => {
+    if(currentUser.profilePhoto != undefined){
+      setIsLoading(false);
+    }
+  }, [currentUser.profilePhoto]);
 
   return(
     <View style={styles.container}>
@@ -64,6 +44,9 @@ const StoryFeed = () => {
         ListHeaderComponent={() => (
           <TouchableOpacity activeOpacity={0.8}>
             <View style={styles.stories}>
+            {isLoading ? (
+              <ActivityIndicator size="large" color="black" />
+              ) : (
               <ProfilePicture
                 size={67}
                 borderRadius={67}
@@ -71,6 +54,7 @@ const StoryFeed = () => {
                 borderColor={"white"}
                 image={currentUser.profilePhoto}
               />
+              )}
             </View>
             <Text style={styles.nameText}>{"Sen"}</Text>
           </TouchableOpacity>

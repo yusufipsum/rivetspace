@@ -9,43 +9,12 @@ import { useSelector } from "react-redux";
 import Background from "../Backgrounds";
 
 const NearbyFeed = () => {
-  const profilesData = useSelector((state: any) => state.profile.allProfiles);
-  const MACsData = useSelector((state: any) => state.profile.allMACs);
-  const allProfiles = profilesData.reduce((acc, inner) => {
-    return acc.concat(inner);
-  },[]);
-  console.log("BUNLAR BOYLE: ", allProfiles)
-  const allMACs = MACsData.reduce((acc, inner) => {
-    return acc.concat(inner);
-  },[]);
-  console.log("MACLAR BOYLE: ", MACsData)
-
-  function filter(allProfiles: any) {
-    const profiles = new Set();
-
-    return allProfiles.filter((item: any) => {
-      if (profiles.has(item.id)) {
-        return false; // Aynı objeyi daha önce ekledik, bu objeyi filtrele
-      }
-      profiles.add(item.id);
-      return true; // Objeyi benzersiz olarak kabul et ve yeni dizide sakla
-    });
-  }
-
-  const profiles = filter(allProfiles);
-
-  const matches = profiles.filter(profile => {
-    const matched = allMACs.filter(device => device.mac === profile.id);
-    return matched.length > 0;
-  });
-  console.log("Eşleşenler: ", matches);
-
-  console.log(profiles);
+  const matches = useSelector((state: any) => state.profile.matches);
  
   return (
     <View style={styles.container}>
       <NearbyTopInfo />
-      <Background color="#def2fa" />
+      <Background color="black" />
       <FlatList
         data={matches}
         numColumns={2}

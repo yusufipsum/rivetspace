@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SafeAreaView, FlatList, TouchableOpacity } from "react-native";
+import { SafeAreaView, FlatList, TouchableOpacity, Dimensions, RefreshControl } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,7 +10,7 @@ import { Text, View } from "../../components/Themed";
 import { PostFeed, StoryFeed, ProfileButton } from "../../components";
 
 import { useAppDispatch, useAppSelector } from "../../store";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { profileSlice } from "../../store/profileSlice";
 import { UserType } from "../../types";
@@ -19,10 +19,13 @@ import { getUser, listUsers } from '../../graphql/queries';
 import DeviceInfo from "react-native-device-info";
 import { createUser, updateUser } from "../../graphql/mutations";
 import { startScanning } from "../../store/bleSlice";
+//import socket from "../../utils/socket";  
 
 //import { getProfiles } from "../../store/profileSlice";
 
 import RNBluetoothClassic, { BluetoothDevice } from 'react-native-bluetooth-classic';
+
+const windowWidth = Dimensions.get("window").width;
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -31,13 +34,13 @@ export default function HomeScreen() {
   };
   
   const dispatch = useAppDispatch();
-  const discoveredDevices = useAppSelector(state => state.ble.allDevices);
+  //const discoveredDevices = useAppSelector(state => state.ble.allDevices);
   const macAddress = useAppSelector((state: any) => state.device.macAddress);
-
+  const users = useAppSelector((state: any) => state.profile.allProfiles);
+  
   const [customUUID, setCustomUUID] = useState("");
 
   //BLUETOOTH CLASSIC
-  let scanInterval;
 
   const startDiscovery = async () => {
     try {
@@ -50,9 +53,6 @@ export default function HomeScreen() {
           allMACs.push(mac);
       });
       console.log("unpaired: ", allMACs);
-      dispatch(
-        profileSlice.actions.setMACs(allMACs)
-      );
       // const discoveredMACs: Record<string, { mac: string}>[] = [];
       // discoveredDevices.forEach(item => {
       //   const mac = {
@@ -61,23 +61,32 @@ export default function HomeScreen() {
       //   discoveredMACs.push(mac);
       // })
       // console.log(discoveredMACs);
+    
+        const matches = users.filter(profile => {
+          const matched = allMACs.filter(device => device.mac === profile.id);
+          return matched.length > 0;
+        });
+  
+        dispatch(profileSlice.actions.matches(matches));
+    
     } catch (err) {
       console.log("ulanhataamk: ", err);
     } finally {
       await RNBluetoothClassic.cancelDiscovery();
     }
   }
-
-  function startScanInterval(){
-    scanInterval = setInterval(() =>{
-      startDiscovery();
-    }, 15000)
-  }
+  //let scanInterval;
+  // function startScanInterval(){
+  //   scanInterval = setInterval(() =>{
+  //     startDiscovery();
+  //   }, 25000)
+  // }
  
   useEffect(() => {
     startDiscovery();
+    //socket.emit("createRoom", macAddress.uuid);
     //startScanInterval();
-    console.log("discaaa: ", discoveredDevices);
+    // console.log("discaaa: ", discoveredDevices);
     //dispatch(startScanning());
     //dispatch(stopScanning());
   },[]);
@@ -138,7 +147,6 @@ export default function HomeScreen() {
   useEffect(() => {
     const user = async () => {
       const userInfo = await Auth.currentAuthenticatedUser();
-      console.log("CUSTOM UUID::::: ", customUUID)
       const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
       console.log("YETERULAAAN::: ", userData)
       if (userInfo) {
@@ -160,6 +168,7 @@ export default function HomeScreen() {
           }
         } else {
           setCustomUUID(userData.data.getUser.uuid);
+          console.log("CUSTOM UUID::::: ", customUUID)
         }
         dispatch(
           profileSlice.actions.userProfile({
@@ -174,34 +183,16 @@ export default function HomeScreen() {
         );
       }
     }
-
-    const fetchProfiles = async () => {
-      try {
-        const profilesData = await API.graphql(graphqlOperation(listUsers));
-        const allProfiles: {id: string, user: string}[] = [];
-        profilesData.data.listUsers.items.forEach(item => {
-          const user = {
-            id: item.uuid,
-            user: item
-          };
-          allProfiles.push(user);
-        });
-        const profiles = allProfiles.filter(item => item.id !== macAddress.uuid);
-        dispatch(profileSlice.actions.setProfiles(profiles));
-      } catch (error) {
-        console.log("fetchProfiels::: ", error);
-      }
-    }
-
-    function startUpdateProfiles(){
-      scanInterval = setInterval(() =>{
-        fetchProfiles();
-      }, 120000)
-    }
-    
     user();
-    fetchProfiles();
-    // startUpdateProfiles();
+  }, []);
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 100);
   }, []);
 
   return (
@@ -232,8 +223,10 @@ export default function HomeScreen() {
         }}
       /> */}
       <FlatList
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{width: windowWidth, flexDirection: "column"}}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         ListHeaderComponent={() => <StoryFeed />}
         ListFooterComponent={() => <PostFeed />}
       />
