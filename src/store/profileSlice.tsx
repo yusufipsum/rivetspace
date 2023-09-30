@@ -7,7 +7,7 @@ import { listUsers } from "../graphql/queries";
 
 interface UserState {
   allProfiles: object[];
-  allMACs: object[];
+  matches: object[];
   isCurrentUser: boolean;
   profiles: object;
   user: object;
@@ -20,7 +20,7 @@ const initialState: UserState = {
   user: {},
   currentUser: {},
   allProfiles: [],
-  allMACs: [],
+  matches: [],
 };
 
 export const profileSlice = createSlice({
@@ -76,18 +76,18 @@ export const profileSlice = createSlice({
       }catch (e){
         console.log(e);
       }finally{
-        state.allProfiles = [...state.allProfiles, action.payload];
+        state.allProfiles = [...state.allProfiles, ...action.payload];
         console.log("proFİLESS::: ", state.allProfiles);
       }    
     },
-    setMACs: (state, action) => {
+    matches: (state, action) => {
       try{
-        state.allMACs = [];
+        state.matches = [];
       }catch (e){
         console.log(e);
       }finally{
-        state.allMACs = [...state.allMACs, action.payload];
-        console.log("MAcsSSSS::: ", state.allMACs);
+        state.matches = [...state.matches, ...action.payload];
+        console.log("MAtchesssss::: ", state.matches);
       }    
     },
   },
