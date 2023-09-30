@@ -183,7 +183,7 @@ android {
             }
             if (!enableSeparateBuildPerCPUArchitecture) {
                 ndk {
-                    abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64", 'armeabi'
+                    abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
                 }
             }
         }
@@ -191,11 +191,6 @@ android {
 
     if (isNewArchitectureEnabled()) {
         // We configure the NDK build only if you decide to opt-in for the New Architecture.
-        externalNativeBuild {
-            ndkBuild {
-                path "$projectDir/src/main/jni/Android.mk"
-            }
-        }
         def reactAndroidProjectDir = project(':ReactAndroid').projectDir
         def packageReactNdkDebugLibs = tasks.register("packageReactNdkDebugLibs", Copy) {
             dependsOn(":ReactAndroid:packageReactNdkDebugLibsForBuck")
@@ -312,13 +307,13 @@ dependencies {
 
     // If your app supports Android versions before Ice Cream Sandwich (API level 14)
     if (isGifEnabled || isWebpEnabled) {
-        implementation "com.facebook.fresco:fresco:${frescoVersion}"
+        implementation 'com.facebook.fresco:fresco:2.5.0'
         implementation "com.facebook.fresco:imagepipeline-okhttp3:${frescoVersion}"
     }
 
     if (isGifEnabled) {
         // For animated gif support
-        implementation "com.facebook.fresco:animated-gif:${frescoVersion}"
+        implementation 'com.facebook.fresco:animated-gif:2.6.0'
     }
 
     if (isWebpEnabled) {
