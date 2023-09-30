@@ -2,8 +2,9 @@ import React from "react";
 import { Image } from "react-native";
 
 export type ProfilePictureProps = {
-  image?: string;
+  image?: string | null;
   size?: number;
+  onLoad?: () => void;
   position?: any;
   marginLeft?: number;
   marginRight?: number;
@@ -28,6 +29,7 @@ const ProfilePicture = ({
   //blurRadius,
   image,
   backgroundColor,
+  onLoad,
   size,
   alignSelf,
   resizeMode,
@@ -35,6 +37,7 @@ const ProfilePicture = ({
   return (
     <Image
       source={{ uri: image }}
+      onLoad={onLoad}
       style={{
         width: size,
         height: size,
