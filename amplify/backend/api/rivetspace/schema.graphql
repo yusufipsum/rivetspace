@@ -1,4 +1,6 @@
-type User @model @auth(rules: [{allow: public}]) {
+type User 
+  @model 
+  @auth(rules: [{allow: public}]) {
   id: ID!
   userName: String!
   name: String!
@@ -7,13 +9,28 @@ type User @model @auth(rules: [{allow: public}]) {
   biography: String
   profilePhoto: String
   color: String
-  posts: [Post] @hasMany
+  roomID: String
+  posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
+  likes: [Like] @hasMany(indexName: "byUser", fields: ["id"])
 }
 
-type Post @model @auth(rules: [{allow: public}]) {
-  id: ID!
+type Post 
+  @model 
+  @auth(rules: [{allow: public}]) {
+  id: ID! @index(name: "byUser", sortKeyFields: ["userID"]) 
   content: String!
   image: String
-  userID: ID!
-  user: User @belongsTo
+  userID: ID! 
+  user: User @belongsTo(fields: ["userID"])
+  likes: [Like] @hasMany(indexName: "byPost", fields: ["id"]) 
 } 
+
+type Like
+  @model(queries: null) 
+  @auth(rules: [{allow: public}]) {
+  id: ID! @index(name: "byPost", sortKeyFields: ["postID", "userID"]) @index(name: "byUser", sortKeyFields: ["userID", "postID"])
+  userID: ID!
+  user: User! @belongsTo(fields: ["userID"]) 
+  postID: ID!
+  post: Post! @belongsTo(fields: ["postID"])
+}

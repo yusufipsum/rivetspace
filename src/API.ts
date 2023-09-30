@@ -11,6 +11,7 @@ export type CreateUserInput = {
   biography?: string | null,
   profilePhoto?: string | null,
   color?: string | null,
+  roomID?: string | null,
 };
 
 export type ModelUserConditionInput = {
@@ -21,6 +22,7 @@ export type ModelUserConditionInput = {
   biography?: ModelStringInput | null,
   profilePhoto?: ModelStringInput | null,
   color?: ModelStringInput | null,
+  roomID?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -76,7 +78,9 @@ export type User = {
   biography?: string | null,
   profilePhoto?: string | null,
   color?: string | null,
+  roomID?: string | null,
   posts?: ModelPostConnection | null,
+  likes?: ModelLikeConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -94,9 +98,26 @@ export type Post = {
   image?: string | null,
   userID: string,
   user?: User | null,
+  likes?: ModelLikeConnection | null,
   createdAt: string,
   updatedAt: string,
-  userPostsId?: string | null,
+};
+
+export type ModelLikeConnection = {
+  __typename: "ModelLikeConnection",
+  items:  Array<Like | null >,
+  nextToken?: string | null,
+};
+
+export type Like = {
+  __typename: "Like",
+  id: string,
+  userID: string,
+  user: User,
+  postID: string,
+  post: Post,
+  createdAt: string,
+  updatedAt: string,
 };
 
 export type UpdateUserInput = {
@@ -108,6 +129,7 @@ export type UpdateUserInput = {
   biography?: string | null,
   profilePhoto?: string | null,
   color?: string | null,
+  roomID?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -119,7 +141,6 @@ export type CreatePostInput = {
   content: string,
   image?: string | null,
   userID: string,
-  userPostsId?: string | null,
 };
 
 export type ModelPostConditionInput = {
@@ -129,7 +150,6 @@ export type ModelPostConditionInput = {
   and?: Array< ModelPostConditionInput | null > | null,
   or?: Array< ModelPostConditionInput | null > | null,
   not?: ModelPostConditionInput | null,
-  userPostsId?: ModelIDInput | null,
 };
 
 export type ModelIDInput = {
@@ -153,10 +173,33 @@ export type UpdatePostInput = {
   content?: string | null,
   image?: string | null,
   userID?: string | null,
-  userPostsId?: string | null,
 };
 
 export type DeletePostInput = {
+  id: string,
+};
+
+export type CreateLikeInput = {
+  id?: string | null,
+  userID: string,
+  postID: string,
+};
+
+export type ModelLikeConditionInput = {
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  and?: Array< ModelLikeConditionInput | null > | null,
+  or?: Array< ModelLikeConditionInput | null > | null,
+  not?: ModelLikeConditionInput | null,
+};
+
+export type UpdateLikeInput = {
+  id: string,
+  userID?: string | null,
+  postID?: string | null,
+};
+
+export type DeleteLikeInput = {
   id: string,
 };
 
@@ -169,6 +212,7 @@ export type ModelUserFilterInput = {
   biography?: ModelStringInput | null,
   profilePhoto?: ModelStringInput | null,
   color?: ModelStringInput | null,
+  roomID?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -188,7 +232,61 @@ export type ModelPostFilterInput = {
   and?: Array< ModelPostFilterInput | null > | null,
   or?: Array< ModelPostFilterInput | null > | null,
   not?: ModelPostFilterInput | null,
-  userPostsId?: ModelIDInput | null,
+};
+
+export type ModelIDKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelLikeByPostCompositeKeyConditionInput = {
+  eq?: ModelLikeByPostCompositeKeyInput | null,
+  le?: ModelLikeByPostCompositeKeyInput | null,
+  lt?: ModelLikeByPostCompositeKeyInput | null,
+  ge?: ModelLikeByPostCompositeKeyInput | null,
+  gt?: ModelLikeByPostCompositeKeyInput | null,
+  between?: Array< ModelLikeByPostCompositeKeyInput | null > | null,
+  beginsWith?: ModelLikeByPostCompositeKeyInput | null,
+};
+
+export type ModelLikeByPostCompositeKeyInput = {
+  postID?: string | null,
+  userID?: string | null,
+};
+
+export type ModelLikeFilterInput = {
+  id?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  postID?: ModelIDInput | null,
+  and?: Array< ModelLikeFilterInput | null > | null,
+  or?: Array< ModelLikeFilterInput | null > | null,
+  not?: ModelLikeFilterInput | null,
+};
+
+export type ModelLikeByUserCompositeKeyConditionInput = {
+  eq?: ModelLikeByUserCompositeKeyInput | null,
+  le?: ModelLikeByUserCompositeKeyInput | null,
+  lt?: ModelLikeByUserCompositeKeyInput | null,
+  ge?: ModelLikeByUserCompositeKeyInput | null,
+  gt?: ModelLikeByUserCompositeKeyInput | null,
+  between?: Array< ModelLikeByUserCompositeKeyInput | null > | null,
+  beginsWith?: ModelLikeByUserCompositeKeyInput | null,
+};
+
+export type ModelLikeByUserCompositeKeyInput = {
+  userID?: string | null,
+  postID?: string | null,
 };
 
 export type ModelSubscriptionUserFilterInput = {
@@ -200,6 +298,7 @@ export type ModelSubscriptionUserFilterInput = {
   biography?: ModelSubscriptionStringInput | null,
   profilePhoto?: ModelSubscriptionStringInput | null,
   color?: ModelSubscriptionStringInput | null,
+  roomID?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
@@ -243,6 +342,14 @@ export type ModelSubscriptionPostFilterInput = {
   or?: Array< ModelSubscriptionPostFilterInput | null > | null,
 };
 
+export type ModelSubscriptionLikeFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  postID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionLikeFilterInput | null > | null,
+  or?: Array< ModelSubscriptionLikeFilterInput | null > | null,
+};
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -259,6 +366,7 @@ export type CreateUserMutation = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -269,7 +377,18 @@ export type CreateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -294,6 +413,7 @@ export type UpdateUserMutation = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -304,7 +424,18 @@ export type UpdateUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -329,6 +460,7 @@ export type DeleteUserMutation = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -339,7 +471,18 @@ export type DeleteUserMutation = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -370,16 +513,32 @@ export type CreatePostMutation = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
   } | null,
 };
 
@@ -405,16 +564,32 @@ export type UpdatePostMutation = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
   } | null,
 };
 
@@ -440,16 +615,227 @@ export type DeletePostMutation = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
+  } | null,
+};
+
+export type CreateLikeMutationVariables = {
+  input: CreateLikeInput,
+  condition?: ModelLikeConditionInput | null,
+};
+
+export type CreateLikeMutation = {
+  createLike?:  {
+    __typename: "Like",
+    id: string,
+    userID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLikeMutationVariables = {
+  input: UpdateLikeInput,
+  condition?: ModelLikeConditionInput | null,
+};
+
+export type UpdateLikeMutation = {
+  updateLike?:  {
+    __typename: "Like",
+    id: string,
+    userID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLikeMutationVariables = {
+  input: DeleteLikeInput,
+  condition?: ModelLikeConditionInput | null,
+};
+
+export type DeleteLikeMutation = {
+  deleteLike?:  {
+    __typename: "Like",
+    id: string,
+    userID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -468,6 +854,7 @@ export type GetUserQuery = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -478,7 +865,18 @@ export type GetUserQuery = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -506,8 +904,13 @@ export type ListUsersQuery = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
@@ -538,16 +941,32 @@ export type GetPostQuery = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
   } | null,
 };
 
@@ -576,12 +995,153 @@ export type ListPostsQuery = {
         biography?: string | null,
         profilePhoto?: string | null,
         color?: string | null,
+        roomID?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
-      userPostsId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PostsByIdAndUserIDQueryVariables = {
+  id: string,
+  userID?: ModelIDKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PostsByIdAndUserIDQuery = {
+  postsByIdAndUserID?:  {
+    __typename: "ModelPostConnection",
+    items:  Array< {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type LikesByIdAndPostIDAndUserIDQueryVariables = {
+  id: string,
+  postIDUserID?: ModelLikeByPostCompositeKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelLikeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type LikesByIdAndPostIDAndUserIDQuery = {
+  likesByIdAndPostIDAndUserID?:  {
+    __typename: "ModelLikeConnection",
+    items:  Array< {
+      __typename: "Like",
+      id: string,
+      userID: string,
+      user:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      postID: string,
+      post:  {
+        __typename: "Post",
+        id: string,
+        content: string,
+        image?: string | null,
+        userID: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type LikesByIdAndUserIDAndPostIDQueryVariables = {
+  id: string,
+  userIDPostID?: ModelLikeByUserCompositeKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelLikeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type LikesByIdAndUserIDAndPostIDQuery = {
+  likesByIdAndUserIDAndPostID?:  {
+    __typename: "ModelLikeConnection",
+    items:  Array< {
+      __typename: "Like",
+      id: string,
+      userID: string,
+      user:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
+      postID: string,
+      post:  {
+        __typename: "Post",
+        id: string,
+        content: string,
+        image?: string | null,
+        userID: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      createdAt: string,
+      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -602,6 +1162,7 @@ export type OnCreateUserSubscription = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -612,7 +1173,18 @@ export type OnCreateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -636,6 +1208,7 @@ export type OnUpdateUserSubscription = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -646,7 +1219,18 @@ export type OnUpdateUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -670,6 +1254,7 @@ export type OnDeleteUserSubscription = {
     biography?: string | null,
     profilePhoto?: string | null,
     color?: string | null,
+    roomID?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -680,7 +1265,18 @@ export type OnDeleteUserSubscription = {
         userID: string,
         createdAt: string,
         updatedAt: string,
-        userPostsId?: string | null,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
       } | null >,
       nextToken?: string | null,
     } | null,
@@ -710,16 +1306,32 @@ export type OnCreatePostSubscription = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
   } | null,
 };
 
@@ -744,16 +1356,32 @@ export type OnUpdatePostSubscription = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
   } | null,
 };
 
@@ -778,15 +1406,223 @@ export type OnDeletePostSubscription = {
       biography?: string | null,
       profilePhoto?: string | null,
       color?: string | null,
+      roomID?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
         nextToken?: string | null,
       } | null,
       createdAt: string,
       updatedAt: string,
     } | null,
+    likes?:  {
+      __typename: "ModelLikeConnection",
+      items:  Array< {
+        __typename: "Like",
+        id: string,
+        userID: string,
+        postID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
-    userPostsId?: string | null,
+  } | null,
+};
+
+export type OnCreateLikeSubscriptionVariables = {
+  filter?: ModelSubscriptionLikeFilterInput | null,
+};
+
+export type OnCreateLikeSubscription = {
+  onCreateLike?:  {
+    __typename: "Like",
+    id: string,
+    userID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLikeSubscriptionVariables = {
+  filter?: ModelSubscriptionLikeFilterInput | null,
+};
+
+export type OnUpdateLikeSubscription = {
+  onUpdateLike?:  {
+    __typename: "Like",
+    id: string,
+    userID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLikeSubscriptionVariables = {
+  filter?: ModelSubscriptionLikeFilterInput | null,
+};
+
+export type OnDeleteLikeSubscription = {
+  onDeleteLike?:  {
+    __typename: "Like",
+    id: string,
+    userID: string,
+    user:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    postID: string,
+    post:  {
+      __typename: "Post",
+      id: string,
+      content: string,
+      image?: string | null,
+      userID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
