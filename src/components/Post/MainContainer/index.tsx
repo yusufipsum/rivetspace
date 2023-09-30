@@ -8,9 +8,6 @@ import { PostType } from "../../../types";
 
 import Footer from "./Footer";
 
-import Lightbox from "react-native-lightbox-v2";
-import CameraRoll from "@react-native-community/cameraroll";
-
 export type MainContainerProps = {
   post: PostType;
 };

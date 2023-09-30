@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
   },
 
   user: {
+    gap: -3,
     flexDirection: "column",
   },
 
@@ -48,6 +49,32 @@ const styles = StyleSheet.create({
     borderColor: "lightgrey",
     borderRadius: 15,
     overflow: "hidden",
+  },
+
+  modal: {
+    margin: 0,
+  },
+
+  menu: {
+    position: 'absolute',
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "flex-end"
+  },
+  
+  modalText: {
+    fontSize: 18,
+    paddingVertical: 5,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
+    color: "white",
+  },
+
+  modalTextDisabled: {
+    fontSize: 18,
+    color: "grey",
+    paddingVertical: 5,
   },
 });
 

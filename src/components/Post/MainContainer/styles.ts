@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    marginTop: 5,
+    width: "100%",
+    paddingTop: 10,
     lineHeight: 18,
   },
 

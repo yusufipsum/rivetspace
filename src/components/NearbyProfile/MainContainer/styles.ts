@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
 
   content: {
     lineHeight: 18,
+    width: "100%",
   },
 
   icons: {

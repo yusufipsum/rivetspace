@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     borderRadius: 40,
-    zIndex: 1,
+    zIndex: 2,
   },
   topFlatList: {
     width: "90%",
@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   text: {
-    paddingBottom: 7,
+    paddingBottom: 5,
+    paddingRight: 15,
+    paddingLeft: 15,
     fontSize: 14,
     color: "#016894",
     width: "100%",

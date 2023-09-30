@@ -2,18 +2,20 @@ import Svg, { Path } from "react-native-svg";
 
 export type BackgroundProps = {
   color: string | undefined;
+  zIndex?: number;
 };
 
-const Background = ({ color }: BackgroundProps) => {
+const Background = ({ color, zIndex }: BackgroundProps) => {
   return (
     <Svg
       style={{
         position: "absolute",
         top: 0,
+        zIndex: zIndex,
       }}
-      height="60%"
+      height="50%"
       width="100%"
-      viewBox="180 0 740 320"
+      viewBox="180 0 740 280"
       preserveAspectRatio="none"
     >
       <Path

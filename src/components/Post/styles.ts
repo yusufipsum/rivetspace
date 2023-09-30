@@ -1,8 +1,10 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
+
+const windowWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: windowWidth,
     flexDirection: "column",
     padding: 5,
     borderTopWidth: 0.3,
@@ -12,6 +14,7 @@ const styles = StyleSheet.create({
   },
 
   posts: {
+    width: "100%",
     padding: 10,
     backgroundColor: "#fff", 
     borderColor: "lightgrey", 

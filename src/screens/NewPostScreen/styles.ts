@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
     width: "85%",
   },
   textInput: {
-    height: 400,
     fontSize: 16,
     textAlignVertical: "top",
   },
@@ -61,6 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   icons: {
+    zIndex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingLeft: 15,
@@ -68,6 +68,31 @@ const styles = StyleSheet.create({
   iconText: {
     fontSize: 10,
     color: "black",
+  },
+  gifSearch: {
+    backgroundColor: 'black', 
+    borderColor: "grey",
+    borderTopLeftRadius: 20, 
+    borderBottomLeftRadius: 20, 
+    borderBottomRightRadius: 20, 
+    shadowOffset: { width: 0, height: 6 },
+    shadowColor: "#171717",
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 8,
+  },
+  closeGif: {
+    position: "absolute",
+    right: -4,
+    top: -4,
+    width: 24,
+    height: 24,
+    borderRadius: 24,
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: .1,
+    borderColor: "grey",
   },
 });
 

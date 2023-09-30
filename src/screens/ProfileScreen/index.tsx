@@ -49,7 +49,7 @@ export default function ProfileScreen() {
       <View style={styles.mainContainer}>
         {isCurrentUser ? (
             <>
-              <Background color={currentUser.color} />
+              <Background zIndex={1} color={currentUser.color} />
               <View style={styles.tagContainer}>
                 <View style={styles.tagLeft}>
                   <ProfilePicture
@@ -83,7 +83,7 @@ export default function ProfileScreen() {
                   {currentUser.bio}
                 </Text>
               </View>
-              <View style={styles.point}>
+              {/* <View style={styles.point}>
                 <View style={styles.dot}></View>
                 <Text style={styles.buttonText}>
                   Sosyallik Puanı:{" "}
@@ -95,14 +95,14 @@ export default function ProfileScreen() {
                     146
                   </Text>
                 </Text>
-              </View>
+              </View> */}
               <TouchableOpacity style={styles.button} activeOpacity={.8} onPress={onPostShare}>
                 <Text style={styles.editButtonText}>Profili Düzenle</Text>
               </TouchableOpacity>
             </>
           ) : (
             <>
-              <Background color={user.color} />
+              <Background zIndex={1} color={user.color} />
               <View style={styles.tagContainer}>
                 <View style={styles.tagLeft}>
                   <ProfilePicture
@@ -134,7 +134,7 @@ export default function ProfileScreen() {
                 </View>
                 <Text style={styles.textInput}>{user.bio}</Text>
               </View>
-              <View style={styles.point}>
+              {/* <View style={styles.point}>
                 <View style={styles.dot}></View>
                 <Text style={styles.buttonText}>
                   Sosyallik Puanı:{" "}
@@ -146,7 +146,7 @@ export default function ProfileScreen() {
                     {randomNumber}
                   </Text>
                 </Text>
-              </View>
+              </View> */}
             </>
           )}
         <FlatList

@@ -31,12 +31,12 @@ const LeftContainer = ({ user }: LeftContainerProps) => {
     navigation.navigate("Profile");
   };
   return (
-    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+    <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
       <View>
         <ProfilePicture
           image={user.profilePhoto}
           borderRadius={100}
-          size={120}
+          size={80}
         />
       </View>
     </TouchableOpacity>
