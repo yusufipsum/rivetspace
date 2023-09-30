@@ -32,35 +32,23 @@ export default function ProfileScreen() {
 
   const navigation = useNavigation();
   const [focused, setFocused] = React.useState(false);
-  const [imageUrl, setImageUrl] = useState("");
-  const [image, setImage] = useState(null);
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const currentUser = useSelector((state: any) => state.profile.currentUser);
-
-  const CheckImage = () => {
-    return (
-      <Image
-        source={{ uri: image }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-    );
-  };
-
+  
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
-    let media = await ImagePicker.launchImageLibraryAsync({
+    let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [4, 4],
       quality: 1,
     });
 
-    console.log(media);
+    console.log(result);
 
-    if (!media.cancelled) {
-      setImage(media.uri);
-      console.log(media.uri);
+    if (!result.canceled) {
+      setProfilePicture(result.assets[0].uri);
     }
   };
 
@@ -76,9 +64,6 @@ export default function ProfileScreen() {
 
   const nameRef = useRef(null);
   const usernameRef = useRef(null);
-  const [imgIndex, setImageIndex] = useState(Number);
-
-  const images = useSelector((state: any) => state.profile.user.photos);
 
   const dispatch = useAppDispatch();
 
@@ -114,6 +99,7 @@ export default function ProfileScreen() {
         id: user.attributes.sub,
         name: name,
         userName: username,
+        profilePhoto: profilePicture,
         biography: biography,
       }
       const update: Partial<typeof check> = {...check};
@@ -121,12 +107,15 @@ export default function ProfileScreen() {
         if(name == "" || name.length <= 0 || name === userData.data.getUser.name){
           delete update.name;
         }
-        if(username.length <= 4 || username === userData.data.getUser.userName){
+        if(username == "" || username.length <= 4 || username === userData.data.getUser.userName){
           delete update.userName;
           console.log("hayirdir", update);
         }
-        if(biography === userData.data.getUser.biography){
+        if(biography == "" || biography === userData.data.getUser.biography){
           delete update.biography;
+        }
+        if(!profilePicture || profilePicture == "" || biography === userData.data.getUser.profilePhoto){
+          delete update.profilePhoto;
         }
       } catch (e) { 
         console.log("not deleted:::: ", e);
@@ -148,13 +137,22 @@ export default function ProfileScreen() {
         <View style={styles.tagContainer}>
           <View style={styles.tagLeft}>
             <View>
+              {profilePicture ?
+              <ProfilePicture
+                borderWidth={0.2}
+                borderRadius={100}
+                borderColor="grey"
+                size={120}
+                image={profilePicture}
+              /> : 
               <ProfilePicture
                 borderWidth={0.2}
                 borderRadius={100}
                 borderColor="grey"
                 size={120}
                 image={currentUser.profilePhoto}
-              />
+              /> 
+              }
               <View style={styles.changeImage}>
                 <TouchableOpacity
                   hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }}
@@ -241,10 +239,10 @@ export default function ProfileScreen() {
       </View>
       <View style={styles.footerContainer}>
       <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={onPostCancel}>
+          <TouchableOpacity style={styles.button} activeOpacity={.7} onPress={onPostCancel}>
             <Text style={styles.vazgecButtonText}>Vazgeç</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <TouchableOpacity style={styles.button} activeOpacity={.7} onPress={handleSubmit}>
             <Text style={styles.onaylaButtonText}>Onayla</Text>
           </TouchableOpacity>
         </View>
