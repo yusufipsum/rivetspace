@@ -12,6 +12,7 @@ export type CreateUserInput = {
   profilePhoto?: string | null,
   color?: string | null,
   roomID?: string | null,
+  pushNToken?: string | null,
 };
 
 export type ModelUserConditionInput = {
@@ -23,6 +24,7 @@ export type ModelUserConditionInput = {
   profilePhoto?: ModelStringInput | null,
   color?: ModelStringInput | null,
   roomID?: ModelStringInput | null,
+  pushNToken?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -79,8 +81,26 @@ export type User = {
   profilePhoto?: string | null,
   color?: string | null,
   roomID?: string | null,
+  pushNToken?: string | null,
+  friends?: ModelFriendConnection | null,
   posts?: ModelPostConnection | null,
   likes?: ModelLikeConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModelFriendConnection = {
+  __typename: "ModelFriendConnection",
+  items:  Array<Friend | null >,
+  nextToken?: string | null,
+};
+
+export type Friend = {
+  __typename: "Friend",
+  id: string,
+  userID: string,
+  friendID: string,
+  user?: User | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -130,6 +150,7 @@ export type UpdateUserInput = {
   profilePhoto?: string | null,
   color?: string | null,
   roomID?: string | null,
+  pushNToken?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -203,6 +224,30 @@ export type DeleteLikeInput = {
   id: string,
 };
 
+export type CreateFriendInput = {
+  id?: string | null,
+  userID: string,
+  friendID: string,
+};
+
+export type ModelFriendConditionInput = {
+  userID?: ModelIDInput | null,
+  friendID?: ModelIDInput | null,
+  and?: Array< ModelFriendConditionInput | null > | null,
+  or?: Array< ModelFriendConditionInput | null > | null,
+  not?: ModelFriendConditionInput | null,
+};
+
+export type UpdateFriendInput = {
+  id: string,
+  userID?: string | null,
+  friendID?: string | null,
+};
+
+export type DeleteFriendInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   userName?: ModelStringInput | null,
@@ -213,6 +258,7 @@ export type ModelUserFilterInput = {
   profilePhoto?: ModelStringInput | null,
   color?: ModelStringInput | null,
   roomID?: ModelStringInput | null,
+  pushNToken?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -289,6 +335,15 @@ export type ModelLikeByUserCompositeKeyInput = {
   postID?: string | null,
 };
 
+export type ModelFriendFilterInput = {
+  id?: ModelIDInput | null,
+  userID?: ModelIDInput | null,
+  friendID?: ModelIDInput | null,
+  and?: Array< ModelFriendFilterInput | null > | null,
+  or?: Array< ModelFriendFilterInput | null > | null,
+  not?: ModelFriendFilterInput | null,
+};
+
 export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   userName?: ModelSubscriptionStringInput | null,
@@ -299,6 +354,7 @@ export type ModelSubscriptionUserFilterInput = {
   profilePhoto?: ModelSubscriptionStringInput | null,
   color?: ModelSubscriptionStringInput | null,
   roomID?: ModelSubscriptionStringInput | null,
+  pushNToken?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
 };
@@ -350,6 +406,14 @@ export type ModelSubscriptionLikeFilterInput = {
   or?: Array< ModelSubscriptionLikeFilterInput | null > | null,
 };
 
+export type ModelSubscriptionFriendFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  userID?: ModelSubscriptionIDInput | null,
+  friendID?: ModelSubscriptionIDInput | null,
+  and?: Array< ModelSubscriptionFriendFilterInput | null > | null,
+  or?: Array< ModelSubscriptionFriendFilterInput | null > | null,
+};
+
 export type CreateUserMutationVariables = {
   input: CreateUserInput,
   condition?: ModelUserConditionInput | null,
@@ -367,6 +431,19 @@ export type CreateUserMutation = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -414,6 +491,19 @@ export type UpdateUserMutation = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -461,6 +551,19 @@ export type DeleteUserMutation = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -514,6 +617,11 @@ export type CreatePostMutation = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -565,6 +673,11 @@ export type UpdatePostMutation = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -616,6 +729,11 @@ export type DeletePostMutation = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -665,6 +783,11 @@ export type CreateLikeMutation = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -694,6 +817,7 @@ export type CreateLikeMutation = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -730,6 +854,11 @@ export type UpdateLikeMutation = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -759,6 +888,7 @@ export type UpdateLikeMutation = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -795,6 +925,11 @@ export type DeleteLikeMutation = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -824,6 +959,7 @@ export type DeleteLikeMutation = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -834,6 +970,135 @@ export type DeleteLikeMutation = {
       createdAt: string,
       updatedAt: string,
     },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateFriendMutationVariables = {
+  input: CreateFriendInput,
+  condition?: ModelFriendConditionInput | null,
+};
+
+export type CreateFriendMutation = {
+  createFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateFriendMutationVariables = {
+  input: UpdateFriendInput,
+  condition?: ModelFriendConditionInput | null,
+};
+
+export type UpdateFriendMutation = {
+  updateFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteFriendMutationVariables = {
+  input: DeleteFriendInput,
+  condition?: ModelFriendConditionInput | null,
+};
+
+export type DeleteFriendMutation = {
+  deleteFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -855,6 +1120,19 @@ export type GetUserQuery = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -905,6 +1183,11 @@ export type ListUsersQuery = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -942,6 +1225,11 @@ export type GetPostQuery = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -996,6 +1284,7 @@ export type ListPostsQuery = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1039,6 +1328,7 @@ export type PostsByIdAndUserIDQuery = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1080,6 +1370,7 @@ export type LikesByIdAndPostIDAndUserIDQuery = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -1127,6 +1418,7 @@ export type LikesByIdAndUserIDAndPostIDQuery = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -1140,6 +1432,123 @@ export type LikesByIdAndUserIDAndPostIDQuery = {
         createdAt: string,
         updatedAt: string,
       },
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFriendQueryVariables = {
+  id: string,
+};
+
+export type GetFriendQuery = {
+  getFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListFriendsQueryVariables = {
+  filter?: ModelFriendFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFriendsQuery = {
+  listFriends?:  {
+    __typename: "ModelFriendConnection",
+    items:  Array< {
+      __typename: "Friend",
+      id: string,
+      userID: string,
+      friendID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        pushNToken?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type FriendsByIdAndFriendIDQueryVariables = {
+  id: string,
+  friendID?: ModelIDKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelFriendFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type FriendsByIdAndFriendIDQuery = {
+  friendsByIdAndFriendID?:  {
+    __typename: "ModelFriendConnection",
+    items:  Array< {
+      __typename: "Friend",
+      id: string,
+      userID: string,
+      friendID: string,
+      user?:  {
+        __typename: "User",
+        id: string,
+        userName: string,
+        name: string,
+        email: string,
+        uuid?: string | null,
+        biography?: string | null,
+        profilePhoto?: string | null,
+        color?: string | null,
+        roomID?: string | null,
+        pushNToken?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1163,6 +1572,19 @@ export type OnCreateUserSubscription = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -1209,6 +1631,19 @@ export type OnUpdateUserSubscription = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -1255,6 +1690,19 @@ export type OnDeleteUserSubscription = {
     profilePhoto?: string | null,
     color?: string | null,
     roomID?: string | null,
+    pushNToken?: string | null,
+    friends?:  {
+      __typename: "ModelFriendConnection",
+      items:  Array< {
+        __typename: "Friend",
+        id: string,
+        userID: string,
+        friendID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null >,
+      nextToken?: string | null,
+    } | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items:  Array< {
@@ -1307,6 +1755,11 @@ export type OnCreatePostSubscription = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1357,6 +1810,11 @@ export type OnUpdatePostSubscription = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1407,6 +1865,11 @@ export type OnDeletePostSubscription = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1455,6 +1918,11 @@ export type OnCreateLikeSubscription = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1484,6 +1952,7 @@ export type OnCreateLikeSubscription = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1519,6 +1988,11 @@ export type OnUpdateLikeSubscription = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1548,6 +2022,7 @@ export type OnUpdateLikeSubscription = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1583,6 +2058,11 @@ export type OnDeleteLikeSubscription = {
       profilePhoto?: string | null,
       color?: string | null,
       roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1612,6 +2092,7 @@ export type OnDeleteLikeSubscription = {
         profilePhoto?: string | null,
         color?: string | null,
         roomID?: string | null,
+        pushNToken?: string | null,
         createdAt: string,
         updatedAt: string,
       } | null,
@@ -1622,6 +2103,132 @@ export type OnDeleteLikeSubscription = {
       createdAt: string,
       updatedAt: string,
     },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateFriendSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendFilterInput | null,
+};
+
+export type OnCreateFriendSubscription = {
+  onCreateFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateFriendSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendFilterInput | null,
+};
+
+export type OnUpdateFriendSubscription = {
+  onUpdateFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteFriendSubscriptionVariables = {
+  filter?: ModelSubscriptionFriendFilterInput | null,
+};
+
+export type OnDeleteFriendSubscription = {
+  onDeleteFriend?:  {
+    __typename: "Friend",
+    id: string,
+    userID: string,
+    friendID: string,
+    user?:  {
+      __typename: "User",
+      id: string,
+      userName: string,
+      name: string,
+      email: string,
+      uuid?: string | null,
+      biography?: string | null,
+      profilePhoto?: string | null,
+      color?: string | null,
+      roomID?: string | null,
+      pushNToken?: string | null,
+      friends?:  {
+        __typename: "ModelFriendConnection",
+        nextToken?: string | null,
+      } | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      likes?:  {
+        __typename: "ModelLikeConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
