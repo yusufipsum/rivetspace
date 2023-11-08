@@ -18,10 +18,15 @@ import DismissKeyboard from "./src/components/DismissKeyboard";
 import useBLE from "./src/useBLE";
 
 import RNBluetoothClassic from 'react-native-bluetooth-classic';
+import { usePushNotifications } from "./src/usePushNotifications";
 
 Amplify.configure(awsconfig);
 
 function App() {
+
+  const {expoPushToken} = usePushNotifications();
+
+  console.log("tokenn:Ç", expoPushToken);
 
   //WITH USEBLE
   const {
@@ -33,7 +38,6 @@ function App() {
     const request = async () => {
       const isPermissionsEnabled = await requestPermissions();
       if(isPermissionsEnabled){
-        console.log("enabled");
         await RNBluetoothClassic.requestBluetoothEnabled();
       } else {
         console.log("")
