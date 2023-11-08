@@ -8,6 +8,7 @@ import { listUsers } from "../graphql/queries";
 interface UserState {
   allProfiles: object[];
   matches: object[];
+  friends: object[];
   isCurrentUser: boolean;
   profiles: object;
   user: object;
@@ -21,6 +22,7 @@ const initialState: UserState = {
   currentUser: {},
   allProfiles: [],
   matches: [],
+  friends: [],
 };
 
 export const profileSlice = createSlice({
@@ -40,23 +42,13 @@ export const profileSlice = createSlice({
       = action.payload;
       state.isCurrentUser = isCurrentUser;
       if (!isCurrentUser && username) {
-        const photos = profiles.slice(0, 5);
-        state.profiles.find((user) => {
-          user.user.name === name,
-            user.user.username === username,
-            user.user.profilePhoto === profilePhoto,
-            user.user.biography === biography,
-            user.user.photos === photos,
-            user.user.color === color,
-            (state.user = {
-              sub: id,
-              name: name,
-              username: username,
-              profilePhoto: profilePhoto,
-              bio: biography,
-              photos: photos,
-              color: color,
-            });
+        (state.user = {
+          sub: id,
+          name: name,
+          username: username,
+          profilePhoto: profilePhoto,
+          bio: biography,
+          color: color,
         });
       } else if(isCurrentUser && username){
         (state.currentUser = {
@@ -77,18 +69,24 @@ export const profileSlice = createSlice({
         console.log(e);
       }finally{
         state.allProfiles = [...state.allProfiles, ...action.payload];
-        console.log("proFİLESS::: ", state.allProfiles);
       }    
     },
     matches: (state, action) => {
       try{
-        state.matches = [];
+        state.matches = [...state.matches, ...action.payload];
       }catch (e){
         console.log(e);
       }finally{
-        state.matches = [...state.matches, ...action.payload];
-        console.log("MAtchesssss::: ", state.matches);
-      }    
+        const uniqueMatches: any[] = [];
+        const map = new Map();
+        for (const match of state.matches) {
+            if (!map.has(match.id)) {
+                map.set(match.id, true);
+                uniqueMatches.push(match);
+            }
+        }
+        state.matches = uniqueMatches;
+      }       
     },
   },
 });
