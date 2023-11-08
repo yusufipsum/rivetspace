@@ -3,6 +3,7 @@
     "name": "rivetspace",
     "slug": "rivetspace",
     "version": "1.0.0",
+    "sdkVersion": "48.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/images/rs.png",
     "scheme": "myapp",
@@ -59,7 +60,8 @@
         "android.permission.BLUETOOTH_CONNECT",
         "android.permission.ACCESS_WIFI_STATE", 
         "android.permission.BLUETOOTH_ADVERTISE"
-      ]
+      ],
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./src/assets/images/rs.png"
