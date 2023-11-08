@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    margin: 8,
+    marginBottom: 12,
   },
   changeImage: {
     backgroundColor: "white",

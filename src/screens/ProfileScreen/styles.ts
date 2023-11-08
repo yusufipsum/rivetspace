@@ -18,10 +18,8 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,  
     width: "100%",
-    height: 350,
     alignItems: "center",
     flexDirection: "column",
-    gap: 15,
     justifyContent: "space-between",
   },
   tagContainer: {
@@ -68,7 +66,7 @@ const styles = StyleSheet.create({
   },
   button: {
     zIndex: 1,
-    top: 5,
+    margin: 15,
     width: "80%",
     height: 35,
     backgroundColor: "black",

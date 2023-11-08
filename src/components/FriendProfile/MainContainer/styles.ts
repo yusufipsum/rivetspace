@@ -46,6 +46,33 @@ const styles = StyleSheet.create({
   icon: {
     padding: 5.5,
   },
+
+
+  modal: {
+    margin: 0,
+  },
+
+  menu: {
+    position: 'absolute',
+    backgroundColor: 'black',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "flex-end"
+  },
+  
+  modalText: {
+    fontSize: 18,
+    paddingVertical: 5,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
+    color: "white",
+  },
+
+  modalTextDisabled: {
+    fontSize: 18,
+    color: "grey",
+    paddingVertical: 5,
+  },
 });
 
 export default styles;

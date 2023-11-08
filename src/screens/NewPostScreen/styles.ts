@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   closeGif: {
     position: "absolute",
     right: -4,
-    top: -4,
+    top: -5,
     width: 24,
     height: 24,
     borderRadius: 24,

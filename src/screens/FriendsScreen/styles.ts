@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "red",
     borderRadius: 25,
     borderColor: "black",
     backgroundColor: "#fff",

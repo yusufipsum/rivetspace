@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   },
 
   sectionCenter: {
+    marginTop: 10,
     flex: 1,
     alignItems: "center",
     justifyContent: "flex-start",
@@ -28,9 +29,8 @@ const styles = StyleSheet.create({
   form: {
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     width: "100%",
-    height: 250,
   },
 
   input: {
@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
   },
 
   inputs: {
+    marginTop: 10,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    height: 90,
   },
 
   resendCode: {
@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     height: 15,
+    marginBottom: 20,
   },
   button: {
     alignItems: "center",
@@ -71,11 +72,9 @@ const styles = StyleSheet.create({
     color: "white",
   },
   footer: {
-    marginTop: 10,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 110,
     width: "100%",
   },
   text: {
@@ -83,6 +82,7 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   signContainer: {
+    marginTop: 30,
     gap: 20,
     alignItems: "center",
   },

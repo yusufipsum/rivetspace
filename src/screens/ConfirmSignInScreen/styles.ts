@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
 
   sectionCenter: {
     flex: 1,
+    marginTop: 10,
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
@@ -90,6 +91,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  codeLottie: {
+    width: "100%",
+    height: 400,
+  }
 });
 
 export default styles;
