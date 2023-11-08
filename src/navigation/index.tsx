@@ -209,12 +209,12 @@ function BottomTabNavigator() {
         name="Messages"
         component={MessagesScreen}
         options={{
-          title: "Mesajlar",
+          title: "Arkadaşlar",
           headerTitleStyle: { fontSize: 20 },
           tabBarIcon: ({ color }) => (
-            <Feather name="mail" color={color} size={25} />
+            <Feather name="users" color={color} size={25} />
           ),
-          headerRight: ({}) => <NewMessageButton />,
+          // headerRight: ({}) => <NewMessageButton />,
         }}
       />
     </Tab.Navigator>
