@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "833690357810",
+    "project_id": "rivetspace",
+    "storage_bucket": "rivetspace.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833690357810:android:a23b6005c58f15ce7f6c2b",
+        "android_client_info": {
+          "package_name": "com.finxterslab.rivetspace"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKndF8ikZ10ECDepP4YmKyG8QmFPaLpDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
