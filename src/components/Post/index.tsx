@@ -11,14 +11,16 @@ import { PostType } from "../../types";
 
 export type PostProps = {
   post: PostType;
+  isHome: boolean;
+  refresh: () => void;
 };
 
-const Post = ({ post }: PostProps) => (
+const Post = ({ post, isHome, refresh }: PostProps) => (
   <View style={styles.container}>
     <View style={styles.posts}>
       <View style={{ flexDirection: "row" }}>
         <ProfileContainer user={post.user} />
-        <TopContainer post={post} />
+        <TopContainer post={post} isHome={isHome} refresh={refresh} />
       </View>
       <MainContainer post={post} />
     </View>

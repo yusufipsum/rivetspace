@@ -21,11 +21,14 @@ import { useSelector } from "react-redux";
 
 import * as ImagePicker from "expo-image-picker";
 import { Octicons, Feather, AntDesign, FontAwesome5 } from "@expo/vector-icons";
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import { Amplify, API, Auth, graphqlOperation, Storage } from "aws-amplify";
 import { getUser } from '../../graphql/queries';
 import { updateUser } from "../../graphql/mutations";
 import { useAppDispatch } from "../../store";
 import { profileSlice } from "../../store/profileSlice";
+
+import awsconfig from '../../aws-exports';
+Amplify.configure(awsconfig);
 
 export default function ProfileScreen() {
   const width = Dimensions.get("window").width;
@@ -33,8 +36,46 @@ export default function ProfileScreen() {
   const navigation = useNavigation();
   const [focused, setFocused] = React.useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
+  const [img, setImg] = useState();
 
   const currentUser = useSelector((state: any) => state.profile.currentUser);
+
+  const fetchResourceFromURI = async (uri) => {
+    const response = await fetch(uri);
+    console.log(response);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  const uploadFile = async (file) => {
+    const img = await fetchResourceFromURI(file.uri);
+    return Storage.put(`profile${currentUser.sub}.jpeg`, img, {
+      level: 'public',
+      contentType: file.type,
+      progressCallback(uploadProgress){
+        console.log("Upload Progress: ", uploadProgress.loaded + "/" + uploadProgress.total);
+      }
+    })
+    .then((res) => {
+      Storage.get(res.key)
+      .then((result) => {
+        console.log("RESULTTT: ", result);
+        result = result.substring(0, result.indexOf('?'));
+        const check = {
+          id: currentUser.sub,
+          profilePhoto: result,
+        }
+        const update: Partial<typeof check> = {...check};
+        updateUserToDB(update);
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+  const [fileName, setFileName] = useState("");
   
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -46,9 +87,12 @@ export default function ProfileScreen() {
     });
 
     console.log(result);
-
     if (!result.canceled) {
       setProfilePicture(result.assets[0].uri);
+      uploadFile(result);
+      let fileName = result.assets[0].uri.split('/').pop();
+      setFileName(fileName);
+      console.log(fileName);
     }
   };
 
@@ -73,8 +117,9 @@ export default function ProfileScreen() {
 
   const updateUserToDB = async (update: any) => {
     await API.graphql(graphqlOperation(updateUser, { input: update }))
-    const user = await Auth.currentAuthenticatedUser();
+    const user = await Auth.currentUserPoolUser();
     const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
+
     console.log("User Updated: ", update);
     dispatch(
       profileSlice.actions.userProfile({
@@ -92,8 +137,9 @@ export default function ProfileScreen() {
   }
 
   const handleSubmit = async () => {
+    console.log("asfasfdb", fileName);
     try {
-      const user = await Auth.currentAuthenticatedUser();
+      const user = await Auth.currentUserPoolUser();
       const userData = await API.graphql(graphqlOperation(getUser, { id: user.attributes.sub }))
       const check = {
         id: user.attributes.sub,
@@ -114,7 +160,7 @@ export default function ProfileScreen() {
         if(biography == "" || biography === userData.data.getUser.biography){
           delete update.biography;
         }
-        if(!profilePicture || profilePicture == "" || biography === userData.data.getUser.profilePhoto){
+        if(!profilePicture || profilePicture == "" || profilePicture === userData.data.getUser.profilePhoto){
           delete update.profilePhoto;
         }
       } catch (e) { 
@@ -236,9 +282,7 @@ export default function ProfileScreen() {
             placeholder={"Biyografine bir şeyler yaz..."}
           />
         </View>
-      </View>
-      <View style={styles.footerContainer}>
-      <View style={styles.buttonContainer}>
+         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} activeOpacity={.7} onPress={onPostCancel}>
             <Text style={styles.vazgecButtonText}>Vazgeç</Text>
           </TouchableOpacity>
@@ -246,10 +290,12 @@ export default function ProfileScreen() {
             <Text style={styles.onaylaButtonText}>Onayla</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View style={styles.footerContainer}>
       <FlatList
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
-        ListHeaderComponent={() => <PostFeed />}
+        ListHeaderComponent={() => <PostFeed isHome={false} />}
       />
         {/* <View style={styles.images}>
           <FlatList

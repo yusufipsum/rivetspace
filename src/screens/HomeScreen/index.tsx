@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SafeAreaView, FlatList, TouchableOpacity, Dimensions, RefreshControl } from "react-native";
+import { SafeAreaView, FlatList, TouchableOpacity, Dimensions, RefreshControl, Alert, Platform } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -10,36 +10,37 @@ import { Text, View } from "../../components/Themed";
 import { PostFeed, StoryFeed, ProfileButton } from "../../components";
 
 import { useAppDispatch, useAppSelector } from "../../store";
-import { useCallback, useEffect, useState } from "react";
-import { API, Auth, graphqlOperation } from "aws-amplify";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { API, Auth, graphqlOperation, Storage } from "aws-amplify";
 import { profileSlice } from "../../store/profileSlice";
 import { UserType } from "../../types";
 
 import { getUser, listUsers } from '../../graphql/queries';
 import DeviceInfo from "react-native-device-info";
-import { createUser, updateUser } from "../../graphql/mutations";
+import { createUser, deleteUser, updateUser } from "../../graphql/mutations";
 import { startScanning } from "../../store/bleSlice";
 //import socket from "../../utils/socket";  
 
 //import { getProfiles } from "../../store/profileSlice";
 
 import RNBluetoothClassic, { BluetoothDevice } from 'react-native-bluetooth-classic';
+import useBLE from "../../useBLE";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function HomeScreen() {
+export default function HomeScreen({route}) {
   const navigation = useNavigation();
   const onPress = () => {
     navigation.navigate("Profile");
   };
-  
+
   const dispatch = useAppDispatch();
   //const discoveredDevices = useAppSelector(state => state.ble.allDevices);
   const macAddress = useAppSelector((state: any) => state.device.macAddress);
   const users = useAppSelector((state: any) => state.profile.allProfiles);
   
   const [customUUID, setCustomUUID] = useState("");
-
+  //const [isDiscovery, setIsDiscovery] = useState(false);
   //BLUETOOTH CLASSIC
 
   const startDiscovery = async () => {
@@ -52,7 +53,6 @@ export default function HomeScreen() {
           };
           allMACs.push(mac);
       });
-      console.log("unpaired: ", allMACs);
       // const discoveredMACs: Record<string, { mac: string}>[] = [];
       // discoveredDevices.forEach(item => {
       //   const mac = {
@@ -66,26 +66,51 @@ export default function HomeScreen() {
           const matched = allMACs.filter(device => device.mac === profile.id);
           return matched.length > 0;
         });
-  
         dispatch(profileSlice.actions.matches(matches));
-    
     } catch (err) {
-      console.log("ulanhataamk: ", err);
+      console.log("err: ", err);
     } finally {
       await RNBluetoothClassic.cancelDiscovery();
     }
   }
-  //let scanInterval;
-  // function startScanInterval(){
-  //   scanInterval = setInterval(() =>{
-  //     startDiscovery();
-  //   }, 25000)
-  // }
+
+  const showAlert = () => {
+    Alert.alert(
+      'Bluetooth Gerekli',
+      'Uygulamayı kullanabilmek için telefonunuzun bluetooth özelliği açık olmalıdır.',
+      [
+        {
+          text: 'Aç',
+          onPress: async () => await RNBluetoothClassic.requestBluetoothEnabled(),
+        },
+        {
+          text: 'İptal',
+          style: 'cancel'
+        }
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const request = async () => {
+    const isBluetoothEnabled = await RNBluetoothClassic.isBluetoothEnabled();
+    if(isBluetoothEnabled){
+      startDiscovery();
+    } else {
+      showAlert();
+    }
+  }
+
+  let scanInterval;
+  function startScanInterval(){
+    scanInterval = setInterval(() =>{
+      request();
+    }, 25000);
+  }
  
   useEffect(() => {
-    startDiscovery();
     //socket.emit("createRoom", macAddress.uuid);
-    //startScanInterval();
+    startScanInterval();
     // console.log("discaaa: ", discoveredDevices);
     //dispatch(startScanning());
     //dispatch(stopScanning());
@@ -94,7 +119,7 @@ export default function HomeScreen() {
   const saveUserToDB = async (user: any) => {
     await API.graphql(graphqlOperation(createUser, { input: user}));
     console.log("User Created: ", user);
-    const userInfo = await Auth.currentUserInfo();
+    const userInfo = await Auth.currentUserPoolUser();
     const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
     dispatch(
       profileSlice.actions.userProfile({
@@ -109,13 +134,18 @@ export default function HomeScreen() {
     );
   }
   
-  const updateUserToDB = async (updateUserUUID: any) => {
+  const updateUserMAC = async (updateUserUUID: any) => {
     await API.graphql(graphqlOperation(updateUser, { input: updateUserUUID }))
     console.log("User Updated: ", updateUserUUID);
   }
 
-  const getRandomPhoto = () => {
-    return 'https://cdn-icons-png.flaticon.com/512/666/666201.png'
+  // const updateUserPushNToken = async (updateUserToken: any) => {
+  //   await API.graphql(graphqlOperation(updateUser, { input: updateUserToken }))
+  //   console.log("User Updated: ", updateUserToken);
+  // }
+
+  const getRandomPhoto = async () => {
+    return 'https://rivetspacef36c220ed25f4408baf82c64fe9e1505225735-staging.s3.eu-west-1.amazonaws.com/public/profilePhoto.png';
   }
 
   const getRandomColor = () => {
@@ -129,26 +159,51 @@ export default function HomeScreen() {
 
   useEffect(() => {
     const userUpdate = async () => {
-      const userInfo = await Auth.currentAuthenticatedUser();
+      const userInfo = await Auth.currentUserPoolUser();
       const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
-      if(customUUID !== "" && customUUID !== macAddress.uuid){
-        console.log("USER IN ", userData.data.getUser)
-        const updateUserUUID = {
-          id: userInfo.attributes.sub,
-          uuid: macAddress.uuid,        
-        }
-        await updateUserToDB(updateUserUUID);
-        console.log("update user", updateUserUUID);
+      let user;
+      try {
+        const response = await API.graphql(graphqlOperation(listUsers, { filter: { uuid: { eq: macAddress.uuid } } }));
+        user = response.data.listUsers.items[0];
+        console.log("responsss ", user.userName, userInfo.username);
+      } catch (e) {
+        console.log("NULLLL ", e)
+      } finally {
+        if(user !== undefined && user.userName != userInfo.username){
+          let updateUserUUID;
+         
+          updateUserUUID = {
+            id: user.id,
+            uuid: "",        
+          }
+          await updateUserMAC(updateUserUUID);
+         
+          updateUserUUID = {
+            id: userInfo.attributes.sub,
+            uuid: macAddress.uuid,        
+          }
+          await updateUserMAC(updateUserUUID);
+            
+        } else if(customUUID != "" && customUUID != macAddress.uuid){
+          const updateUserUUID = {
+            id: userInfo.attributes.sub,
+            uuid: macAddress.uuid,        
+          }
+          await updateUserMAC(updateUserUUID);
+        }  
       }
+      //await updateUserPushNToken(token.data);
     }
     userUpdate();
   }, [customUUID]);
 
   useEffect(() => {
     const user = async () => {
-      const userInfo = await Auth.currentAuthenticatedUser();
+      const userInfo = await Auth.currentUserPoolUser();
+      console.log("INFOFOFOFOF:: ", userInfo);
       const userData = await API.graphql(graphqlOperation(getUser, { id: userInfo.attributes.sub }))
-      console.log("YETERULAAAN::: ", userData)
+      console.log("asdasd", userData);
+      //let profilePhotoURL;
       if (userInfo) {
         if(!userData.data.getUser && macAddress.uuid != ""){
           try {
@@ -168,7 +223,16 @@ export default function HomeScreen() {
           }
         } else {
           setCustomUUID(userData.data.getUser.uuid);
-          console.log("CUSTOM UUID::::: ", customUUID)
+          // try {
+          //   
+          //   profilePhotoURL = await Storage.get(`profile${userInfo.attributes.sub}.jpeg`);
+          //   profilePhotoURL = profilePhotoURL.substring(0, profilePhotoURL.indexOf('?'));
+          //   console.log('Profil fotoğrafı URL:', profilePhotoURL);
+          //   
+          // } catch (error) {
+          //   console.error('Profil fotoğrafı alınamadı.', error);
+          //   profilePhotoURL = await Storage.get(`public/profilePhoto.png`);
+          // }
         }
         dispatch(
           profileSlice.actions.userProfile({
@@ -194,6 +258,15 @@ export default function HomeScreen() {
       setRefreshing(false);
     }, 100);
   }, []);
+
+  useEffect(() => {
+    if (route.params?.refresh) {
+      setRefreshing(true);
+      setTimeout(() => {
+        setRefreshing(false);
+      }, 100);
+    }
+  }, [route.params?.refresh]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -228,7 +301,7 @@ export default function HomeScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         ListHeaderComponent={() => <StoryFeed />}
-        ListFooterComponent={() => <PostFeed />}
+        ListFooterComponent={() => <PostFeed isHome={true} />}
       />
     </SafeAreaView>
   );

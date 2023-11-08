@@ -29,6 +29,7 @@ export default function ProfileScreen() {
 
   const onPostCancel = () => {
     navigation.goBack();
+    // navigation.navigate("Home", { refresh: true }); 
   };
 
   return (
@@ -152,9 +153,9 @@ export default function ProfileScreen() {
         <FlatList
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
-          ListHeaderComponent={() => <PostFeed />}
+          ListHeaderComponent={() => <PostFeed isHome={false} />}
         />
-    </View>
+      </View>
     </SafeAreaView>
   );
 }

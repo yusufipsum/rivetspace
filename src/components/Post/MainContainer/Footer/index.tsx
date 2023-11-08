@@ -80,12 +80,12 @@ const Footer = ({ post }: FooterContainerProps) => {
         </TouchableOpacity>
       </View>
       <View style={styles.rightIcons}>
-        <TouchableOpacity activeOpacity={0.5} hitSlop={{ top: 25, bottom: 25 }}>
+        {/* <TouchableOpacity activeOpacity={0.5} hitSlop={{ top: 25, bottom: 25 }}>
           <View style={styles.commentIcon}>
             <EvilIcons size={24} name={"comment"} />
             <Text style={styles.info}>{post.numberOfComments}</Text>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

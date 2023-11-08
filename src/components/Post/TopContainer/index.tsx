@@ -9,14 +9,18 @@ import { PostType } from "../../../types";
 
 import * as FileSystem from 'expo-file-system';
 import Modal from 'react-native-modal';
+import { API, graphqlOperation } from "aws-amplify";
+import { createUser, deletePost } from "../../../graphql/mutations";
 
 export type TopContainerProps = {
   post: PostType;
+  isHome: boolean;
+  refresh: () => void;
 };
 
 const { width, height } = Dimensions.get('window');
 
-const TopContainer = ({ post }: TopContainerProps) => {
+const TopContainer = ({ post, isHome, refresh }: TopContainerProps) => {
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -24,6 +28,21 @@ const TopContainer = ({ post }: TopContainerProps) => {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const removePost = async () => {
+    try {
+      const input = {
+        id: post.id,
+      };
+      const result = await API.graphql(graphqlOperation(deletePost, { input }));
+      console.log('Post deleted:', result.data.deletePost);
+      refresh();
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    } finally {
+      setModalVisible(!isModalVisible);
+    }
   };
 
   const showMenu = (e) => {
@@ -56,6 +75,12 @@ const TopContainer = ({ post }: TopContainerProps) => {
     }
   };
 
+  const moment = require('moment');
+
+  const date = moment.utc(post.createdAt).local();
+
+  const formattedDate = date.format('DD.MM.YYYY - HH:mm');
+
   return(
     <View style={styles.container}>
       <View style={styles.header}>
@@ -69,9 +94,10 @@ const TopContainer = ({ post }: TopContainerProps) => {
         <TouchableOpacity
           style={{right: 20, paddingLeft: 5, paddingRight: 5 }}
           activeOpacity={0.3}
-          hitSlop={{ top: 10, left: 10, right: 10 }}
+          hitSlop={{ top: 15, left: 15, right: 15 }}
           onPress={showMenu}
         >
+          <Text style={{right: 68, fontSize: 10, color: "grey"}}>{formattedDate}</Text>
           <Ionicons name={"ellipsis-horizontal"} color={"grey"} size={15} />
         </TouchableOpacity>
         <Modal isVisible={isModalVisible} style={styles.modal} animationIn="fadeIn">
@@ -84,9 +110,13 @@ const TopContainer = ({ post }: TopContainerProps) => {
             //   <Text style={styles.modalTextDisabled}>Görseli Kaydet</Text>
             // </TouchableOpacity>
             }
-            <TouchableOpacity activeOpacity={0.6} onPress={toggleModal}>
+            {isHome ?  
+            (<TouchableOpacity activeOpacity={0.6} onPress={toggleModal}>
               <Text style={[styles.modalText, {color: 'red'}]}>Şikayet Et</Text>
-            </TouchableOpacity>
+            </TouchableOpacity>) :  
+            (<TouchableOpacity activeOpacity={0.6} onPress={removePost}>
+              <Text style={[styles.modalText, {color: 'red'}]}>Bu Paylaşımı Sil</Text>
+            </TouchableOpacity>)}
             <TouchableOpacity activeOpacity={0.6} onPress={toggleModal}>
               <Text style={styles.modalText}>Vazgeç</Text>
             </TouchableOpacity>

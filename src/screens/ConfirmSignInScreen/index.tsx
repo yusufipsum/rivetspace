@@ -18,6 +18,10 @@ import { Logo } from "../../assets/svg";
 
 import { useRef, useState } from "react";
 
+import LottieView from "lottie-react-native";
+
+import kutla from '../../assets/lottie/kutla.json'; 
+
 export default function ConfirmSignInScreen() {
   const navigation = useNavigation();
 
@@ -132,6 +136,11 @@ export default function ConfirmSignInScreen() {
             >
               <Text style={styles.buttonText}>Onayla</Text>
             </TouchableOpacity>
+            {/* <LottieView
+          style={styles.codeLottie}
+          source={kutla}
+          autoPlay
+        /> */}
           </View>
         </View>
         <View style={styles.signContainer}>
@@ -147,6 +156,7 @@ export default function ConfirmSignInScreen() {
             </TouchableOpacity>
           </View>
         </View>
+        
       </View>
       <StatusBar style={Platform.OS === "ios" ? "light" : "auto"} />
     </SafeAreaView>

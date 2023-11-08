@@ -11,7 +11,6 @@ import {
   Image,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Marquee from "react-native-marquee";
 
 import styles from "./styles";
 import { Text, View } from "../../components/Themed";
@@ -28,12 +27,11 @@ import { GifSearch } from 'react-native-gif-search';
 
 import { createPost } from "../../graphql/mutations";
 
-
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const tenor = "AIzaSyD0Ieyxlk_T9AzFal26xePEmehNTh1hn7Q";
-const giphy = "https://api.giphy.com/v1/gifs/search?api_key=z5mzhc6AfhlI5G2C8VvisYt2f3quV6bE&q=&limit=25&offset=0&rating=g&lang=en&bundle=messaging_non_clips";
+const giphy = "z5mzhc6AfhlI5G2C8VvisYt2f3quV6bE&q";
 
 export default function NewPostScreen() {
   const [imagif, setImagif] = useState('');
@@ -113,14 +111,13 @@ export default function NewPostScreen() {
   
   const onPostShare = async () => {
     try {
-      if(post != "" ){
+      if(post != ""){
         const newPost = {
           content: post,
           image: imagif,
           userID: currentUser.sub,
         }
         await API.graphql(graphqlOperation(createPost, {input: newPost}));
-        Alert.alert("Paylaşıldı", `${post}`);
       }
     } catch (err) {
       console.log(err);
@@ -177,7 +174,7 @@ export default function NewPostScreen() {
               onGifSelected={(gif_url)=>{setImagif(gif_url), setIsPick(true)}}
               />
               <TouchableOpacity activeOpacity={1} style={styles.closeGif} hitSlop={{top: 15, bottom: 15, right: 15, left: 10}} onPress={() => setIsPick(false)}>
-                <Text style={{color: "white"}}>X</Text>
+                <Text style={{color: "white", textAlign: "center"}}>X</Text>
               </TouchableOpacity>
             </View> : null}
             {imagif && <Image source={{ uri: imagif }} style={{ width: "100%", height: 220, marginVertical: 5, borderRadius: 20 }} />}

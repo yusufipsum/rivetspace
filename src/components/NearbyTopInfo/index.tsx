@@ -6,25 +6,35 @@ import styles from "./styles";
 import ProfilePicture from "../ProfilePicture";
 import { useSelector } from "react-redux";
 
+import MarqueeView from 'react-native-marquee-view';
+
 const NearbyTopInfo = () => {
   const matches = useSelector((state: any) => state.profile.matches);
 
-  const rest = matches.length;
-  const lastProfile = matches.slice(0, 1); //4,5
+  const rest = matches.length - 4;
+  const lastProfile = matches.slice(4, 5); //4,5
 
-  if(rest < 1){
+  if(matches.length < 1){
     return (
+    <>
       <View style={styles.topContainer}>
         <Text style={styles.text}>
           Etrafında hiç RivetSpace kullanıcısı yok, taramaya devam ediyoruz...
         </Text>
-        <Text style={{ fontWeight: "bold", color: "#016894" }}>
+        <Text style={{ fontWeight: "bold", color: "#def2fa" }}>
           (Yaklaşık 30 saniye sürebilir.)
         </Text>
       </View>
+      <MarqueeView style={styles.infoContainer} speed={.15}>
+        <Text style={styles.infoText}>
+          Bluetooth'u kapatıp tekrar açarak çevrendeki yeni kullanıcıların da seni keşfetmesini sağlayabilirsin.
+        </Text>
+      </MarqueeView>
+    </>
     )
-  } else if(rest < 5){
+  } else if(matches.length < 5){
     return (
+    <>
       <View style={styles.topContainer}>
         <FlatList
           contentContainerStyle={styles.topFlatList}
@@ -44,14 +54,21 @@ const NearbyTopInfo = () => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
         />
-        <Text style={styles.text}>
+        <Text style={styles.foundText}>
           Ortamında <Text style={{ fontWeight: "bold" }}>{matches.length}</Text>{" "}
-          aktif kullanıcı bulunuyor
+          aktif kullanıcı bulunuyor.
         </Text>
       </View>
+      <MarqueeView style={styles.infoContainer} speed={.15}>
+        <Text style={styles.infoText}>
+          Bluetooth'u kapatıp tekrar açarak çevrendeki yeni kullanıcıların da seni keşfetmesini sağlayabilirsin.
+        </Text>
+      </MarqueeView>
+    </>
     )
   } else {
     return (
+    <>
       <View style={styles.topContainer}>
         <FlatList
           contentContainerStyle={styles.topFlatList}
@@ -84,11 +101,17 @@ const NearbyTopInfo = () => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
         />
-        <Text style={styles.text}>
+        <Text style={styles.foundText}>
           Ortamında <Text style={{ fontWeight: "bold" }}>{matches.length}</Text>{" "}
-          aktif kullanıcı bulunuyor
+          aktif kullanıcı bulunuyor.
         </Text>
       </View>
+      <MarqueeView style={styles.infoContainer} speed={.15}>
+        <Text style={styles.infoText}>
+          Bluetooth'u kapatıp tekrar açarak çevrendeki yeni kullanıcıların da seni keşfetmesini sağlayabilirsin.
+        </Text>
+      </MarqueeView>
+    </>
     )
   }
 };

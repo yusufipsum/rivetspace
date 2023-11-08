@@ -17,7 +17,8 @@ const ProfileButton = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-   if(currentUser.profilePhoto != undefined){
+    console.log("curr::", currentUser);
+   if(currentUser.profilePhoto != undefined || currentUser.profilePhoto != null){
      setIsLoading(false);
    }
  }, [currentUser.profilePhoto]);

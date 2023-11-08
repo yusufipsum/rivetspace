@@ -13,7 +13,7 @@ const Background = ({ color, zIndex }: BackgroundProps) => {
         top: 0,
         zIndex: zIndex,
       }}
-      height="50%"
+      height="42%"
       width="100%"
       viewBox="180 0 740 280"
       preserveAspectRatio="none"

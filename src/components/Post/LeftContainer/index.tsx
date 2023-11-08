@@ -17,29 +17,38 @@ const ProfileContainer = ({ user }: ProfileContainerProps) => {
 
   const currentUser = useSelector((state: any) => state.profile.currentUser);
 
-  const [currUser, setCurrUser] = useState(false);
-  
   const onPress = () => {
     console.log(user.id)
     console.log(currentUser.sub)
     try {
       if(currentUser.sub === user.id){
-        setCurrUser(true);
+        dispatch(
+          profileSlice.actions.userProfile({
+            isCurrentUser: true,
+            id: user.id,
+            name: user.name,
+            username: user.userName,
+            profilePhoto: user.profilePhoto,
+            biography: user.biography,
+            color: user.color,
+          })
+        );
+      } else {
+        dispatch(
+          profileSlice.actions.userProfile({
+            isCurrentUser: false,
+            id: user.id,
+            name: user.name,
+            username: user.userName,
+            profilePhoto: user.profilePhoto,
+            biography: user.biography,
+            color: user.color,
+          })
+        );
       }
     } catch (error) {
       console.log(error)
-    } finally {
-      dispatch(
-        profileSlice.actions.userProfile({
-          isCurrentUser: currUser,
-          id: user.id,
-          name: user.name,
-          username: user.userName,
-          profilePhoto: user.profilePhoto,
-          biography: user.biography,
-          color: user.color,
-        })
-      );
+    } finally { 
       navigation.navigate("Profile");
     }
   };
