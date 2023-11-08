@@ -14,6 +14,17 @@ export const getUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -57,6 +68,10 @@ export const listUsers = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -87,6 +102,10 @@ export const getPost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -133,6 +152,7 @@ export const listPosts = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -178,6 +198,7 @@ export const postsByIdAndUserID = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -221,6 +242,7 @@ export const likesByIdAndPostIDAndUserID = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -270,6 +292,7 @@ export const likesByIdAndUserIDAndPostID = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -279,6 +302,114 @@ export const likesByIdAndUserIDAndPostID = /* GraphQL */ `
           content
           image
           userID
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFriend = /* GraphQL */ `
+  query GetFriend($id: ID!) {
+    getFriend(id: $id) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFriends = /* GraphQL */ `
+  query ListFriends(
+    $filter: ModelFriendFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFriends(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        friendID
+        user {
+          id
+          userName
+          name
+          email
+          uuid
+          biography
+          profilePhoto
+          color
+          roomID
+          pushNToken
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const friendsByIdAndFriendID = /* GraphQL */ `
+  query FriendsByIdAndFriendID(
+    $id: ID!
+    $friendID: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelFriendFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    friendsByIdAndFriendID(
+      id: $id
+      friendID: $friendID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        friendID
+        user {
+          id
+          userName
+          name
+          email
+          uuid
+          biography
+          profilePhoto
+          color
+          roomID
+          pushNToken
           createdAt
           updatedAt
         }

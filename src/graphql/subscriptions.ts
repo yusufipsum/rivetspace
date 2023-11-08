@@ -14,6 +14,17 @@ export const onCreateUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -52,6 +63,17 @@ export const onUpdateUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -90,6 +112,17 @@ export const onDeleteUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -133,6 +166,10 @@ export const onCreatePost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -174,6 +211,10 @@ export const onUpdatePost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -215,6 +256,10 @@ export const onDeletePost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -254,6 +299,10 @@ export const onCreateLike = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -279,6 +328,7 @@ export const onCreateLike = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -308,6 +358,10 @@ export const onUpdateLike = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -333,6 +387,7 @@ export const onUpdateLike = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -362,6 +417,10 @@ export const onDeleteLike = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -387,8 +446,111 @@ export const onDeleteLike = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateFriend = /* GraphQL */ `
+  subscription OnCreateFriend($filter: ModelSubscriptionFriendFilterInput) {
+    onCreateFriend(filter: $filter) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFriend = /* GraphQL */ `
+  subscription OnUpdateFriend($filter: ModelSubscriptionFriendFilterInput) {
+    onUpdateFriend(filter: $filter) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFriend = /* GraphQL */ `
+  subscription OnDeleteFriend($filter: ModelSubscriptionFriendFilterInput) {
+    onDeleteFriend(filter: $filter) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
         }
         likes {
           nextToken

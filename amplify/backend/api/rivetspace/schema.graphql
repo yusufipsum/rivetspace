@@ -10,6 +10,8 @@ type User
   profilePhoto: String
   color: String
   roomID: String
+  pushNToken: String
+  friends: [Friend] @hasMany(indexName: "byUser", fields: ["id"])
   posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
   likes: [Like] @hasMany(indexName: "byUser", fields: ["id"])
 }
@@ -34,3 +36,12 @@ type Like
   postID: ID!
   post: Post! @belongsTo(fields: ["postID"])
 }
+
+type Friend
+  @model 
+  @auth(rules: [{allow: public}]) {
+  id: ID! @index(name: "byUser", sortKeyFields: ["friendID"]) 
+  userID: ID! 
+  friendID: ID!
+  user: User @belongsTo(fields: ["friendID"])
+} 

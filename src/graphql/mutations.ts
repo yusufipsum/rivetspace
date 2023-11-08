@@ -17,6 +17,17 @@ export const createUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -58,6 +69,17 @@ export const updateUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -99,6 +121,17 @@ export const deleteUser = /* GraphQL */ `
       profilePhoto
       color
       roomID
+      pushNToken
+      friends {
+        items {
+          id
+          userID
+          friendID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       posts {
         items {
           id
@@ -145,6 +178,10 @@ export const createPost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -189,6 +226,10 @@ export const updatePost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -233,6 +274,10 @@ export const deletePost = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -275,6 +320,10 @@ export const createLike = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -300,6 +349,7 @@ export const createLike = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -332,6 +382,10 @@ export const updateLike = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -357,6 +411,7 @@ export const updateLike = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
         }
@@ -389,6 +444,10 @@ export const deleteLike = /* GraphQL */ `
         profilePhoto
         color
         roomID
+        pushNToken
+        friends {
+          nextToken
+        }
         posts {
           nextToken
         }
@@ -414,8 +473,120 @@ export const deleteLike = /* GraphQL */ `
           profilePhoto
           color
           roomID
+          pushNToken
           createdAt
           updatedAt
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createFriend = /* GraphQL */ `
+  mutation CreateFriend(
+    $input: CreateFriendInput!
+    $condition: ModelFriendConditionInput
+  ) {
+    createFriend(input: $input, condition: $condition) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFriend = /* GraphQL */ `
+  mutation UpdateFriend(
+    $input: UpdateFriendInput!
+    $condition: ModelFriendConditionInput
+  ) {
+    updateFriend(input: $input, condition: $condition) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
+        }
+        likes {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFriend = /* GraphQL */ `
+  mutation DeleteFriend(
+    $input: DeleteFriendInput!
+    $condition: ModelFriendConditionInput
+  ) {
+    deleteFriend(input: $input, condition: $condition) {
+      id
+      userID
+      friendID
+      user {
+        id
+        userName
+        name
+        email
+        uuid
+        biography
+        profilePhoto
+        color
+        roomID
+        pushNToken
+        friends {
+          nextToken
+        }
+        posts {
+          nextToken
         }
         likes {
           nextToken
