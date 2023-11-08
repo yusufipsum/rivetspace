@@ -1,0 +1,14 @@
+{
+  "resourceName": "rivetspace",
+  "policyUUID": "444cfe0b",
+  "bucketName": "rivetspacef36c220ed25f4408baf82c64fe9e1505",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger31ec3692",
+  "groupAccess": {}
+}

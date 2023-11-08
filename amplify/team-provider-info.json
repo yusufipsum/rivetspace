@@ -17,6 +17,15 @@
       },
       "api": {
         "rivetspace": {}
+      },
+      "function": {
+        "S3Trigger31ec3692": {
+          "deploymentBucketName": "amplify-rivetspace-staging-225735-deployment",
+          "s3Key": "amplify-builds/S3Trigger31ec3692-30356451667531716869-build.zip"
+        }
+      },
+      "storage": {
+        "rivetspace": {}
       }
     }
   }

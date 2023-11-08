@@ -2,5 +2,5 @@
   "AppSyncApiName": "rivetspace",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2023-07-16T15:06:12.675Z"
+  "AuthModeLastUpdated": "2023-10-29T18:45:54.973Z"
 }
